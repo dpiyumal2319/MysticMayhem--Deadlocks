@@ -6,26 +6,26 @@ public class Artefacts extends Equipments{
             case "Excalibur" :
                 this.name = "Excalibur";
                 this.price = 150;
+                this.extraAttack = 2;
+                this.extraDefense = 0;
+                this.extraHealth = 0;
+                this.extraSpeed = 0;
+                break;
+            case "Amulet" :
+                this.name = "Amulet";
+                this.price = 200;
                 this.extraAttack = 1;
-                this.extraDefense = 1;
+                this.extraDefense = -1;
                 this.extraHealth = 1;
                 this.extraSpeed = 1;
                 break;
-            case "Ring of the Damned" :
-                this.name = "Ring of the Damned";
-                this.price = 100;
-                this.extraAttack = 1;
+            case "Crystal" : 
+                this.name = "Crystal";
+                this.price = 210;
+                this.extraAttack = 2;
                 this.extraDefense = 1;
-                this.extraHealth = 1;
-                this.extraSpeed = 1;
-                break;
-            case "Crown of the Damned" : 
-                this.name = "Crown of the Damned";
-                this.price = 100;
-                this.extraAttack = 1;
-                this.extraDefense = 1;
-                this.extraHealth = 1;
-                this.extraSpeed = 1;
+                this.extraHealth = -1;
+                this.extraSpeed = -1;
                 break;
         }
     }
