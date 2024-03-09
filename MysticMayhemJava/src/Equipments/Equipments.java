@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Equipments {
-    protected String name;
+    protected String name, type;
     protected int extraAttack, extraDefense, extraSpeed, extraHealth, price;
 
     public static final Map<String, EquipmentCatalog> ARMOR_MAP = new HashMap<>();
@@ -37,6 +37,7 @@ public class Equipments {
             this.extraSpeed = equipment.getExtraSpeed();
             this.extraHealth = equipment.getExtraHealth();
             this.price = equipment.getPrice();
+            this.type = equipment.getType();
         }
     }
 

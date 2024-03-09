@@ -43,4 +43,7 @@ public class EquipmentCatalog {
     public int getExtraSpeed() {
         return extraSpeed;
     }
+    public String getType() {
+        return type;
+    }
 }

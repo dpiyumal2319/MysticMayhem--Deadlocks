@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Warrior {
-    protected String name;
+    protected String name, type;
     protected int health, attack, defense, speed, price;
     
     protected int extraHealth, extraAttack, extraDefense, extraSpeed;
@@ -18,7 +18,7 @@ public class Warrior {
     public static final Map<String, WarriorCatalog> MAGE_MAP = new HashMap<>();
     public static final Map<String, WarriorCatalog> MYTHICALCREATURE_MAP = new HashMap<>();
 
-    //Keys are in lower case to remove case sensitivity
+    //Keys are in lower case to remove case sensitivity by adding .toLowerCase() in the switch case
     static {
         ARCHER_MAP.put("shooter", new WarriorCatalog("Shooter","Archer", 6, 11, 4, 9, 80));
         ARCHER_MAP.put("ranger", new WarriorCatalog("Ranger","Archer", 8, 14, 5, 10, 115));
@@ -78,6 +78,7 @@ public class Warrior {
             this.defense = warrior.getDefense();
             this.speed = warrior.getSpeed();
             this.price = warrior.getPrice();
+            this.type = warrior.getType();
             this.value = this.price;
         }
     }

@@ -42,4 +42,7 @@ public class WarriorCatalog {
     public int getPrice() {
         return price;
     }
+    public String getType() {
+        return type;
+    }
 }
