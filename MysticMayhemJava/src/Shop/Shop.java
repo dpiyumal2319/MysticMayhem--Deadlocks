@@ -223,6 +223,8 @@ public abstract class Shop {
                 }
             }
         }
+        scanner.close();
+        return;
     }
 
     private static void buyEquipment(User user) {
