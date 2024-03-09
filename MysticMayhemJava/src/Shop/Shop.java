@@ -17,15 +17,16 @@ public abstract class Shop {
         inventory = user.getInventory();
         printInventory(user);
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to buy[B] or sell[S]?");
+        System.out.println("To check your inventory : [I].");
+        System.out.println("To exit the shop : [Q].");
         while (true) {
-            System.out.println("Do you want to buy[B] or sell[S]?");
-            System.out.println("To check your inventory : [I].");
-            System.out.println("To exit the shop : [Q].");
+            System.out.println("Enter your choice of buy or sell.");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("B")) {
                 buy(user);
             } else if (input.equalsIgnoreCase("S")) {
-                // sell(user);
+                 sell(user);
             } else if (input.equalsIgnoreCase("Q")) {
                 System.out.println("Goodbye!");
                 break;
@@ -48,6 +49,7 @@ public abstract class Shop {
         System.out.println("To check your inventory : [I].");
         System.out.println("To move back : [Q].");
         while (true) {
+            System.out.println("Enter your choice of warrior to sell.");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("A")) {
                 sellWarrior(user, "Archer");
@@ -77,6 +79,7 @@ public abstract class Shop {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Do you want to sell your " + warriorType + "? [Y/N].");
         while (true) {
+            System.out.println("Enter your choice of selling the warrior.");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("Y")) {
                 double value = user.removeWarrior(warriorType) * 0.9;
@@ -98,6 +101,7 @@ public abstract class Shop {
         System.out.println(
                 "Do you want to buy a warrior[W] or an equipment[E] to a warrior?. To exit buy mode type [Q].");
         while (true) {
+            System.out.println("Enter your choice of buy mode (Warrior or Equipment).");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("W")) {
                 buyWarrior(user);
@@ -121,6 +125,7 @@ public abstract class Shop {
         System.out.println("To move back : [Q].");
 
         while (true) {
+            System.out.println("Enter your choice of warrior to buy.");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("A")) {
                 buyOrReplaceWarrior(user, "Archer");
@@ -149,6 +154,7 @@ public abstract class Shop {
             System.out.println("Do you want to replace it? [Y/N]. Existing " + warriorType + " will be sold for "
                     + user.getWarrior(warriorType).getValue() * 0.9 + " coins.");
             while (true) {
+                System.out.println("Enter your choice of replacing the warrior.");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
                     sellWarrior(user, warriorType);
@@ -166,6 +172,7 @@ public abstract class Shop {
             System.out.println("To abort the purchase : [Q].");
             printWarriorCatalog(warriorType);
             while (true) {
+                System.out.println("Enter your choice of which "+ warriorType + " to buy.");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Q")) {
                     return;
@@ -197,6 +204,7 @@ public abstract class Shop {
         System.out.println("To move back : [Q].");
 
         while (true) {
+            System.out.println("Enter your choice of warrior to buy equipment for.");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("A")) {
                 buyEquipmentForWarrior(user, "Archer");
@@ -230,6 +238,7 @@ public abstract class Shop {
         System.out.println("To move back : [Q].");
 
         while (true) {
+            System.out.println("Enter your choice of equipment to buy (Armor or Artefect).");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("A")) {
                 buyOrReplaceEquipment(user, warriorType, "Armor");
@@ -255,6 +264,7 @@ public abstract class Shop {
             System.out.println("You already have a " + equipmentType + " for your " + warriorType + ".");
             System.out.println("Do you want to replace it? [Y/N]. Existing " + equipmentType + " will be destroyed.");
             while (true) {
+                System.out.println("Enter your choice of replacing the equipment.");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
                     user.getWarrior(warriorType).removeEquipment(equipmentType);
@@ -274,6 +284,7 @@ public abstract class Shop {
             System.out.println("To abort the purchase : [Q].");
             printEquipmentCatalog(equipmentType);
             while (true) {
+                System.out.println("Enter your choice of which "+ equipmentType + " to buy.");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Q")) {
                     return;
