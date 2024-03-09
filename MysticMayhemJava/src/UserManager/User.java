@@ -1,36 +1,42 @@
 package UserManager;
-import Equipments.Equipments;
+
 import Warrior.Warrior;
-import java.util.HashMap;
-import java.util.Map;
 
 public class User {
-    public static int UserCount = 100000;
+    private static int UserCount = 100000;
     public final int userID;
     public int xp;
     public final String userName;
     private float money;
-    public Warrior Archer , Healer, Knight, Mage, MythicalCreature;
+    public Warrior Archer, Healer, Knight, Mage, MythicalCreature;
+
     public User(String userName) {
         this.userID = UserCount++;
         this.xp = 0;
         this.userName = userName;
         this.money = 500;
     }
+
     public float getMoney() {
         return this.money;
     }
+
+    public void setMoney(float money) {
+        this.money = money;
+    }
+
     public int getxp() {
         return this.xp;
     }
 
-    public Map<Warrior, Equipments[]> getInventory() {
-        Map<Warrior, Equipments[]> inventory = new HashMap<Warrior, Equipments[]>();
-        inventory.put(Archer, Archer.getEquipments());
-        inventory.put(Healer, Healer.getEquipments());
-        inventory.put(Knight, Knight.getEquipments());
-        inventory.put(Mage, Mage.getEquipments());
-        inventory.put(MythicalCreature, MythicalCreature.getEquipments());
+    public Object[][] getInventory() {
+        Object[][] inventory = {
+                Archer.getInfo(),
+                Healer.getInfo(),
+                Knight.getInfo(),
+                Mage.getInfo(),
+                MythicalCreature.getInfo()
+        };
         return inventory;
     }
 }

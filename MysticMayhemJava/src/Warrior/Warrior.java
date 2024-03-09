@@ -50,12 +50,16 @@ abstract public class Warrior {
         MYTHICALCREATURE_MAP.put("Pegasus", new WarriorCatalog("Pegasus", 20, 14, 18, 20, 340));
     }
 
-    public Equipments[] getEquipments() {
-        Equipments[] equipments = {armor, artefact};
-        return equipments;
+    public Object[] getInfo() {
+        Object[] info = {this ,armor, artefact};
+        return info;
     }
 
     public String getName() {
         return this.name;
     }
+
+    // public int getValue() {
+    //     return (int) this.value;
+    // }
 }
