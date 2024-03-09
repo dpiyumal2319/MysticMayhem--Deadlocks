@@ -1,17 +1,18 @@
 package UserManager;
 
 import Warrior.Warrior;
+import java.io.Serializable;
 
-public class User {
-    private static int UserCount = 100000;
+public class User implements Serializable{
+    private static final int UserIdStart = 100000;
     public final int userID;
     public int xp;
     public final String userName;
     private double money;
     public Warrior Archer, Healer, Knight, Mage, MythicalCreature;
 
-    public User(String userName) {
-        this.userID = UserCount++;
+    public User(String userName, int currentUsers) {
+        this.userID = UserIdStart + currentUsers + 1;
         this.xp = 0;
         this.userName = userName;
         this.money = 500;
