@@ -10,21 +10,18 @@ public class User {
     public int xp;
     public final String userName;
     private float money;
-    public Warrior Archer , Healer, Knight, Mage, MythicalCreature = null;
+    public Warrior Archer , Healer, Knight, Mage, MythicalCreature;
     public User(String userName) {
         this.userID = UserCount++;
         this.xp = 0;
         this.userName = userName;
         this.money = 500;
     }
-    public void updateMoney(float money) {
-        this.money += money;
-    }
     public float getMoney() {
         return this.money;
     }
-    public void updateXP(int xp) {
-        this.xp += xp;
+    public int getxp() {
+        return this.xp;
     }
 
     public Map<Warrior, Equipments[]> getInventory() {
