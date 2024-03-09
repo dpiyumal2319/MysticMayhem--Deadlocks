@@ -18,38 +18,39 @@ public class Warrior {
     public static final Map<String, WarriorCatalog> MAGE_MAP = new HashMap<>();
     public static final Map<String, WarriorCatalog> MYTHICALCREATURE_MAP = new HashMap<>();
 
+    //Keys are in lower case to remove case sensitivity
     static {
-        ARCHER_MAP.put("Shooter", new WarriorCatalog("Shooter","Archer", 6, 11, 4, 9, 80));
-        ARCHER_MAP.put("Ranger", new WarriorCatalog("Ranger","Archer", 8, 14, 5, 10, 115));
-        ARCHER_MAP.put("Sunfire", new WarriorCatalog("Sunfire","Archer", 7, 15, 5, 14, 160));
-        ARCHER_MAP.put("Zing", new WarriorCatalog("Zing","Archer", 11, 16, 9, 14, 200));
-        ARCHER_MAP.put("Sagittarius", new WarriorCatalog("Sagittarius","Archer", 12, 18, 7, 17, 230));
+        ARCHER_MAP.put("shooter", new WarriorCatalog("Shooter","Archer", 6, 11, 4, 9, 80));
+        ARCHER_MAP.put("ranger", new WarriorCatalog("Ranger","Archer", 8, 14, 5, 10, 115));
+        ARCHER_MAP.put("sunfire", new WarriorCatalog("Sunfire","Archer", 7, 15, 5, 14, 160));
+        ARCHER_MAP.put("zing", new WarriorCatalog("Zing","Archer", 11, 16, 9, 14, 200));
+        ARCHER_MAP.put("sagittarius", new WarriorCatalog("Sagittarius","Archer", 12, 18, 7, 17, 230));
 
-        KNIGHT_MAP.put("Squire", new WarriorCatalog("Squire","Knight", 7, 8, 9, 8, 85));
-        KNIGHT_MAP.put("Cavalier", new WarriorCatalog("Cavalier","Knight", 7, 10, 12, 10, 110));
-        KNIGHT_MAP.put("Templar", new WarriorCatalog("Templar","Knight", 12, 14, 16, 12, 155));
-        KNIGHT_MAP.put("Zoro", new WarriorCatalog("Zoro","Knight", 13, 17, 16, 14, 180));
-        KNIGHT_MAP.put("Swiftblade", new WarriorCatalog("Swiftblade","Knight", 17, 18, 20, 13, 250));
+        KNIGHT_MAP.put("squire", new WarriorCatalog("Squire","Knight", 7, 8, 9, 8, 85));
+        KNIGHT_MAP.put("cavalier", new WarriorCatalog("Cavalier","Knight", 7, 10, 12, 10, 110));
+        KNIGHT_MAP.put("templar", new WarriorCatalog("Templar","Knight", 12, 14, 16, 12, 155));
+        KNIGHT_MAP.put("zoro", new WarriorCatalog("Zoro","Knight", 13, 17, 16, 14, 180));
+        KNIGHT_MAP.put("swiftblade", new WarriorCatalog("Swiftblade","Knight", 17, 18, 20, 13, 250));
 
 
-        HEALER_MAP.put("Soother", new WarriorCatalog("Soother","Healer", 9, 10, 8, 6, 95));
-        HEALER_MAP.put("Medic", new WarriorCatalog("Medic","Healer", 10, 12, 9, 7, 125));
-        HEALER_MAP.put("Alchemist", new WarriorCatalog("Alchemist","Healer", 13, 13, 13, 13, 150));
-        HEALER_MAP.put("Saint", new WarriorCatalog("Saint","Healer", 17, 16, 14, 9, 200));
-        HEALER_MAP.put("Lifebringer", new WarriorCatalog("Lifebringer","Healer", 19, 17, 15, 12, 260));
+        HEALER_MAP.put("soother", new WarriorCatalog("Soother","Healer", 9, 10, 8, 6, 95));
+        HEALER_MAP.put("medic", new WarriorCatalog("Medic","Healer", 10, 12, 9, 7, 125));
+        HEALER_MAP.put("alchemist", new WarriorCatalog("Alchemist","Healer", 13, 13, 13, 13, 150));
+        HEALER_MAP.put("saint", new WarriorCatalog("Saint","Healer", 17, 16, 14, 9, 200));
+        HEALER_MAP.put("lifebringer", new WarriorCatalog("Lifebringer","Healer", 19, 17, 15, 12, 260));
 
-        MAGE_MAP.put("Warlock", new WarriorCatalog("Warlock","Mage", 10, 12, 7, 12, 100));
-        MAGE_MAP.put("Illusionist", new WarriorCatalog("Illusionist","Mage", 12, 13, 8, 14, 120));
-        MAGE_MAP.put("Enchanter", new WarriorCatalog("Enchanter","Mage", 13, 16, 10, 16, 160));
-        MAGE_MAP.put("Conjurer", new WarriorCatalog("Conjurer","Mage", 14, 18, 15, 12, 195));
-        MAGE_MAP.put("Eldritch", new WarriorCatalog("Eldritch","Mage", 18, 19, 17, 14, 270));
-        
-        MYTHICALCREATURE_MAP.put("Dragon", new WarriorCatalog("Dragon", "MythicalCreature",15, 12, 14, 8, 120));
-        MYTHICALCREATURE_MAP.put("Dragon", new WarriorCatalog("Dragon","MythicalCreature", 15, 12, 14, 8, 120));
-        MYTHICALCREATURE_MAP.put("Basilisk", new WarriorCatalog("Basilisk","MythicalCreature", 10, 15, 11, 12, 165));
-        MYTHICALCREATURE_MAP.put("Hydra", new WarriorCatalog("Hydra","MythicalCreature", 15, 12, 16, 11, 205));
-        MYTHICALCREATURE_MAP.put("Phoenix", new WarriorCatalog("Phoenix","MythicalCreature", 17, 17, 13, 19, 275));
-    }
+        MAGE_MAP.put("warlock", new WarriorCatalog("Warlock","Mage", 10, 12, 7, 12, 100));
+        MAGE_MAP.put("illusionist", new WarriorCatalog("Illusionist","Mage", 12, 13, 8, 14, 120));
+        MAGE_MAP.put("enchanter", new WarriorCatalog("Enchanter","Mage", 13, 16, 10, 16, 160));
+        MAGE_MAP.put("conjurer", new WarriorCatalog("Conjurer","Mage", 14, 18, 15, 12, 195));
+        MAGE_MAP.put("eldritch", new WarriorCatalog("Eldritch","Mage", 18, 19, 17, 14, 270));
+
+        MYTHICALCREATURE_MAP.put("dragon", new WarriorCatalog("Dragon", "MythicalCreature",15, 12, 14, 8, 120));
+        MYTHICALCREATURE_MAP.put("dragon", new WarriorCatalog("Dragon","MythicalCreature", 15, 12, 14, 8, 120));
+        MYTHICALCREATURE_MAP.put("basilisk", new WarriorCatalog("Basilisk","MythicalCreature", 10, 15, 11, 12, 165));
+        MYTHICALCREATURE_MAP.put("hydra", new WarriorCatalog("Hydra","MythicalCreature", 15, 12, 16, 11, 205));
+        MYTHICALCREATURE_MAP.put("phoenix", new WarriorCatalog("Phoenix","MythicalCreature", 17, 17, 13, 19, 275));
+        }
 
     public Warrior(String warriorType, String name) {
         WarriorCatalog warrior = null;
@@ -131,7 +132,58 @@ public class Warrior {
         return this.price;
     }
 
-    public void setArmor(Equipments armor) {
-        this.armor = armor;
+    public Equipments getEquipments(String equipmentType) {
+        switch (equipmentType) {
+            case "Armor":
+                return this.armor;
+            case "Artefact":
+                return this.artefact;
+            default:
+                return null;
+        }
+    }
+
+    public void setEquipment(String equipmentType, String equipmentName) {
+        Equipments equipment = new Equipments(equipmentType, equipmentName);
+        switch (equipmentType) {
+            case "Armor":
+                this.armor = equipment;
+                this.extraAttack = equipment.getExtraAttack();
+                this.extraDefense = equipment.getExtraDefense();
+                this.extraSpeed = equipment.getExtraSpeed();
+                this.extraHealth = equipment.getExtraHealth();
+                this.value += equipment.getPrice() * 0.2;
+                break;
+            case "Artefact":
+                this.artefact = equipment;
+                this.extraAttack = equipment.getExtraAttack();
+                this.extraDefense = equipment.getExtraDefense();
+                this.extraSpeed = equipment.getExtraSpeed();
+                this.extraHealth = equipment.getExtraHealth();
+                this.value += equipment.getPrice() * 0.2;
+                break;
+        }
+    }
+
+    public void removeEquipment
+    (String equipmentType) {
+        switch (equipmentType) {
+            case "Armor":
+                this.value -= this.armor.getPrice() * 0.2;
+                this.armor = null;
+                this.extraAttack = 0;
+                this.extraDefense = 0;
+                this.extraSpeed = 0;
+                this.extraHealth = 0;
+                break;
+            case "Artefact":
+                this.value -= this.artefact.getPrice() * 0.2;
+                this.artefact = null;
+                this.extraAttack = 0;
+                this.extraDefense = 0;
+                this.extraSpeed = 0;
+                this.extraHealth = 0;
+                break;
+        }
     }
 }

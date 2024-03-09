@@ -7,8 +7,9 @@ public class EquipmentCatalog {
     private final int extraDefense;
     private final int extraHealth;
     private final int extraSpeed;
+    private final String type;
 
-    public EquipmentCatalog(String name, int price, int extraAttack, int extraDefense, int extraHealth,
+    public EquipmentCatalog(String name, String type, int price, int extraAttack, int extraDefense, int extraHealth,
             int extraSpeed) {
         this.name = name;
         this.price = price;
@@ -16,6 +17,7 @@ public class EquipmentCatalog {
         this.extraDefense = extraDefense;
         this.extraHealth = extraHealth;
         this.extraSpeed = extraSpeed;
+        this.type = type;
     }
 
     public String getName() {
