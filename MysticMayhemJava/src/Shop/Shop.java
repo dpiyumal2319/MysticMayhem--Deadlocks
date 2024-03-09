@@ -42,7 +42,7 @@ public abstract class Shop {
 
     private static void sell(User user) {
         printMoney(user);
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("You can only sell warriors for now.");
         System.out.println("Which warrior do you want to sell?");
         System.out.println("Archer[A], Healer[H], Knight[K], Mage[M], MythicalCreature[MC].");
