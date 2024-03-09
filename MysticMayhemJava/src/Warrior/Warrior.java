@@ -1,10 +1,12 @@
 package Warrior;
 
 import Equipments.Equipments;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Warrior {
+public class Warrior implements Serializable{
     protected String name, type;
     protected int health, attack, defense, speed, price;
     

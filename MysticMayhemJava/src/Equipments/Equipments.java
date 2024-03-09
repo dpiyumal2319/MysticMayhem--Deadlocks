@@ -1,9 +1,10 @@
 package Equipments;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Equipments {
+public class Equipments implements Serializable{
     protected String name, type;
     protected int extraAttack, extraDefense, extraSpeed, extraHealth, price;
 

@@ -1,6 +1,8 @@
 package Warrior;
 
-public class WarriorCatalog {
+import java.io.Serializable;
+
+public class WarriorCatalog implements Serializable{
     private final String name;
     private final int health;
     private final int attack;

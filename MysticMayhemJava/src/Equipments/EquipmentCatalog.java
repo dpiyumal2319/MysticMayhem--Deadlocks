@@ -1,6 +1,8 @@
 package Equipments;
 
-public class EquipmentCatalog {
+import java.io.Serializable;
+
+public class EquipmentCatalog implements Serializable{
     private final String name;
     private final int price;
     private final int extraAttack;
