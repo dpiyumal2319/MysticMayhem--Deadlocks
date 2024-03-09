@@ -10,6 +10,7 @@ public class Knight extends Warrior {
             this.defense = knight.getDefense();
             this.speed = knight.getSpeed();
             this.price = knight.getPrice();
+            this.value = this.price;
         }
     }
 }

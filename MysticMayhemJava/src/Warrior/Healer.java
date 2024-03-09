@@ -10,6 +10,7 @@ public class Healer extends Warrior {
             this.defense = healer.getDefense();
             this.speed = healer.getSpeed();
             this.price = healer.getPrice();
+            this.value = this.price;
         }
     }
 }

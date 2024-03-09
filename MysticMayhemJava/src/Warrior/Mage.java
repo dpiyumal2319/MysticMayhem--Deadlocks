@@ -10,6 +10,7 @@ public class Mage extends Warrior {
             this.defense = mage.getDefense();
             this.speed = mage.getSpeed();
             this.price = mage.getPrice();
+            this.value = this.price;
         }
     }
 }

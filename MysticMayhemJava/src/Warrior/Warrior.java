@@ -59,7 +59,31 @@ abstract public class Warrior {
         return this.name;
     }
 
-    // public int getValue() {
-    //     return (int) this.value;
-    // }
+    public int getValue() {
+        return (int) this.value;
+    }
+
+    public int getHealth() {
+        return this.health + this.extraHealth;
+    }
+
+    public int getAttack() {
+        return this.attack + this.extraAttack;
+    }
+
+    public int getDefense() {
+        return this.defense + this.extraDefense;
+    }
+
+    public int getSpeed() {
+        return this.speed + this.extraSpeed;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public void setArmor(Equipments armor) {
+        this.armor = armor;
+    }
 }

@@ -7,7 +7,7 @@ public class User {
     public final int userID;
     public int xp;
     public final String userName;
-    private float money;
+    private double money;
     public Warrior Archer, Healer, Knight, Mage, MythicalCreature;
 
     public User(String userName) {
@@ -17,11 +17,11 @@ public class User {
         this.money = 500;
     }
 
-    public float getMoney() {
+    public double getMoney() {
         return this.money;
     }
 
-    public void setMoney(float money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
@@ -31,12 +31,49 @@ public class User {
 
     public Object[][] getInventory() {
         Object[][] inventory = {
-                Archer.getInfo(),
-                Healer.getInfo(),
-                Knight.getInfo(),
-                Mage.getInfo(),
-                MythicalCreature.getInfo()
+                Archer == null ? null : Archer.getInfo(),
+                Healer == null ? null : Healer.getInfo(),
+                Knight == null ? null : Knight.getInfo(),
+                Mage == null ? null : Mage.getInfo(),
+                MythicalCreature == null ? null : MythicalCreature.getInfo()
         };
         return inventory;
+    }
+
+    public Warrior getWarrior(String warriorType) {
+        switch (warriorType) {
+            case "Archer":
+                return Archer;
+            case "Healer":
+                return Healer;
+            case "Knight":
+                return Knight;
+            case "Mage":
+                return Mage;
+            case "MythicalCreature":
+                return MythicalCreature;
+            default:
+                return null;
+        }
+    }
+
+    public void setWarrior(String warriorType, Warrior warrior) {
+        switch (warriorType) {
+            case "Archer":
+                Archer = (Archer) warrior;
+                break;
+            case "Healer":
+                Healer = warrior;
+                break;
+            case "Knight":
+                Knight = warrior;
+                break;
+            case "Mage":
+                Mage = warrior;
+                break;
+            case "MythicalCreature":
+                MythicalCreature = warrior;
+                break;
+        }
     }
 }

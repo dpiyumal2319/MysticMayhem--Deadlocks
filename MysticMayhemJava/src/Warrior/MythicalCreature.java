@@ -10,6 +10,7 @@ public class MythicalCreature extends Warrior {
             this.defense = mythicalCreature.getDefense();
             this.speed = mythicalCreature.getSpeed();
             this.price = mythicalCreature.getPrice();
+            this.value = this.price;
         }
     }
 }
