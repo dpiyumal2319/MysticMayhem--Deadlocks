@@ -1,18 +1,16 @@
-import UserManager.User;
-import UserManager.UserManager;
+import bin.Shop;
+import bin.User;
+import bin.UserManager;
 
 import java.util.Map;
 import java.util.Scanner;
 
-import Shop.Shop;
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Mystic Mayhem!");
-
         Map<String, User> users = UserManager.loadUsers();
         int currentUsers = users.size();
-
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("1. Login");
             System.out.println("2. Register");
@@ -20,7 +18,6 @@ public class App {
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
-
             if (choice == 1) {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
@@ -65,6 +62,5 @@ public class App {
                 System.out.println("Invalid choice!");
             }
         }
-        scanner.close();
     }
 }
