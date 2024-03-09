@@ -57,10 +57,11 @@ public class User {
         }
     }
 
-    public void setWarrior(String warriorType, Warrior warrior) {
+    public void setwarrior(String warriorType, String WarriorName) {
+        Warrior warrior = new Warrior(warriorType, WarriorName);
         switch (warriorType) {
             case "Archer":
-                Archer = (Archer) warrior;
+                Archer = warrior;
                 break;
             case "Healer":
                 Healer = warrior;
@@ -75,5 +76,32 @@ public class User {
                 MythicalCreature = warrior;
                 break;
         }
+    }
+
+    public double removeWarrior(String warriorType) {
+        double value = 0;
+        switch (warriorType) {
+            case "Archer":
+                value = Archer.getValue();
+                Archer = null;
+                break;
+            case "Healer":
+                value = Healer.getValue();
+                Healer = null;
+                break;
+            case "Knight":
+                value = Knight.getValue();
+                Knight = null;
+                break;
+            case "Mage":
+                value = Mage.getValue();
+                Mage = null;
+                break;
+            case "MythicalCreature":
+                value = MythicalCreature.getValue();
+                MythicalCreature = null;
+                break;
+        }
+        return value;
     }
 }

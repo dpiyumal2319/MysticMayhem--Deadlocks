@@ -4,7 +4,7 @@ import Equipments.Equipments;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract public class Warrior {
+public class Warrior {
     protected String name;
     protected int health, attack, defense, speed, price;
     
@@ -19,35 +19,83 @@ abstract public class Warrior {
     public static final Map<String, WarriorCatalog> MYTHICALCREATURE_MAP = new HashMap<>();
 
     static {
-        ARCHER_MAP.put("Shooter", new WarriorCatalog("Shooter", 6, 11, 4, 9, 80));
-        ARCHER_MAP.put("Ranger", new WarriorCatalog("Ranger", 8, 14, 5, 10, 115));
-        ARCHER_MAP.put("Sunfire", new WarriorCatalog("Sunfire", 7, 15, 5, 14, 160));
-        ARCHER_MAP.put("Zing", new WarriorCatalog("Zing", 11, 16, 9, 14, 200));
-        ARCHER_MAP.put("Sagittarius", new WarriorCatalog("Sagittarius", 12, 18, 7, 17, 230));
+        ARCHER_MAP.put("Shooter", new WarriorCatalog("Shooter","Archer", 6, 11, 4, 9, 80));
+        ARCHER_MAP.put("Ranger", new WarriorCatalog("Ranger","Archer", 8, 14, 5, 10, 115));
+        ARCHER_MAP.put("Sunfire", new WarriorCatalog("Sunfire","Archer", 7, 15, 5, 14, 160));
+        ARCHER_MAP.put("Zing", new WarriorCatalog("Zing","Archer", 11, 16, 9, 14, 200));
+        ARCHER_MAP.put("Sagittarius", new WarriorCatalog("Sagittarius","Archer", 12, 18, 7, 17, 230));
 
-        KNIGHT_MAP.put("Squire", new WarriorCatalog("Squire", 7, 8, 9, 8, 85));
-        KNIGHT_MAP.put("Cavalier", new WarriorCatalog("Cavalier", 7, 10, 12, 10, 110));
-        KNIGHT_MAP.put("Templar", new WarriorCatalog("Templar", 12, 14, 16, 12, 155));
-        KNIGHT_MAP.put("Zoro", new WarriorCatalog("Zoro", 13, 17, 16, 14, 180));
-        KNIGHT_MAP.put("Swiftblade", new WarriorCatalog("Swiftblade", 17, 18, 20, 13, 250));
+        KNIGHT_MAP.put("Squire", new WarriorCatalog("Squire","Knight", 7, 8, 9, 8, 85));
+        KNIGHT_MAP.put("Cavalier", new WarriorCatalog("Cavalier","Knight", 7, 10, 12, 10, 110));
+        KNIGHT_MAP.put("Templar", new WarriorCatalog("Templar","Knight", 12, 14, 16, 12, 155));
+        KNIGHT_MAP.put("Zoro", new WarriorCatalog("Zoro","Knight", 13, 17, 16, 14, 180));
+        KNIGHT_MAP.put("Swiftblade", new WarriorCatalog("Swiftblade","Knight", 17, 18, 20, 13, 250));
 
-        HEALER_MAP.put("Soother", new WarriorCatalog("Soother", 9, 10, 8, 6, 95));
-        HEALER_MAP.put("Medic", new WarriorCatalog("Medic", 10, 12, 9, 7, 125));
-        HEALER_MAP.put("Alchemist", new WarriorCatalog("Alchemist", 13, 13, 13, 13, 150));
-        HEALER_MAP.put("Saint", new WarriorCatalog("Saint", 17, 16, 14, 9, 200));
-        HEALER_MAP.put("Lifebringer", new WarriorCatalog("Lifebringer", 19, 17, 15, 12, 260));
 
-        MAGE_MAP.put("Warlock", new WarriorCatalog("Warlock", 10, 12, 7, 12, 100));
-        MAGE_MAP.put("Illusionist", new WarriorCatalog("Illusionist", 12, 13, 8, 14, 120));
-        MAGE_MAP.put("Enchanter", new WarriorCatalog("Enchanter", 13, 16, 10, 16, 160));
-        MAGE_MAP.put("Conjurer", new WarriorCatalog("Conjurer", 14, 18, 15, 12, 195));
-        MAGE_MAP.put("Eldritch", new WarriorCatalog("Eldritch", 18, 19, 17, 14, 270));
+        HEALER_MAP.put("Soother", new WarriorCatalog("Soother","Healer", 9, 10, 8, 6, 95));
+        HEALER_MAP.put("Medic", new WarriorCatalog("Medic","Healer", 10, 12, 9, 7, 125));
+        HEALER_MAP.put("Alchemist", new WarriorCatalog("Alchemist","Healer", 13, 13, 13, 13, 150));
+        HEALER_MAP.put("Saint", new WarriorCatalog("Saint","Healer", 17, 16, 14, 9, 200));
+        HEALER_MAP.put("Lifebringer", new WarriorCatalog("Lifebringer","Healer", 19, 17, 15, 12, 260));
+
+        MAGE_MAP.put("Warlock", new WarriorCatalog("Warlock","Mage", 10, 12, 7, 12, 100));
+        MAGE_MAP.put("Illusionist", new WarriorCatalog("Illusionist","Mage", 12, 13, 8, 14, 120));
+        MAGE_MAP.put("Enchanter", new WarriorCatalog("Enchanter","Mage", 13, 16, 10, 16, 160));
+        MAGE_MAP.put("Conjurer", new WarriorCatalog("Conjurer","Mage", 14, 18, 15, 12, 195));
+        MAGE_MAP.put("Eldritch", new WarriorCatalog("Eldritch","Mage", 18, 19, 17, 14, 270));
         
-        MYTHICALCREATURE_MAP.put("Dragon", new WarriorCatalog("Dragon", 15, 12, 14, 8, 120));
-        MYTHICALCREATURE_MAP.put("Basilisk", new WarriorCatalog("Basilisk", 10, 15, 11, 12, 165));
-        MYTHICALCREATURE_MAP.put("Hydra", new WarriorCatalog("Hydra", 15, 12, 16, 11, 205));
-        MYTHICALCREATURE_MAP.put("Phoenix", new WarriorCatalog("Phoenix", 17, 17, 13, 19, 275));
-        MYTHICALCREATURE_MAP.put("Pegasus", new WarriorCatalog("Pegasus", 20, 14, 18, 20, 340));
+        MYTHICALCREATURE_MAP.put("Dragon", new WarriorCatalog("Dragon", "MythicalCreature",15, 12, 14, 8, 120));
+        MYTHICALCREATURE_MAP.put("Dragon", new WarriorCatalog("Dragon","MythicalCreature", 15, 12, 14, 8, 120));
+        MYTHICALCREATURE_MAP.put("Basilisk", new WarriorCatalog("Basilisk","MythicalCreature", 10, 15, 11, 12, 165));
+        MYTHICALCREATURE_MAP.put("Hydra", new WarriorCatalog("Hydra","MythicalCreature", 15, 12, 16, 11, 205));
+        MYTHICALCREATURE_MAP.put("Phoenix", new WarriorCatalog("Phoenix","MythicalCreature", 17, 17, 13, 19, 275));
+    }
+
+    public Warrior(String warriorType, String name) {
+        WarriorCatalog warrior = null;
+        switch (warriorType) {
+            case "Archer":
+                warrior = ARCHER_MAP.get(name);
+                break;
+            case "Knight":
+                warrior = KNIGHT_MAP.get(name);
+                break;
+            case "Healer":
+                warrior = HEALER_MAP.get(name);
+                break;
+            case "Mage":
+                warrior = MAGE_MAP.get(name);
+                break;
+            case "MythicalCreature":
+                warrior = MYTHICALCREATURE_MAP.get(name);
+                break;
+        }
+        if (warrior != null) {
+            this.name = warrior.getName();
+            this.health = warrior.getHealth();
+            this.attack = warrior.getAttack();
+            this.defense = warrior.getDefense();
+            this.speed = warrior.getSpeed();
+            this.price = warrior.getPrice();
+            this.value = this.price;
+        }
+    }
+
+    public static Map<String, WarriorCatalog> getWarriorMap(String warriorType) {
+        switch (warriorType) {
+            case "Archer":
+                return ARCHER_MAP;
+            case "Knight":
+                return KNIGHT_MAP;
+            case "Healer":
+                return HEALER_MAP;
+            case "Mage":
+                return MAGE_MAP;
+            case "MythicalCreature":
+                return MYTHICALCREATURE_MAP;
+            default:
+                return null;
+        }
     }
 
     public Object[] getInfo() {

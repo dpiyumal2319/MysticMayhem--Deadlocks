@@ -2,12 +2,6 @@ package Shop;
 
 import java.util.Map;
 import java.util.Scanner;
-
-import Warrior.Archer;
-import Warrior.Healer;
-import Warrior.Knight;
-import Warrior.Mage;
-import Warrior.MythicalCreature;
 import Warrior.Warrior;
 import Equipments.Equipments;
 import UserManager.User;
@@ -19,7 +13,7 @@ public abstract class Shop {
 
     public static void enterShop(User user) {
         System.out.println("Welcome to the shop " + user.userName + "!");
-        System.out.println("You have " + user.getMoney() + " coins.");
+        printMoney(user);
         inventory = user.getInventory();
         printInventory(inventory);
         Scanner scanner = new Scanner(System.in);
@@ -46,6 +40,7 @@ public abstract class Shop {
     }
 
     private static void buy(User user) {
+        printMoney(user);
         Scanner scanner = new Scanner(System.in);
         System.out.println(
                 "Do you want to buy a warrior[W] or an equipment[E] to a warrior?. To exit buy mode type [Q].");
@@ -65,269 +60,25 @@ public abstract class Shop {
         scanner.close();
     }
 
-    // private static void buyWarrior(User user) {
-    // Scanner scanner = new Scanner(System.in);
-    // System.out.println("Which warrior do you want to buy?");
-    // System.out.println("Archer[A], Healer[H], Knight[K], Mage[M],
-    // MythicalCreature[MC].");
-    // System.out.println("To check your inventory : [I].");
-    // System.out.println("To exit buy mode : [Q].");
-    // while (true) {
-    // String input = scanner.nextLine();
-    // if (input.equalsIgnoreCase("I")) {
-    // printInventory(inventory);
-    // } else if (input.equalsIgnoreCase("A")) {
-    // if (user.getArcher() != null) {
-    // System.out.println("You already have an Archer.");
-    // System.out.println("Do you want to replace it? [Y/N]. Existing archer will be
-    // sold for "
-    // + user.getArcher().getValue() * 0.9 + " coins.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // if (input.equalsIgnoreCase("Y")) {
-    // Warrior currArcher = (Archer) user.getArcher();
-    // user.setMoney(user.getMoney() + currArcher.getValue() * 0.9);
-    // user.setArcher(null);
-    // } else if (input.equalsIgnoreCase("N")) {
-    // break;
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // if (user.getArcher() == null) {
-    // Map<String, WarriorCatalog> Archers = Warrior.ARCHER_MAP;
-    // printWarriorCatalog(Archers, "Archer");
-    // System.out.println("Which Archer do you want to buy? Enter the name of the
-    // Archer.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // WarriorCatalog archer = Archers.get(input);
-    // if (archer != null) {
-    // if (user.getMoney() >= archer.getPrice()) {
-    // user.setMoney(user.getMoney() - archer.getPrice());
-    // user.setArcher(new Archer(input));
-    // System.out
-    // .println("You have bought " + input + " for " + archer.getPrice() + "
-    // coins.");
-    // inventory = user.getInventory();
-    // break;
-    // } else {
-    // System.out.println("You don't have enough money to buy " + input + ".");
-    // break;
-    // }
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // } else if (input.equalsIgnoreCase("H")) {
-    // if (user.getHealer() != null) {
-    // System.out.println("You already have a Healer.");
-    // System.out.println("Do you want to replace it? [Y/N]. Existing healer will be
-    // sold for "
-    // + user.getHealer().getValue() * 0.9 + " coins.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // if (input.equalsIgnoreCase("Y")) {
-    // Warrior currHealer = (Healer) user.getHealer();
-    // user.setMoney(user.getMoney() + currHealer.getValue() * 0.9);
-    // user.setHealer(null);
-    // } else if (input.equalsIgnoreCase("N")) {
-    // break;
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // if (user.getHealer() == null) {
-    // Map<String, WarriorCatalog> Healers = Warrior.HEALER_MAP;
-    // printWarriorCatalog(Healers, "Healer");
-    // System.out.println("Which Healer do you want to buy? Enter the name of the
-    // Healer.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // WarriorCatalog healer = Healers.get(input);
-    // if (healer != null) {
-    // if (user.getMoney() >= healer.getPrice()) {
-    // user.setMoney(user.getMoney() - healer.getPrice());
-    // user.setHealer(new Healer(input));
-    // System.out
-    // .println("You have bought " + input + " for " + healer.getPrice() + "
-    // coins.");
-    // inventory = user.getInventory();
-    // break;
-    // } else {
-    // System.out.println("You don't have enough money to buy " + input + ".");
-    // break;
-    // }
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // } else if (input.equalsIgnoreCase("K")) {
-    // if (user.getKnight() != null) {
-    // System.out.println("You already have a Knight.");
-    // System.out.println("Do you want to replace it? [Y/N]. Existing knight will be
-    // sold for "
-    // + user.getKnight().getValue() * 0.9 + " coins.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // if (input.equalsIgnoreCase("Y")) {
-    // Warrior currKnight = (Knight) user.getKnight();
-    // user.setMoney(user.getMoney() + currKnight.getValue() * 0.9);
-    // user.setKnight(null);
-    // } else if (input.equalsIgnoreCase("N")) {
-    // break;
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // if (user.getKnight() == null) {
-    // Map<String, WarriorCatalog> Knights = Warrior.KNIGHT_MAP;
-    // printWarriorCatalog(Knights, "Knight");
-    // System.out.println("Which Knight do you want to buy? Enter the name of the
-    // Knight.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // WarriorCatalog knight = Knights.get(input);
-    // if (knight != null) {
-    // if (user.getMoney() >= knight.getPrice()) {
-    // user.setMoney(user.getMoney() - knight.getPrice());
-    // user.setKnight(new Knight(input));
-    // System.out
-    // .println("You have bought " + input + " for " + knight.getPrice() + "
-    // coins.");
-    // inventory = user.getInventory();
-    // break;
-    // } else {
-    // System.out.println("You don't have enough money to buy " + input + ".");
-    // break;
-    // }
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // } else if (input.equalsIgnoreCase("M")) {
-    // if (user.getMage() != null) {
-    // System.out.println("You already have a Mage.");
-    // System.out.println("Do you want to replace it? [Y/N]. Existing mage will be
-    // sold for "
-    // + user.getMage().getValue() * 0.9 + " coins.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // if (input.equalsIgnoreCase("Y")) {
-    // Warrior currMage = (Mage) user.getMage();
-    // user.setMoney(user.getMoney() + currMage.getValue() * 0.9);
-    // user.setMage(null);
-    // } else if (input.equalsIgnoreCase("N")) {
-    // break;
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // if (user.getMage() == null) {
-    // Map<String, WarriorCatalog> Mages = Warrior.MAGE_MAP;
-    // printWarriorCatalog(Mages, "Mage");
-    // System.out.println("Which Mage do you want to buy? Enter the name of the
-    // Mage.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // WarriorCatalog mage = Mages.get(input);
-    // if (mage != null) {
-    // if (user.getMoney() >= mage.getPrice()) {
-    // user.setMoney(user.getMoney() - mage.getPrice());
-    // user.setMage(new Mage(input));
-    // System.out.println("You have bought " + input + " for " + mage.getPrice() + "
-    // coins.");
-    // inventory = user.getInventory();
-    // break;
-    // } else {
-    // System.out.println("You don't have enough money to buy " + input + ".");
-    // break;
-    // }
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // } else if (input.equalsIgnoreCase("MC")) {
-    // if (user.getMythicalCreature() != null) {
-    // System.out.println("You already have a MythicalCreature.");
-    // System.out.println("Do you want to replace it? [Y/N]. Existing mythical
-    // creature will be sold for "
-    // + user.getMythicalCreature().getValue() * 0.9 + " coins.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // if (input.equalsIgnoreCase("Y")) {
-    // Warrior currMythicalCreature = (MythicalCreature) user.getMythicalCreature();
-    // user.setMoney(user.getMoney() + currMythicalCreature.getValue() * 0.9);
-    // user.setMythicalCreature(null);
-    // } else if (input.equalsIgnoreCase("N")) {
-    // break;
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // if (user.getMythicalCreature() == null) {
-    // Map<String, WarriorCatalog> MythicalCreatures = Warrior.MYTHICALCREATURE_MAP;
-    // printWarriorCatalog(MythicalCreatures, "MythicalCreature");
-    // System.out.println(
-    // "Which MythicalCreature do you want to buy? Enter the name of the
-    // MythicalCreature.");
-    // while (true) {
-    // input = scanner.nextLine();
-    // WarriorCatalog mythicalCreature = MythicalCreatures.get(input);
-    // if (mythicalCreature != null) {
-    // if (user.getMoney() >= mythicalCreature.getPrice()) {
-    // user.setMoney(user.getMoney() - mythicalCreature.getPrice());
-    // user.setMythicalCreature(new MythicalCreature(input));
-    // System.out.println(
-    // "You have bought " + input + " for " + mythicalCreature.getPrice() + "
-    // coins.");
-    // inventory = user.getInventory();
-    // break;
-    // } else {
-    // System.out.println("You don't have enough money to buy " + input + ".");
-    // break;
-    // }
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-    // } else if (input.equalsIgnoreCase("Q")) {
-    // break;
-    // } else {
-    // System.out.println("Invalid input. Please try again.");
-    // }
-    // }
-    // }
-
-    private void buyWarrior(User user) {
+    private static void buyWarrior(User user) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which warrior do you want to buy?");
         System.out.println("Archer[A], Healer[H], Knight[K], Mage[M], MythicalCreature[MC].");
         System.out.println("To check your inventory : [I].");
-        System.out.println("To exit buy mode : [Q].");
+        System.out.println("To move back : [Q].");
 
         while (true) {
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("A")) {
-                buyOrReplaceWarrior(user, Warrior.ARCHER_MAP, "Archer");
+                buyOrReplaceWarrior(user, "Archer");
             } else if (input.equalsIgnoreCase("H")) {
-                buyOrReplaceWarrior(user, Warrior.HEALER_MAP, "Healer");
+                buyOrReplaceWarrior(user, "Healer");
             } else if (input.equalsIgnoreCase("K")) {
-                buyOrReplaceWarrior(user, Warrior.KNIGHT_MAP, "Knight");
+                buyOrReplaceWarrior(user, "Knight");
             } else if (input.equalsIgnoreCase("M")) {
-                buyOrReplaceWarrior(user, Warrior.MAGE_MAP, "Mage");
+                buyOrReplaceWarrior(user, "Mage");
             } else if (input.equalsIgnoreCase("MC")) {
-                buyOrReplaceWarrior(user, Warrior.MYTHICALCREATURE_MAP, "MythicalCreature");
+                buyOrReplaceWarrior(user, "MythicalCreature");
             } else if (input.equalsIgnoreCase("I")) {
                 printInventory(inventory);
             } else if (input.equalsIgnoreCase("Q")) {
@@ -338,7 +89,7 @@ public abstract class Shop {
         }
     }
 
-    private void buyOrReplaceWarrior(User user, Map<String, WarriorCatalog> map, String warriorType) {
+    private static void buyOrReplaceWarrior(User user, String warriorType) {
         Scanner scanner = new Scanner(System.in);
         if (user.getWarrior(warriorType) != null) {
             System.out.println("You already have a " + warriorType + ".");
@@ -347,9 +98,10 @@ public abstract class Shop {
             while (true) {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
-                    Warrior currWarrior = user.getWarrior(warriorType);
-                    user.setMoney(user.getMoney() + currWarrior.getValue() * 0.9);
-                    user.setWarrior(warriorType, null);
+                    double value = user.removeWarrior(warriorType);
+                    user.setMoney(user.getMoney() + value * 0.9);
+                    System.out.println("You have sold your " + warriorType + " for " + value * 0.9 + " coins.");
+                    System.out.println("You have " + user.getMoney() + " coins.");
                     break;
                 } else if (input.equalsIgnoreCase("N")) {
                     return;
@@ -358,26 +110,61 @@ public abstract class Shop {
                 }
             }
         }
+        Map<String, WarriorCatalog> warriors = Warrior.getWarriorMap(warriorType);
         if (user.getWarrior(warriorType) == null) {
-            printWarriorCatalog(map, warriorType);
             System.out.println("Which " + warriorType + " do you want to buy? Enter the name of the " + warriorType + ".");
+            System.out.println("To abort the purchase : [Q].");
+            printWarriorCatalog(warriorType);
             while (true) {
                 String input = scanner.nextLine();
-                WarriorCatalog warrior = map.get(input);
-                if (warrior != null) {
+                if (input.equalsIgnoreCase("Q")) {
+                    return;
+                } else if (warriors.containsKey(input)) {
+                    WarriorCatalog warrior = warriors.get(input);
                     if (user.getMoney() >= warrior.getPrice()) {
                         user.setMoney(user.getMoney() - warrior.getPrice());
-                        user.setWarrior(warriorType, warrior);
+                        user.setwarrior(warriorType, input.toLowerCase()); // Take lower case to match the warrior name and remove case sensitivity
                         System.out.println("You have bought " + input + " for " + warrior.getPrice() + " coins.");
+                        printMoney(user);
                         inventory = user.getInventory();
-                        break;
+                        return;
                     } else {
                         System.out.println("You don't have enough money to buy " + input + ".");
-                        break;
+                        printMoney(user);
+                        return;
                     }
                 } else {
                     System.out.println("Invalid input. Please try again.");
                 }
+            }
+        }
+    }
+
+    private static void buyEquipment(User user) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which warrior do you want to buy equipment for?");
+        System.out.println("Archer[A], Healer[H], Knight[K], Mage[M], MythicalCreature[MC].");
+        System.out.println("To check your inventory : [I].");
+        System.out.println("To move back : [Q].");
+
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("A")) {
+                buyEquipmentForWarrior(user, "Archer");
+            } else if (input.equalsIgnoreCase("H")) {
+                buyEquipmentForWarrior(user, "Healer");
+            } else if (input.equalsIgnoreCase("K")) {
+                buyEquipmentForWarrior(user, "Knight");
+            } else if (input.equalsIgnoreCase("M")) {
+                buyEquipmentForWarrior(user, "Mage");
+            } else if (input.equalsIgnoreCase("MC")) {
+                buyEquipmentForWarrior(user, "MythicalCreature");
+            } else if (input.equalsIgnoreCase("I")) {
+                printInventory(inventory);
+            } else if (input.equalsIgnoreCase("Q")) {
+                break;
+            } else {
+                System.out.println("Invalid input. Please try again.");
             }
         }
     }
@@ -404,7 +191,8 @@ public abstract class Shop {
         }
     }
 
-    private static void printWarriorCatalog(Map<String, WarriorCatalog> warriors, String warriorType) {
+    private static void printWarriorCatalog(String warriorType) {
+        Map<String, WarriorCatalog> warriors = Warrior.getWarriorMap(warriorType);
         System.out.println("Awailable " + warriorType + "s:");
         for (Map.Entry<String, WarriorCatalog> entry : warriors.entrySet()) {
             System.out.println("\t" + entry.getKey() + " : " + entry.getValue().getPrice() + " coins.");
@@ -415,14 +203,9 @@ public abstract class Shop {
         }
     }
 
-    private static void printEquipmentCatalog(Map<String, EquipmentCatalog> equipments, String equipmentType) {
-        System.out.println("Awailable " + equipmentType + "s:");
-        for (Map.Entry<String, EquipmentCatalog> entry : equipments.entrySet()) {
-            System.out.println("\t" + entry.getKey() + " : " + entry.getValue().getPrice() + " coins.");
-            System.out.println("\t\tExtra Health: " + entry.getValue().getExtraHealth());
-            System.out.println("\t\tExtra Attack: " + entry.getValue().getExtraAttack());
-            System.out.println("\t\tExtra Defense: " + entry.getValue().getExtraDefense());
-            System.out.println("\t\tExtra Speed: " + entry.getValue().getExtraSpeed());
-        }
+
+
+    private static void printMoney(User user) {
+        System.out.println("You have " + user.getMoney() + " coins.");
     }
 }

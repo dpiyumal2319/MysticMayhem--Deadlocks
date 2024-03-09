@@ -7,14 +7,16 @@ public class WarriorCatalog {
     private final int defense;
     private final int speed;
     private final int price;
+    private final String type;
 
-    public WarriorCatalog(String name, int health, int attack, int defense, int speed, int price) {
+    public WarriorCatalog(String name, String type, int health, int attack, int defense, int speed, int price) {
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
         this.price = price;
+        this.type = type;
     }
 
     public String getName() {
