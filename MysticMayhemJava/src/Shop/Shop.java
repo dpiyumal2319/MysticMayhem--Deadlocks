@@ -37,12 +37,12 @@ public abstract class Shop {
             }
         }
         System.out.println("Exiting shop.");
+        scanner.close();
         return;
     }
 
     private static void sell(User user) {
         printMoney(user);
-
         System.out.println("You can only sell warriors for now.");
         System.out.println("Which warrior do you want to sell?");
         System.out.println("Archer[A], Healer[H], Knight[K], Mage[M], MythicalCreature[MC].");
@@ -99,11 +99,14 @@ public abstract class Shop {
                 printMoney(user);
                 break;
             } else if (input.equalsIgnoreCase("N")) {
+                scanner.close();
                 return;
             } else {
                 System.out.println("Invalid input. Please try again.");
             }
         }
+        scanner.close();
+        return;
     }
 
     private static void buy(User user) {
@@ -158,13 +161,13 @@ public abstract class Shop {
                     printInventory(user);
                     break;
                 case "Q":
+                    scanner.close();
                     return;
                 default:
                     System.out.println("Invalid input. Please try again.");
                     break;
             }
         }
-
     }
 
     private static void buyOrReplaceWarrior(User user, String warriorType) {
@@ -180,6 +183,7 @@ public abstract class Shop {
                     sellWarrior(user, warriorType);
                     break;
                 } else if (input.equalsIgnoreCase("N")) {
+                    scanner.close();
                     return;
                 } else {
                     System.out.println("Invalid input. Please try again.");
@@ -196,6 +200,7 @@ public abstract class Shop {
                 System.out.println("Enter your choice of which " + warriorType + " to buy.");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Q")) {
+                    scanner.close();
                     return;
                 } else if (warriors.containsKey(input)) {
                     WarriorCatalog warrior = warriors.get(input);
@@ -205,10 +210,12 @@ public abstract class Shop {
                                                                            // and remove case sensitivity
                         System.out.println("You have bought " + input + " for " + warrior.getPrice() + " coins.");
                         printMoney(user);
+                        scanner.close();
                         return;
                     } else {
                         System.out.println("You don't have enough money to buy " + input + ".");
                         printMoney(user);
+                        scanner.close();
                         return;
                     }
                 } else {
@@ -248,6 +255,7 @@ public abstract class Shop {
                     printInventory(user);
                     break;
                 case "Q":
+                    scanner.close();
                     return;
                 default:
                     System.out.println("Invalid input. Please try again.");
@@ -261,6 +269,7 @@ public abstract class Shop {
         Scanner scanner = new Scanner(System.in);
         if (user.getWarrior(warriorType) == null) {
             System.out.println("You don't have a " + warriorType + ".");
+            scanner.close();
             return;
         }
         System.out.println("Which equipment do you want to buy for your " + warriorType + "?");
@@ -283,6 +292,8 @@ public abstract class Shop {
                 System.out.println("Invalid input. Please try again.");
             }
         }
+        scanner.close();
+        return;
     }
 
     private static void buyOrReplaceEquipment(User user, String warriorType, String equipmentType) {
@@ -323,12 +334,7 @@ public abstract class Shop {
                     EquipmentCatalog equipment = equipments.get(input);
                     if (user.getMoney() >= equipment.getPrice()) {
                         user.setMoney(user.getMoney() - equipment.getPrice());
-                        user.getWarrior(warriorType).setEquipment(equipmentType, input.toLowerCase()); // Take lower
-                                                                                                       // case to match
-                                                                                                       // the equipment
-                                                                                                       // name and
-                                                                                                       // remove case
-                                                                                                       // sensitivity
+                        user.getWarrior(warriorType).setEquipment(equipmentType, input.toLowerCase()); //Take lower case to match the equipment name and remove case sensitivity
                         System.out.println("You have bought " + input + " for " + equipment.getPrice() + " coins.");
                         printMoney(user);
                         return;
