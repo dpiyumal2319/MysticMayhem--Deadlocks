@@ -17,6 +17,7 @@ public class User extends SuperUserControls {
         this.userID = UserIdStart + currentUsers + 1;
         this.xp = 0;
         this.userName = userName;
+        this.squad = new Squad();
     }
 
     public int getxp() {
@@ -43,15 +44,15 @@ public class User extends SuperUserControls {
                     System.out.println("Enter your choice, Which warrior you want to sell:");
                     input = scanner.nextLine();
                     if (input.equalsIgnoreCase("A"))
-                        sell(squad.getArcher());
+                        sellWarrior(squad.getArcher());
                     else if (input.equalsIgnoreCase("K"))
-                        sell(squad.getKnight());
+                        sellWarrior(squad.getKnight());
                     else if (input.equalsIgnoreCase("M"))
-                        sell(squad.getMage());
+                        sellWarrior(squad.getMage());
                     else if (input.equalsIgnoreCase("H"))
-                        sell(squad.getHealer());
+                        sellWarrior(squad.getHealer());
                     else if (input.equalsIgnoreCase("MC"))
-                        sell(squad.getMythicalCreature());
+                        sellWarrior(squad.getMythicalCreature());
                     else if (input.equalsIgnoreCase("Q"))
                         break;
                     else if (input.equalsIgnoreCase("I"))
@@ -158,31 +159,14 @@ public class User extends SuperUserControls {
         printMoney();
         if (warrior.getWoredrobe().getEquipment(type) != null) {
             System.out.println("You already have this equipment!");
-            System.out.println("Do you want to replce it?. No money will be refunded.");
+            System.out.println("Do you want to remove it?. No money will be refunded.");
             System.out.println("Yes[Y] or No[N]");
             while (true) {
                 System.out.println("Enter your choice [Y/N]:");
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
                     warrior.getWoredrobe().removeEquipment(type);
-                    System.out.println("Which " + type + " do you want to buy?");
-                    InventoryItem.printMap(type);
-                    printMoney();
-                    System.out.println("Enter the name of the " + type + " you want to buy: ");
-                    while (true) {
-                        System.out.println("Enter your choice [name] of  " + type + " you want to buy");
-                        input = scanner.nextLine();
-                        if (InventoryItem.getEquipmentMap(type).containsKey(input)) {
-                            InventoryItem newEquipment = warrior.getWoredrobe().addEquipment(type, input);
-                            System.out
-                                    .println("You have bought a new " + type + "for " + newEquipment.value + " coins.");
-                            giveMoneyFor(newEquipment);
-                            printMoney();
-                            return;
-                        } else {
-                            System.out.println("Invalid choice!");
-                        }
-                    }
+                    System.out.println("You have removed the " + type + " from your " + warrior.type + ".");
                 } else if (input.equalsIgnoreCase("N")) {
                     return;
                 } else {
@@ -204,8 +188,8 @@ public class User extends SuperUserControls {
                     System.out.println("Enter your choice [name]: ");
                     input = scanner.nextLine();
                     if (InventoryItem.getEquipmentMap(type).containsKey(input)) {
-                        if (getMoney() >= InventoryItem.getEquipmentMap(type).get("input").price) {
-                            InventoryItem newEquipment = warrior.getWoredrobe().addEquipment(type, input);
+                        if (getMoney() >= InventoryItem.getEquipmentMap(type).get(input.toLowerCase()).price) {
+                            InventoryItem newEquipment = warrior.getWoredrobe().addEquipment(type, input.toLowerCase());
                             giveMoneyFor(newEquipment);
                             System.out
                                     .println("You have bought a new " + type + "for " + newEquipment.value + " coins.");
@@ -227,9 +211,9 @@ public class User extends SuperUserControls {
         }
     }
 
-    private void buyWarrior(InventoryItem item, String type) {
+    private void buyWarrior(Warrior warrior, String type) {
         printMoney();
-        if (item != null) {
+        if (warrior != null) {
             System.out.println("You already have this warrior!");
             System.out.println("Do you want to Sell it?");
             System.out.println("Yes[Y] or No[N]");
@@ -237,7 +221,7 @@ public class User extends SuperUserControls {
                 System.out.println("Enter your choice: ");
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
-                    sell(item);
+                    sellWarrior(warrior);
                     break;
                 } else if (input.equalsIgnoreCase("N")) {
                     return;
@@ -260,7 +244,7 @@ public class User extends SuperUserControls {
                     System.out.println("Enter your choice [name]: ");
                     input = scanner.nextLine();
                     if (InventoryItem.getWarriorMap(type).containsKey(input)) {
-                        if (getMoney() >= InventoryItem.getWarriorMap(type).get("input").price) {
+                        if (getMoney() >= InventoryItem.getWarriorMap(type).get(input.toLowerCase()).price) {
                             InventoryItem newWarrior = squad.addSquadMate(type);
                             giveMoneyFor(newWarrior);
                             System.out.println("You have bought a new " + type + "for " + newWarrior.value + " coins.");
@@ -278,21 +262,21 @@ public class User extends SuperUserControls {
         }
     }
 
-    private void sell(InventoryItem item) {
+    private void sellWarrior(Warrior warrior) {
         printMoney();
-        if (item == null) {
+        if (warrior == null) {
             System.out.println("You don't currently have this warrior!");
             return;
         } else {
-            System.out.println("Do you want to sell your " + item.name + " for " + item.value + " coins?");
+            System.out.println("Do you want to sell your " + warrior.name + " for " + warrior.value + " coins?");
             System.out.println("Yes[Y] or No[N]");
             while (true) {
                 System.out.println("Enter your choice: ");
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
-                    getMoneyFrom(item);
-                    squad.setSquadMate(null, item.type);
-                    System.out.println("You have sold your " + item.name + " for " + item.value + " coins.");
+                    getMoneyFrom(warrior);
+                    squad.setSquadMate(null, warrior.type);
+                    System.out.println("You have sold your " + warrior.name + " for " + warrior.value + " coins.");
                     printMoney();
                     break;
                 } else if (input.equalsIgnoreCase("N")) {

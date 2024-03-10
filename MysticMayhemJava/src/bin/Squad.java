@@ -4,44 +4,53 @@ import bin.Warriors.*;
 
 import java.io.Serializable;
 
-public abstract class Squad implements Serializable{
+public class Squad implements Serializable{
     private Archer archer;
     private Knight knight;
     private Mage mage;
     private Healer healer;
     private MythicalCreature mythicalCreature;
 
-    public void setArcher(Archer archer) {
+    public Squad() {
+        archer = null;
+        knight = null;
+        mage = null;
+        healer = null;
+        mythicalCreature = null;
+    }
+
+    void setArcher(Archer archer) {
         this.archer = archer;
     }
-    public void setKnight(Knight knight) {
+    void setKnight(Knight knight) {
         this.knight = knight;
     }
-    public void setMage(Mage mage) {
+    void setMage(Mage mage) {
         this.mage = mage;
     }
-    public void setHealer(Healer healer) {
+    void setHealer(Healer healer) {
         this.healer = healer;
     }
-    public void setMythicalCreature(MythicalCreature mythicalCreature) {
+    void setMythicalCreature(MythicalCreature mythicalCreature) {
         this.mythicalCreature = mythicalCreature;
     }
-    public Archer getArcher() {
+    Archer getArcher() {
         return archer;
     }
-    public Knight getKnight() {
+    Knight getKnight() {
         return knight;
     }
-    public Mage getMage() {
+    Mage getMage() {
         return mage;
     }
-    public Healer getHealer() {
+    Healer getHealer() {
         return healer;
     }
-    public MythicalCreature getMythicalCreature() {
+    MythicalCreature getMythicalCreature() {
         return mythicalCreature;
     }
-    void setSquadMate(InventoryItem warrior,String type) {
+
+    void setSquadMate(Warrior warrior,String type) {
         switch (type) {
             case "Archer":
                 setArcher((Archer) warrior);
@@ -61,8 +70,8 @@ public abstract class Squad implements Serializable{
         }
     }
 
-    InventoryItem addSquadMate(String type) {
-        InventoryItem warrior = null;
+    Warrior addSquadMate(String type) {
+        Warrior warrior = null;
         switch (type) {
             case "Archer":
                 warrior = new Archer(type);
