@@ -1,10 +1,11 @@
-package bin;
+package bin.Warriors;
 
+import bin.Collections.WarriorInfo;
 
-public class Mage extends Warrior{
-
-    public Mage(String name) {
-        WarriorInfo info = data.mages.get(name);
+public class Archer extends Warrior{
+    
+    public Archer(String name) {
+        WarriorInfo info = data.archers.get(name);
         this.name = info.name;
         this.attack = info.attack;
         this.defense = info.defense;
@@ -12,6 +13,6 @@ public class Mage extends Warrior{
         this.speed = info.speed;
         this.price = info.price;
         this.value = info.price * 0.9;
-        this.type = "Mage";
+        this.type = "Archer";
     }
 }

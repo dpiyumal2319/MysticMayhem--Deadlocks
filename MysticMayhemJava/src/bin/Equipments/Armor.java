@@ -1,6 +1,9 @@
-package bin;
+package bin.Equipments;
 
-public class Armor extends Equipment {
+import bin.Collections.EquipmentInfo;
+
+public class Armor extends Equipments {
+
     public Armor(String name) {
         EquipmentInfo info = data.armors.get(name);
         this.name = info.name;

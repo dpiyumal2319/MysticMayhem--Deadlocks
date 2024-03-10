@@ -1,9 +1,11 @@
-package bin;
+package bin.Warriors;
 
-public class MythicalCreature extends Warrior{
+import bin.Collections.WarriorInfo;
+
+public class Healer extends Warrior{
     
-    public MythicalCreature(String name) {
-        WarriorInfo info = data.mythicalCreatures.get(name);
+    public Healer(String name) {
+        WarriorInfo info = data.healers.get(name);
         this.name = info.name;
         this.attack = info.attack;
         this.defense = info.defense;
@@ -11,6 +13,6 @@ public class MythicalCreature extends Warrior{
         this.speed = info.speed;
         this.price = info.price;
         this.value = info.price * 0.9;
-        this.type = "MythicalCreature";
+        this.type = "Healer";
     }
 }

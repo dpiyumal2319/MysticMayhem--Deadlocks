@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-class DataSet implements Serializable{
+import bin.Collections.EquipmentInfo;
+import bin.Collections.WarriorInfo;
+
+public class DataSet implements Serializable{
     public Map<String, WarriorInfo> archers = new HashMap<>();
     public Map<String, WarriorInfo> knights = new HashMap<>();
     public Map<String, WarriorInfo> healers = new HashMap<>();
@@ -51,43 +54,5 @@ class DataSet implements Serializable{
         artefacts.put("excalibur", new EquipmentInfo("Excalibur", 150, 2, 0, 0, 0));
         artefacts.put("amulet", new EquipmentInfo("Amulet", 200, 1, -1, 1, 1));
         artefacts.put("crystal", new EquipmentInfo("Crystal", 210, 2, 1, -1, -1));
-    }
-}
-
-class WarriorInfo {
-    final String name;
-    final int health;
-    final int attack;
-    final int defense;
-    final int speed;
-    final int price;
-    final String homeLand;
-
-    public WarriorInfo(String name, int health, int attack, int defense, int speed, int price, String homeLand) {
-        this.name = name;
-        this.health = health;
-        this.attack = attack;
-        this.defense = defense;
-        this.speed = speed;
-        this.price = price;
-        this.homeLand = homeLand;
-    }
-}
-
-class EquipmentInfo {
-    final String name;
-    final int price;
-    final int extraAttack;
-    final int extraDefense;
-    final int extraHealth;
-    final int extraSpeed;
-
-    public EquipmentInfo(String name, int price, int extraAttack, int extraDefense, int extraHealth, int extraSpeed) {
-        this.name = name;
-        this.price = price;
-        this.extraAttack = extraAttack;
-        this.extraDefense = extraDefense;
-        this.extraHealth = extraHealth;
-        this.extraSpeed = extraSpeed;
     }
 }

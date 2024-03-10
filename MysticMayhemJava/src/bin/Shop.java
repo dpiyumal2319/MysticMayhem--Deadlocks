@@ -1,6 +1,18 @@
 package bin;
 
 import java.util.Scanner;
+
+import bin.Collections.EquipmentInfo;
+import bin.Collections.WarriorInfo;
+import bin.Equipments.Armor;
+import bin.Equipments.Artefact;
+import bin.Warriors.Archer;
+import bin.Warriors.Healer;
+import bin.Warriors.Knight;
+import bin.Warriors.Mage;
+import bin.Warriors.MythicalCreature;
+import bin.Warriors.Warrior;
+
 import java.util.Map;
 
 public abstract class Shop {
