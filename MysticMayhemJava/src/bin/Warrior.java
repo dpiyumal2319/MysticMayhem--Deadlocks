@@ -40,21 +40,25 @@ public abstract class Warrior extends InventoryItem {
         System.out.println("\t\tValue :" + value);
     }
 
-    InventoryItem removeEquipment(String type) {
+    InventoryItem addEquipment(String type, String name) {
+        InventoryItem item = null;
         if (type.equals("Armor")) {
-            return woredrobe.removeArmor();
+            item = woredrobe.addArmor(name);
         } else if (type.equals("Artefact")) {
-            return woredrobe.removeArtefact();
+            item = woredrobe.addArtefact(name);
         }
-        return null;
+        this.value += item.value;
+        return item;
     }
 
-    InventoryItem addEquipment(String type, String name) {
+    InventoryItem removeEquipment(String type) {
+        InventoryItem item = null;
         if (type.equals("Armor")) {
-            return woredrobe.addArmor(name);
+            item = woredrobe.removeArmor();
         } else if (type.equals("Artefact")) {
-            return woredrobe.addArtefact(name);
+            item = woredrobe.removeArtefact();
         }
-        return null;
+        this.value -= item.value;
+        return item;
     }
 }
