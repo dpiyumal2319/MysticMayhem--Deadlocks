@@ -2,7 +2,7 @@ package bin.Equipments;
 
 import bin.InventoryItem;
 
-public abstract class Equipments extends InventoryItem {
+public class Equipments extends InventoryItem {
     protected int extraAttack, extraDefense, extraHealth, extraSpeed;
 
     public int getExtraAttack() {

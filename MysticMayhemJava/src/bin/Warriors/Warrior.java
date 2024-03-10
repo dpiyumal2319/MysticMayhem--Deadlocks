@@ -9,7 +9,7 @@ public abstract class Warrior extends InventoryItem{
 
     private int extraAttack, extraDefense, extraHealth, extraSpeed;
 
-    private Waredrobe woredrobe;
+    private Waredrobe woredrobe = new Waredrobe();
 
     public int getAttack() {
         return attack + extraAttack;
@@ -29,6 +29,10 @@ public abstract class Warrior extends InventoryItem{
 
     public String getName() {
         return name;
+    }
+
+    public Waredrobe getWoredrobe() {
+        return woredrobe;
     }
 
     public void printInfo() {

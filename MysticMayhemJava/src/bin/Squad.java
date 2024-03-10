@@ -1,12 +1,10 @@
 package bin;
 
-import bin.Warriors.Archer;
-import bin.Warriors.Healer;
-import bin.Warriors.Knight;
-import bin.Warriors.Mage;
-import bin.Warriors.MythicalCreature;
+import bin.Warriors.*;
 
-public abstract class Squad {
+import java.io.Serializable;
+
+public abstract class Squad implements Serializable{
     private Archer archer;
     private Knight knight;
     private Mage mage;
@@ -63,7 +61,7 @@ public abstract class Squad {
         }
     }
 
-    void addSquadMate(String type) {
+    InventoryItem addSquadMate(String type) {
         InventoryItem warrior = null;
         switch (type) {
             case "Archer":
@@ -83,5 +81,6 @@ public abstract class Squad {
                 break;
         }
         setSquadMate(warrior, type);
+        return warrior;
     }
 }

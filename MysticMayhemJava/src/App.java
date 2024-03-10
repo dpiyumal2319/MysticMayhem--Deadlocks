@@ -32,7 +32,7 @@ public class App {
                         System.out.print("Enter your choice: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
-                            Shop.enterShop(user);
+                            user.Store();
                             UserManager.saveUsers(users);
                         } else if (input.equals("exit")) {
                             break;

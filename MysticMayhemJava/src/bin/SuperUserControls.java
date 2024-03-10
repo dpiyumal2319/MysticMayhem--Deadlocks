@@ -13,7 +13,7 @@ public class SuperUserControls implements Serializable{
         money += item.value;
     }
 
-    int getMoney() {
+    public int getMoney() {
         return money;
     }
 }
