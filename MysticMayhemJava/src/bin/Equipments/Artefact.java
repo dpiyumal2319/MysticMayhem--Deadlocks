@@ -1,8 +1,9 @@
 package bin.Equipments;
 
+import bin.Equipment;
 import bin.Collections.EquipmentInfo;
 
-public class Artefact extends Equipments{
+public class Artefact extends Equipment{
     
     public Artefact(String name) {
         EquipmentInfo info = data.artefacts.get(name);

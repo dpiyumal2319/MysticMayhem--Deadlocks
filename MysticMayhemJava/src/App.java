@@ -1,4 +1,3 @@
-import bin.Shop;
 import bin.User;
 import bin.UserManager;
 
@@ -62,5 +61,6 @@ public class App {
                 System.out.println("Invalid choice!");
             }
         }
+        scanner.close();
     }
 }

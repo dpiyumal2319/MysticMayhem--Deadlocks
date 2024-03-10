@@ -1,5 +1,6 @@
 package bin.Warriors;
 
+import bin.Warrior;
 import bin.Collections.WarriorInfo;
 
 public class Knight extends Warrior{

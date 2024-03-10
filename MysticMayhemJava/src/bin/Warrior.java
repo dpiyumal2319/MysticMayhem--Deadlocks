@@ -31,13 +31,13 @@ public abstract class Warrior extends InventoryItem {
 
     public void printInfo() {
         System.out.println(type + " : " + name);
-        System.out.println("/tArmor :" + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name));
-        System.out.println("/tArtefact :" + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
-        System.out.println("/tAttak :" + getAttack());
-        System.out.println("/tDefense :" + getDefense());
-        System.out.println("/tHealth :" + getHealth());
-        System.out.println("/tSpeed :" + getSpeed());
-        System.out.println("/tValue :" + value);
+        System.out.println("/t/tArmor :" + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name));
+        System.out.println("/t/tArtefact :" + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
+        System.out.println("/t/tAttak :" + getAttack());
+        System.out.println("/t/tDefense :" + getDefense());
+        System.out.println("/t/tHealth :" + getHealth());
+        System.out.println("/t/tSpeed :" + getSpeed());
+        System.out.println("/t/tValue :" + value);
     }
 
     InventoryItem removeEquipment(String type) {

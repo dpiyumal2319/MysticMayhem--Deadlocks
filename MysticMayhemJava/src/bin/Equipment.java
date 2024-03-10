@@ -1,8 +1,6 @@
-package bin.Equipments;
+package bin;
 
-import bin.InventoryItem;
-
-public class Equipments extends InventoryItem {
+public class Equipment extends InventoryItem {
     protected int extraAttack, extraDefense, extraHealth, extraSpeed;
 
     public int getExtraAttack() {

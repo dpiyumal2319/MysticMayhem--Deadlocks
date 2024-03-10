@@ -165,7 +165,7 @@ public class User extends SuperUserControls {
                 System.out.println("Enter your choice [Y/N]:");
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
-                    warrior.getWoredrobe().removeEquipment(type);
+                    warrior.removeEquipment(type);
                     System.out.println("You have removed the " + type + " from your " + warrior.type + ".");
                 } else if (input.equalsIgnoreCase("N")) {
                     return;
@@ -189,7 +189,7 @@ public class User extends SuperUserControls {
                     input = scanner.nextLine();
                     if (InventoryItem.getEquipmentMap(type).containsKey(input)) {
                         if (getMoney() >= InventoryItem.getEquipmentMap(type).get(input.toLowerCase()).price) {
-                            InventoryItem newEquipment = warrior.getWoredrobe().addEquipment(type, input.toLowerCase());
+                            InventoryItem newEquipment = warrior.addEquipment(type, input.toLowerCase());
                             giveMoneyFor(newEquipment);
                             System.out
                                     .println("You have bought a new " + type + "for " + newEquipment.value + " coins.");
