@@ -1,8 +1,8 @@
 package bin;
 
 import java.util.Scanner;
-
-import bin.Warriors.*;
+import java.util.Map;
+import bin.Collections.*;
 
 public class User extends SuperUserControls {
     private static final int UserIdStart = 100000;
@@ -29,10 +29,13 @@ public class User extends SuperUserControls {
         printMoney();
         System.out.println("Do you want to buy[B] or sell[S]?");
         System.out.println("Inventory/Squad [I]");
+        System.out.println("Quit[Q]");
         while (true) {
-            System.out.println("Enter your choice [B/S/I]: ");
+            System.out.println("Enter your choice [B/S/I/Q]: ");
             input = scanner.nextLine();
-            if (input.equalsIgnoreCase("I"))
+            if (input.equalsIgnoreCase("Q")) {
+                break;
+            } else if (input.equalsIgnoreCase("I"))
                 printSquad();
             else if (input.equalsIgnoreCase("S")) {
                 printMoney();
@@ -73,8 +76,9 @@ public class User extends SuperUserControls {
                     if (input.equalsIgnoreCase("W")) {
                         System.out.println("Which warrior do you want to buy?");
                         System.out.println("Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]");
+                        System.out.println("Quit[Q], Inventory[I]");
                         while (true) {
-                            System.out.println("Enter your choice, Which warrior you want to buy:");
+                            System.out.println("Enter your choice, Which warrior you want to buy [A/K/M/H/MC] or Quit[Q]/Inventory[I]:");
                             input = scanner.nextLine();
                             if (input.equalsIgnoreCase("A")) {
                                 buyWarrior(squad.getArcher(), "Archer");
@@ -86,11 +90,14 @@ public class User extends SuperUserControls {
                                 buyWarrior(squad.getHealer(), "Healer");
                             } else if (input.equalsIgnoreCase("MC")) {
                                 buyWarrior(squad.getMythicalCreature(), "MythicalCreature");
+                            } else if (input.equalsIgnoreCase("Q")) {
+                                break;
+                            } else if (input.equalsIgnoreCase("I")) {
+                                printSquad();
                             } else {
                                 System.out.println("Invalid choice!");
                                 continue;
                             }
-                            break;
                         }
                     } else if (input.equalsIgnoreCase("E")) {
                         System.out.println("For which warrior do you want to buy equipment?");
@@ -127,6 +134,8 @@ public class User extends SuperUserControls {
                 System.out.println("Invalid choice!");
             }
         }
+        System.out.println("Thank you for visiting the store " + this.userName + "!");
+        System.out.println("Goodbye!");
     }
 
     private void buyEquipment(Warrior warrior) {
@@ -181,7 +190,7 @@ public class User extends SuperUserControls {
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("Y")) {
                 System.out.println("Which " + type + " do you want to buy?");
-                InventoryItem.printMap(type);
+                printEquipmentMap(type);
                 printMoney();
                 System.out.println("Enter the name of the " + type + " you want to buy: ");
                 while (true) {
@@ -237,23 +246,26 @@ public class User extends SuperUserControls {
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("Y")) {
                 System.out.println("Which " + type + " do you want to buy?");
-                InventoryItem.printMap(type);
+                printWarriorMap(type);
                 printMoney();
                 System.out.println("Enter the name of the " + type + " you want to buy: ");
                 while (true) {
-                    System.out.println("Enter your choice [name]: ");
+                    System.out.println("Enter your choice [name]: , Quit[Q]");
                     input = scanner.nextLine();
                     if (InventoryItem.getWarriorMap(type).containsKey(input)) {
                         if (getMoney() >= InventoryItem.getWarriorMap(type).get(input.toLowerCase()).price) {
-                            InventoryItem newWarrior = squad.addSquadMate(type);
+                            InventoryItem newWarrior = squad.addSquadMate(type, input.toLowerCase());
                             giveMoneyFor(newWarrior);
-                            System.out.println("You have bought a new " + type + "for " + newWarrior.value + " coins.");
+                            System.out
+                                    .println("You have bought a new " + type + " for " + newWarrior.price + " coins.");
                             printMoney();
-                            break;
+                            return;
                         } else {
                             System.out.println("You don't have enough money!");
                             break;
                         }
+                    } else if (input.equalsIgnoreCase("Q")) {
+                        return;
                     } else {
                         System.out.println("Invalid choice!");
                     }
@@ -294,10 +306,58 @@ public class User extends SuperUserControls {
 
     private void printSquad() {
         System.out.println("Your squad:");
-        squad.getArcher().printInfo();
-        squad.getKnight().printInfo();
-        squad.getMage().printInfo();
-        squad.getHealer().printInfo();
-        squad.getMythicalCreature().printInfo();
+        if (squad.getArcher() != null) {
+            squad.getArcher().printInfo();
+        } else {
+            System.out.println("Archer: None");
+        }
+        if (squad.getKnight() != null) {
+            squad.getKnight().printInfo();
+        } else {
+            System.out.println("Knight: None");
+        }
+        if (squad.getMage() != null) {
+            squad.getMage().printInfo();
+        } else {
+            System.out.println("Mage: None");
+        }
+        if (squad.getHealer() != null) {
+            squad.getHealer().printInfo();
+        } else {
+            System.out.println("Healer: None");
+        }
+        if (squad.getMythicalCreature() != null) {
+            squad.getMythicalCreature().printInfo();
+        } else {
+            System.out.println("Mythical Creature: None");
+        }
+    }
+
+    private void printWarriorMap(String type) {
+        Map<String, WarriorInfo> warriorMap = InventoryItem.getWarriorMap(type);
+        if (warriorMap != null) {
+            for (String key : warriorMap.keySet()) {
+                System.out.println(key + ":");
+                System.out.println("\tAttack: " + warriorMap.get(key).attack);
+                System.out.println("\tDefense: " + warriorMap.get(key).defense);
+                System.out.println("\tHealth: " + warriorMap.get(key).health);
+                System.out.println("\tSpeed: " + warriorMap.get(key).speed);
+                System.out.println("\tPrice: " + warriorMap.get(key).price);
+            }
+        }
+    }
+
+    private void printEquipmentMap(String type) {
+        Map<String, EquipmentInfo> equipmentMap = InventoryItem.getEquipmentMap(type);
+        if (equipmentMap != null) {
+            for (String key : equipmentMap.keySet()) {
+                System.out.println(key + ":");
+                System.out.println("\tAttack: " + equipmentMap.get(key).extraAttack);
+                System.out.println("\tDefense: " + equipmentMap.get(key).extraDefense);
+                System.out.println("\tHealth: " + equipmentMap.get(key).extraDefense);
+                System.out.println("\tSpeed: " + equipmentMap.get(key).extraDefense);
+                System.out.println("\tPrice: " + equipmentMap.get(key).price);
+            }
+        }
     }
 }

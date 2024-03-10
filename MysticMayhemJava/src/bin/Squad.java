@@ -70,23 +70,23 @@ public class Squad implements Serializable{
         }
     }
 
-    Warrior addSquadMate(String type) {
+    Warrior addSquadMate(String type, String name) {
         Warrior warrior = null;
         switch (type) {
             case "Archer":
-                warrior = new Archer(type);
+                warrior = new Archer(name);
                 break;
             case "Knight":
-                warrior = new Knight(type);
+                warrior = new Knight(name);
                 break;
             case "Mage":
-                warrior = new Mage(type);
+                warrior = new Mage(name);
                 break;
             case "Healer":
-                warrior = new Healer(type);
+                warrior = new Healer(name);
                 break;
             case "MythicalCreature":
-                warrior = new MythicalCreature(type);
+                warrior = new MythicalCreature(name);
                 break;
         }
         setSquadMate(warrior, type);

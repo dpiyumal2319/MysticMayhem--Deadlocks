@@ -1,6 +1,6 @@
 package bin.Collections;
 
-public class EquipmentInfo {
+public class EquipmentInfo{
     public final String name;
     public final int price;
     public final int extraAttack;
