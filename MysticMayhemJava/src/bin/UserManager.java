@@ -14,6 +14,7 @@ public class UserManager implements Serializable{
             e.printStackTrace();
         }
     }
+    @SuppressWarnings("unchecked")
     public static Map<String, User> loadUsers() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(USERS_FILE))) {
             return (Map<String, User>) in.readObject();

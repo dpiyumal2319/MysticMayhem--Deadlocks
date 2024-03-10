@@ -1,30 +1,24 @@
-package bin.Warriors;
+package bin;
 
-
-import bin.InventoryItem;
-import bin.Waredrobe;
-
-public abstract class Warrior extends InventoryItem{
+public abstract class Warrior extends InventoryItem {
     protected int attack, defense, health, speed;
-
-    private int extraAttack, extraDefense, extraHealth, extraSpeed;
 
     private Waredrobe woredrobe = new Waredrobe();
 
     public int getAttack() {
-        return attack + extraAttack;
+        return attack + woredrobe.getAttackBoost();
     }
 
     public int getDefense() {
-        return defense + extraDefense;
+        return defense + woredrobe.getDefenseBoost();
     }
 
     public int getHealth() {
-        return health + extraHealth;
+        return health + woredrobe.getHealthBoost();
     }
 
     public int getSpeed() {
-        return speed + extraSpeed;
+        return speed + woredrobe.getSpeedBoost();
     }
 
     public String getName() {
@@ -44,5 +38,23 @@ public abstract class Warrior extends InventoryItem{
         System.out.println("/tHealth :" + getHealth());
         System.out.println("/tSpeed :" + getSpeed());
         System.out.println("/tValue :" + value);
+    }
+
+    InventoryItem removeEquipment(String type) {
+        if (type.equals("Armor")) {
+            return woredrobe.removeArmor();
+        } else if (type.equals("Artefact")) {
+            return woredrobe.removeArtefact();
+        }
+        return null;
+    }
+
+    InventoryItem addEquipment(String type, String name) {
+        if (type.equals("Armor")) {
+            return woredrobe.addArmor(name);
+        } else if (type.equals("Artefact")) {
+            return woredrobe.addArtefact(name);
+        }
+        return null;
     }
 }
