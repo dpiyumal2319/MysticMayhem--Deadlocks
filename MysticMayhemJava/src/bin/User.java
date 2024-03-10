@@ -78,7 +78,8 @@ public class User extends SuperUserControls {
                         System.out.println("Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]");
                         System.out.println("Quit[Q], Inventory[I]");
                         while (true) {
-                            System.out.println("Enter your choice, Which warrior you want to buy [A/K/M/H/MC] or Quit[Q]/Inventory[I]:");
+                            System.out.println(
+                                    "Enter your choice, Which warrior you want to buy [A/K/M/H/MC] or Quit[Q]/Inventory[I]:");
                             input = scanner.nextLine();
                             if (input.equalsIgnoreCase("A")) {
                                 buyWarrior(squad.getArcher(), "Archer");
@@ -194,9 +195,13 @@ public class User extends SuperUserControls {
                 printMoney();
                 System.out.println("Enter the name of the " + type + " you want to buy: ");
                 while (true) {
-                    System.out.println("Enter your choice [name]: ");
+                    System.out.println("Enter your choice of equipment [name], Quit[Q], Inventory[I]:  ");
                     input = scanner.nextLine();
-                    if (InventoryItem.getEquipmentMap(type).containsKey(input)) {
+                    if (input.equalsIgnoreCase("Q")) {
+                        return;
+                    } else if (input.equalsIgnoreCase("I")) {
+                        printSquad();
+                    } else if (InventoryItem.getEquipmentMap(type).containsKey(input)) {
                         if (getMoney() >= InventoryItem.getEquipmentMap(type).get(input.toLowerCase()).price) {
                             InventoryItem newEquipment = warrior.addEquipment(type, input.toLowerCase());
                             giveMoneyFor(newEquipment);
@@ -250,7 +255,7 @@ public class User extends SuperUserControls {
                 printMoney();
                 System.out.println("Enter the name of the " + type + " you want to buy: ");
                 while (true) {
-                    System.out.println("Enter your choice [name]: , Quit[Q]");
+                    System.out.println("Enter your choice OF warrior [name]: , Quit[Q]");
                     input = scanner.nextLine();
                     if (InventoryItem.getWarriorMap(type).containsKey(input)) {
                         if (getMoney() >= InventoryItem.getWarriorMap(type).get(input.toLowerCase()).price) {
