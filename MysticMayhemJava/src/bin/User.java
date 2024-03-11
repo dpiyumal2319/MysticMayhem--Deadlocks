@@ -37,7 +37,7 @@ public class User extends SuperUserControls {
             if (input.equalsIgnoreCase("Q")) {
                 break;
             } else if (input.equalsIgnoreCase("I"))
-                printSquad();
+                printInventory();
             else if (input.equalsIgnoreCase("S")) {
                 printMoney();
                 System.out.println("Currently you can only sell Warriors");
@@ -60,7 +60,7 @@ public class User extends SuperUserControls {
                     else if (input.equalsIgnoreCase("Q"))
                         break;
                     else if (input.equalsIgnoreCase("I"))
-                        printSquad();
+                        printInventory();
                     else {
                         System.out.println("Invalid choice!");
                         continue;
@@ -95,7 +95,7 @@ public class User extends SuperUserControls {
                             } else if (input.equalsIgnoreCase("Q")) {
                                 break;
                             } else if (input.equalsIgnoreCase("I")) {
-                                printSquad();
+                                printInventory();
                             } else {
                                 System.out.println("Invalid choice!");
                                 continue;
@@ -126,7 +126,7 @@ public class User extends SuperUserControls {
                     } else if (input.equalsIgnoreCase("Q")) {
                         break;
                     } else if (input.equalsIgnoreCase("I")) {
-                        printSquad();
+                        printInventory();
                     } else {
                         System.out.println("Invalid choice!");
                         continue;
@@ -159,7 +159,7 @@ public class User extends SuperUserControls {
             } else if (input.equalsIgnoreCase("Q")) {
                 break;
             } else if (input.equalsIgnoreCase("I")) {
-                printSquad();
+                printInventory();
             } else {
                 System.out.println("Invalid choice!");
             }
@@ -201,7 +201,7 @@ public class User extends SuperUserControls {
                     if (input.equalsIgnoreCase("Q")) {
                         return;
                     } else if (input.equalsIgnoreCase("I")) {
-                        printSquad();
+                        printInventory();
                     } else if (InventoryItem.getEquipmentMap(type).containsKey(input)) {
                         if (getMoney() >= InventoryItem.getEquipmentMap(type).get(input.toLowerCase()).price) {
                             InventoryItem newEquipment = warrior.addEquipment(type, input.toLowerCase());
@@ -310,7 +310,7 @@ public class User extends SuperUserControls {
         System.out.println("You have " + getMoney() + " coins.");
     }
 
-    private void printSquad() {
+    private void printInventory() {
         System.out.println("Your squad:");
         if (squad.getArcher() != null) {
             squad.getArcher().printInfo();
@@ -337,6 +337,7 @@ public class User extends SuperUserControls {
         } else {
             System.out.println("Mythical Creature: None");
         }
+        printMoney();
     }
 
     private void printWarriorMap(String type) {
@@ -388,7 +389,7 @@ public class User extends SuperUserControls {
     }
 
     private Warrior addSquadMate(String type, String name) {
-        if (type == "Archert") {
+        if (type == "Archer") {
             Archer archer = new Archer(name);
             squad.setArcher(archer);
             return archer;
