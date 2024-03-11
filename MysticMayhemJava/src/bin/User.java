@@ -3,6 +3,7 @@ package bin;
 import java.util.Scanner;
 import java.util.Map;
 import bin.Collections.*;
+import bin.Warriors.*;
 
 public class User extends SuperUserControls {
     private static final int UserIdStart = 100000;
@@ -259,7 +260,7 @@ public class User extends SuperUserControls {
                     input = scanner.nextLine();
                     if (InventoryItem.getWarriorMap(type).containsKey(input)) {
                         if (getMoney() >= InventoryItem.getWarriorMap(type).get(input.toLowerCase()).price) {
-                            InventoryItem newWarrior = squad.addSquadMate(type, input.toLowerCase());
+                            InventoryItem newWarrior = addSquadMate(type, input.toLowerCase());
                             giveMoneyFor(newWarrior);
                             System.out
                                     .println("You have bought a new " + type + " for " + newWarrior.price + " coins.");
@@ -292,7 +293,7 @@ public class User extends SuperUserControls {
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
                     getMoneyFrom(warrior);
-                    squad.setSquadMate(null, warrior.type);
+                    removeSquadMate(warrior.type);
                     System.out.println("You have sold your " + warrior.name + " for " + warrior.value + " coins.");
                     printMoney();
                     break;
@@ -363,6 +364,52 @@ public class User extends SuperUserControls {
                 System.out.println("\tSpeed: " + equipmentMap.get(key).extraDefense);
                 System.out.println("\tPrice: " + equipmentMap.get(key).price);
             }
+        }
+    }
+
+    private void removeSquadMate(String type) {
+        switch (type) {
+            case "Archer":
+                squad.setArcher(null);
+                break;
+            case "Knight":
+                squad.setKnight(null);
+                break;
+            case "Mage":
+                squad.setMage(null);
+                break;
+            case "Healer":
+                squad.setHealer(null);
+                break;
+            case "MythicalCreature":
+                squad.setMythicalCreature(null);
+                break;
+        }
+    }
+
+    private Warrior addSquadMate(String type, String name) {
+        if (type == "Archert") {
+            Archer archer = new Archer(name);
+            squad.setArcher(archer);
+            return archer;
+        } else if (type == "Knight") {
+            Knight knight = new Knight(name);
+            squad.setKnight(knight);
+            return knight;
+        } else if (type == "Mage") {
+            Mage mage = new Mage(name);
+            squad.setMage(mage);
+            return mage;
+        } else if (type == "Healer") {
+            Healer healer = new Healer(name);
+            squad.setHealer(healer);
+            return healer;
+        } else if (type == "MythicalCreature") {
+            MythicalCreature mythicalCreature = new MythicalCreature(name);
+            squad.setMythicalCreature(mythicalCreature);
+            return mythicalCreature;
+        } else {
+            return null;
         }
     }
 }
