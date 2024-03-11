@@ -50,46 +50,46 @@ public class Squad implements Serializable{
         return mythicalCreature;
     }
 
-    void setSquadMate(Warrior warrior,String type) {
-        switch (type) {
-            case "Archer":
-                setArcher((Archer) warrior);
-                break;
-            case "Knight":
-                setKnight((Knight) warrior);
-                break;
-            case "Mage":
-                setMage((Mage) warrior);
-                break;
-            case "Healer":
-                setHealer((Healer) warrior);
-                break;
-            case "MythicalCreature":
-                setMythicalCreature((MythicalCreature) warrior);
-                break;
-        }
-    }
+    // void setSquadMate(Warrior warrior,String type) {
+    //     switch (type) {
+    //         case "Archer":
+    //             setArcher((Archer) warrior);
+    //             break;
+    //         case "Knight":
+    //             setKnight((Knight) warrior);
+    //             break;
+    //         case "Mage":
+    //             setMage((Mage) warrior);
+    //             break;
+    //         case "Healer":
+    //             setHealer((Healer) warrior);
+    //             break;
+    //         case "MythicalCreature":
+    //             setMythicalCreature((MythicalCreature) warrior);
+    //             break;
+    //     }
+    // }
 
-    Warrior addSquadMate(String type, String name) {
-        Warrior warrior = null;
-        switch (type) {
-            case "Archer":
-                warrior = new Archer(name);
-                break;
-            case "Knight":
-                warrior = new Knight(name);
-                break;
-            case "Mage":
-                warrior = new Mage(name);
-                break;
-            case "Healer":
-                warrior = new Healer(name);
-                break;
-            case "MythicalCreature":
-                warrior = new MythicalCreature(name);
-                break;
-        }
-        setSquadMate(warrior, type);
-        return warrior;
-    }
+    // Warrior addSquadMate(String type, String name) {
+    //     Warrior warrior = null;
+    //     switch (type) {
+    //         case "Archer":
+    //             warrior = new Archer(name);
+    //             break;
+    //         case "Knight":
+    //             warrior = new Knight(name);
+    //             break;
+    //         case "Mage":
+    //             warrior = new Mage(name);
+    //             break;
+    //         case "Healer":
+    //             warrior = new Healer(name);
+    //             break;
+    //         case "MythicalCreature":
+    //             warrior = new MythicalCreature(name);
+    //             break;
+    //     }
+    //     setSquadMate(warrior, type);
+    //     return warrior;
+    // }
 }
