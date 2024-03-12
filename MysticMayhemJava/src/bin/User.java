@@ -11,7 +11,7 @@ public class User extends SuperUserControls {
     public final String homeGround;
     public int xp;
     public final String userName;
-    private Squad squad;
+    public Squad squad;
     static Scanner scanner = new Scanner(System.in);
     static String input;
 
