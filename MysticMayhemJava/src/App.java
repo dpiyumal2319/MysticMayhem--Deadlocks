@@ -47,7 +47,36 @@ public class App {
                 if (users.containsKey(username)) {
                     System.out.println("Username already exists!");
                 } else {
-                    User user = new User(username, currentUsers);
+                    // Selecting the Homeground by user choise
+                    String homeGround;
+                    while (true) {
+                        System.out.println("Select your home ground:");
+                        System.out.println("Hillcrest [H]");
+                        System.out.println("Marshland [M]");
+                        System.out.println("Desert [M]");
+                        System.out.println("Arcane [A]");
+                        System.out.print("Enter the  corresponding letter to your home ground choice: ");
+                        String homeGroundChoice;
+
+                        homeGroundChoice = scanner.nextLine();
+                        // According to the users choice we adding the homeground to the user
+                        if (homeGroundChoice.equalsIgnoreCase("H")) {
+                            homeGround = "Hillcrest";
+                            break;
+                        } else if (homeGroundChoice.equalsIgnoreCase("M")) {
+                            homeGround = "Marshland";
+                            break;
+                        } else if (homeGroundChoice.equalsIgnoreCase("D")) {
+                            homeGround = "Desert";
+                            break;
+                        } else if (homeGroundChoice.equalsIgnoreCase("A")) {
+                            homeGround = "Arcane";
+                            break;
+                        } else {
+                            System.out.println("Invalid option! Please try again.");
+                        }
+                    }
+                    User user = new User(username, currentUsers, homeGround);
                     users.put(username, user);
                     UserManager.saveUsers(users);
                     System.out.println("User registered successfully!");
