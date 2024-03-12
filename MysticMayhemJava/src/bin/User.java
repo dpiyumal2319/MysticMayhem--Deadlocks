@@ -317,27 +317,27 @@ public class User extends SuperUserControls {
         if (squad.getArcher() != null) {
             squad.getArcher().printInfo();
         } else {
-            System.out.println("Archer: None");
+            System.out.println("\tArcher: None");
         }
         if (squad.getKnight() != null) {
             squad.getKnight().printInfo();
         } else {
-            System.out.println("Knight: None");
+            System.out.println("\tKnight: None");
         }
         if (squad.getMage() != null) {
             squad.getMage().printInfo();
         } else {
-            System.out.println("Mage: None");
+            System.out.println("\tMage: None");
         }
         if (squad.getHealer() != null) {
             squad.getHealer().printInfo();
         } else {
-            System.out.println("Healer: None");
+            System.out.println("\tHealer: None");
         }
         if (squad.getMythicalCreature() != null) {
             squad.getMythicalCreature().printInfo();
         } else {
-            System.out.println("Mythical Creature: None");
+            System.out.println("\tMythical Creature: None");
         }
         printMoney();
     }
