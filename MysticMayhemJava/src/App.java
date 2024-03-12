@@ -11,13 +11,12 @@ public class App {
         int currentUsers = users.size();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("Login[L]");
+            System.out.println("Register[R]");
+            System.out.println("Exit[E]");
+            System.out.print("Enter your choice[L]/[R]/[E]: ");
             String choice = scanner.nextLine();
-            scanner.nextLine();
-            if (choice == "1") {
+            if (choice.equalsIgnoreCase("L")) {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
@@ -28,7 +27,7 @@ public class App {
                     System.out.println("To enter the shop, type 'shop'.");
                     System.out.println("To exit, type 'exit'.");
                     while (true) {
-                        System.out.print("Enter your choice: ");
+                        System.out.print("Enter your choice[store]/[exit]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
                             user.Store();
@@ -42,7 +41,7 @@ public class App {
                 } else {
                     System.out.println("User not found!");
                 }
-            } else if (choice == "2") {
+            } else if (choice.equalsIgnoreCase("R")) {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
@@ -54,7 +53,7 @@ public class App {
                     System.out.println("User registered successfully!");
                     currentUsers++;
                 }
-            } else if (choice == "3") {
+            } else if (choice.equalsIgnoreCase("E")) {
                 UserManager.saveUsers(users);
                 break;
             } else {
@@ -62,5 +61,6 @@ public class App {
             }
         }
         scanner.close();
+        System.out.println("Goodbye!");
     }
 }
