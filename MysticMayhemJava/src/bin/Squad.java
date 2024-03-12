@@ -50,6 +50,38 @@ public class Squad implements Serializable{
         return mythicalCreature;
     }
 
+    Archer getArcher(String battleGround) {
+        archer.prepareBattle(battleGround);
+        return archer;
+    }
+
+    Knight getKnight(String battleGround) {
+        knight.prepareBattle(battleGround);
+        return knight;
+    }
+
+    Mage getMage(String battleGround) {
+        mage.prepareBattle(battleGround);
+        return mage;
+    }
+
+    Healer getHealer(String battleGround) {
+        healer.prepareBattle(battleGround);
+        return healer;
+    }
+
+    MythicalCreature getMythicalCreature(String battleGround) {
+        mythicalCreature.prepareBattle(battleGround);
+        return mythicalCreature;
+    }
+
+    void resetBattle() {
+        archer.resetBattle();
+        knight.resetBattle();
+        mage.resetBattle();
+        healer.resetBattle();
+        mythicalCreature.resetBattle();
+    }
     // void setSquadMate(Warrior warrior,String type) {
     //     switch (type) {
     //         case "Archer":

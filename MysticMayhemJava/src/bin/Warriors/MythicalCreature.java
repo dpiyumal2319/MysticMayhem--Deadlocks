@@ -6,6 +6,7 @@ import bin.Collections.WarriorInfo;
 public class MythicalCreature extends Warrior{
     
     public MythicalCreature(String name) {
+        super(3, 4, data.mythicalCreatures.get(name).homeLand);
         WarriorInfo info = data.mythicalCreatures.get(name);
         this.name = info.name;
         this.attack = info.attack;

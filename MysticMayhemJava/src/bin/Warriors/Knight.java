@@ -6,6 +6,7 @@ import bin.Collections.WarriorInfo;
 public class Knight extends Warrior{
     
     public Knight(String name) {
+        super(2, 4, data.knights.get(name).homeLand);
         WarriorInfo info = data.knights.get(name);
         this.name = info.name;
         this.attack = info.attack;
