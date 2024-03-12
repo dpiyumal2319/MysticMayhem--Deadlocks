@@ -8,16 +8,18 @@ import bin.Warriors.*;
 public class User extends SuperUserControls {
     private static final int UserIdStart = 100000;
     public final int userID;
+    public  String homeGround;
     public int xp;
     public final String userName;
     private Squad squad;
     static Scanner scanner = new Scanner(System.in);
     static String input;
 
-    public User(String userName, int currentUsers) {
+    public User(String userName, int currentUsers, String homeGround) {
         this.userID = UserIdStart + currentUsers + 1;
         this.xp = 0;
         this.userName = userName;
+        this.homeGround = homeGround;
         this.squad = new Squad();
     }
 
