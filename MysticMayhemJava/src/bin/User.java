@@ -43,29 +43,34 @@ public class User extends SuperUserControls {
             else if (input.equalsIgnoreCase("S")) {
                 printMoney();
                 System.out.println("Currently you can only sell Warriors");
-                System.out.println("Which warrior do you want to sell?");
-                System.out.println("Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]");
-                System.out.println("Quit[Q], Inventory[I]");
-                while (true) {
-                    System.out.println("Enter your choice, Which warrior you want to sell:");
-                    input = scanner.nextLine();
-                    if (input.equalsIgnoreCase("A"))
-                        sellWarrior(squad.getArcher());
-                    else if (input.equalsIgnoreCase("K"))
-                        sellWarrior(squad.getKnight());
-                    else if (input.equalsIgnoreCase("M"))
-                        sellWarrior(squad.getMage());
-                    else if (input.equalsIgnoreCase("H"))
-                        sellWarrior(squad.getHealer());
-                    else if (input.equalsIgnoreCase("MC"))
-                        sellWarrior(squad.getMythicalCreature());
-                    else if (input.equalsIgnoreCase("Q"))
-                        break;
-                    else if (input.equalsIgnoreCase("I"))
-                        printInventory();
-                    else {
-                        System.out.println("Invalid choice!");
-                        continue;
+                if (isAllWarriorsAwailable()) {
+                    System.out.println("You don't have any warriors to sell!");
+                    continue;
+                } else {
+                    System.out.println("Which warrior do you want to sell?");
+                    System.out.println("Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]");
+                    System.out.println("Quit[Q], Inventory[I]");
+                    while (true) {
+                        System.out.println("Enter your choice, Which warrior you want to sell [A/K/M/H/MC] or Quit[Q]/Inventory[I]: ");
+                        input = scanner.nextLine();
+                        if (input.equalsIgnoreCase("A"))
+                            sellWarrior(squad.getArcher());
+                        else if (input.equalsIgnoreCase("K"))
+                            sellWarrior(squad.getKnight());
+                        else if (input.equalsIgnoreCase("M"))
+                            sellWarrior(squad.getMage());
+                        else if (input.equalsIgnoreCase("H"))
+                            sellWarrior(squad.getHealer());
+                        else if (input.equalsIgnoreCase("MC"))
+                            sellWarrior(squad.getMythicalCreature());
+                        else if (input.equalsIgnoreCase("Q"))
+                            break;
+                        else if (input.equalsIgnoreCase("I"))
+                            printInventory();
+                        else {
+                            System.out.println("Invalid choice!");
+                            continue;
+                        }
                     }
                 }
             } else if (input.equalsIgnoreCase("B")) {
@@ -74,7 +79,7 @@ public class User extends SuperUserControls {
                 System.out.println("Warrior[W], Equipment[E]");
                 System.out.println("Quit[Q], Inventory[I]");
                 while (true) {
-                    System.out.println("Enter your choice, What do you want to buy:");
+                    System.out.println("Enter your choice, What do you want to buy [W/E/Q/I]: ");
                     input = scanner.nextLine();
                     if (input.equalsIgnoreCase("W")) {
                         System.out.println("Which warrior do you want to buy?");
@@ -209,7 +214,7 @@ public class User extends SuperUserControls {
                             InventoryItem newEquipment = warrior.addEquipment(type, input.toLowerCase());
                             giveMoneyFor(newEquipment);
                             System.out
-                                    .println("You have bought a new " + type + "for " + newEquipment.value + " coins.");
+                                    .println("You have bought a new " + type + "for " + newEquipment.price + " coins.");
                             printMoney();
                             return;
                         } else {
@@ -317,27 +322,27 @@ public class User extends SuperUserControls {
         if (squad.getArcher() != null) {
             squad.getArcher().printInfo();
         } else {
-            System.out.println("Archer: None");
+            System.out.println("\tArcher: None");
         }
         if (squad.getKnight() != null) {
             squad.getKnight().printInfo();
         } else {
-            System.out.println("Knight: None");
+            System.out.println("\tKnight: None");
         }
         if (squad.getMage() != null) {
             squad.getMage().printInfo();
         } else {
-            System.out.println("Mage: None");
+            System.out.println("\tMage: None");
         }
         if (squad.getHealer() != null) {
             squad.getHealer().printInfo();
         } else {
-            System.out.println("Healer: None");
+            System.out.println("\tHealer: None");
         }
         if (squad.getMythicalCreature() != null) {
             squad.getMythicalCreature().printInfo();
         } else {
-            System.out.println("Mythical Creature: None");
+            System.out.println("\tMythical Creature: None");
         }
         printMoney();
     }
@@ -413,6 +418,16 @@ public class User extends SuperUserControls {
             return mythicalCreature;
         } else {
             return null;
+        }
+    }
+
+    public Boolean isAllWarriorsAwailable() {
+        if (squad.getArcher() == null || squad.getKnight() == null || squad.getMage() == null
+                || squad.getHealer() == null
+                || squad.getMythicalCreature() == null) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

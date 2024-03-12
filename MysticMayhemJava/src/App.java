@@ -8,7 +8,6 @@ public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Mystic Mayhem!");
         Map<String, User> users = UserManager.loadUsers();
-        int currentUsers = users.size();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Login[L]");
@@ -21,16 +20,16 @@ public class App {
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
                     User user = users.get(username);
+                    System.out.println("Successfully logged in to "+ user.userName+ " : " + user.userID);
                     System.out.println("Welcome back, " + user.userName + "!");
                     System.out.println("You have " + user.getMoney() + " gold coins.");
                     System.out.println("You have " + user.getxp() + " xp.");
                     System.out.println("Your home ground is " + user.homeGround + ".");
-                    System.out.println("Your inventory is: ");
                     user.printInventory();
                     System.out.println("To enter the shop, type 'shop'.");
                     System.out.println("To exit, type 'exit'.");
                     while (true) {
-                        System.out.print("Enter your choice[store]/[exit]: ");
+                        System.out.print("Enter your choice[shop]/[exit]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
                             user.Store();
@@ -79,8 +78,10 @@ public class App {
                             System.out.println("Invalid option! Please try again.");
                         }
                     }
-                    User user = new User(username, currentUsers, homeGround);
+                    int currentUsers = UserManager.loadNumberOfUsers();
+                    User user = new User(username, currentUsers++, homeGround);
                     users.put(username, user);
+                    UserManager.saveNumberOfUsers(currentUsers);
                     UserManager.saveUsers(users);
                     System.out.println("User registered successfully!");
                     currentUsers++;
