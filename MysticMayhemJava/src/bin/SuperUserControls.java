@@ -10,7 +10,7 @@ public class SuperUserControls implements Serializable{
     }
 
     protected void getMoneyFrom(InventoryItem item) {
-        money += item.value;
+        money += item.getValue();
     }
 
     public int getMoney() {
