@@ -24,6 +24,9 @@ public class App {
                     System.out.println("Welcome back, " + user.userName + "!");
                     System.out.println("You have " + user.getMoney() + " gold coins.");
                     System.out.println("You have " + user.getxp() + " xp.");
+                    System.out.println("Your home ground is " + user.homeGround + ".");
+                    System.out.println("Your inventory is: ");
+                    user.printInventory();
                     System.out.println("To enter the shop, type 'shop'.");
                     System.out.println("To exit, type 'exit'.");
                     while (true) {

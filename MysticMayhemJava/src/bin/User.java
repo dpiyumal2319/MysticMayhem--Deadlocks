@@ -8,7 +8,7 @@ import bin.Warriors.*;
 public class User extends SuperUserControls {
     private static final int UserIdStart = 100000;
     public final int userID;
-    public  String homeGround;
+    public final String homeGround;
     public int xp;
     public final String userName;
     private Squad squad;
@@ -312,7 +312,7 @@ public class User extends SuperUserControls {
         System.out.println("You have " + getMoney() + " coins.");
     }
 
-    private void printInventory() {
+    public void printInventory() {
         System.out.println("Your squad:");
         if (squad.getArcher() != null) {
             squad.getArcher().printInfo();
