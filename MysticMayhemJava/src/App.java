@@ -15,9 +15,9 @@ public class App {
             System.out.println("2. Register");
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
+            String choice = scanner.nextLine();
             scanner.nextLine();
-            if (choice == 1) {
+            if (choice == "1") {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
@@ -42,7 +42,7 @@ public class App {
                 } else {
                     System.out.println("User not found!");
                 }
-            } else if (choice == 2) {
+            } else if (choice == "2") {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
@@ -54,7 +54,7 @@ public class App {
                     System.out.println("User registered successfully!");
                     currentUsers++;
                 }
-            } else if (choice == 3) {
+            } else if (choice == "3") {
                 UserManager.saveUsers(users);
                 break;
             } else {
