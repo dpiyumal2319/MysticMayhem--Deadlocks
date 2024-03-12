@@ -1,27 +1,17 @@
 package bin.Warriors;
 
 import bin.Warrior;
-import bin.Collections.WarriorInfo;
 
 public class Healer extends Warrior{
     
     public Healer(String name) {
-        super(5, 1, data.healers.get(name).homeLand);
-        WarriorInfo info = data.healers.get(name);
-        this.name = info.name;
-        this.attack = info.attack;
-        this.defense = info.defense;
-        this.health = info.health;
-        this.speed = info.speed;
-        this.price = info.price;
-        this.value = info.price * 0.9;
-        this.type = "Healer";
+        super(5, 1, data.healers.get(name), "Healer");
     }
 
     public void prepareBattle(String battleGround) {
         switch (battleGround) {
             case "Hillcrest" :
-                if (homeGround == "Highlanders") {
+                if (homeLand == "Highlanders") {
                     battleDefense = getDefense() + 1;
                     bonusAttackBuff = 0.2f;
                     bonusTurns = 1;
@@ -30,26 +20,26 @@ public class Healer extends Warrior{
                 }
                 break;
             case "Marshland" :
-                if (homeGround == "Marshlanders") {
+                if (homeLand == "Marshlanders") {
                     battleDefense = getDefense() + 2;
-                } else if (homeGround == "Sunchildren") {
+                } else if (homeLand == "Sunchildren") {
                     battleAttack = getAttack() - 1;
-                } else if (homeGround == "Mystics") {
+                } else if (homeLand == "Mystics") {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
             case "Desert" :
-                if (homeGround == "Marshlanders") {
+                if (homeLand == "Marshlanders") {
                     battleHealth = getHealth() - 1;
-                } else if (homeGround == "Sunchildren") {
+                } else if (homeLand == "Sunchildren") {
                     battleAttack = getAttack() + 1;
                 }
                 break;
             case "Arcane" :
-                if (homeGround == "Mystics") {
+                if (homeLand == "Mystics") {
                     battleAttack = getAttack() + 2;
                     healPerAttack = 0.1f;
-                } else if (homeGround == "Highlanders" || homeGround == "Marshlanders") {
+                } else if (homeLand == "Highlanders" || homeLand == "Marshlanders") {
                     battleSpeed = getSpeed() - 1;
                     battleDefense = getDefense() - 1;
                 }

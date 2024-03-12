@@ -10,10 +10,10 @@ import bin.Collections.WarriorInfo;
 public class InventoryItem implements Serializable{
     public static DataSet data = new DataSet();
 
-    public String name;
-    public int price;
-    public double value;
-    public String type;
+    public final String name;
+    public final int price;
+    private double value;
+    public final String type;
 
     //Making static data set to be used by all instances of InventoryItem
     static {
@@ -53,6 +53,25 @@ public class InventoryItem implements Serializable{
     data.artefacts.put("excalibur", new EquipmentInfo("Excalibur", 150, 2, 0, 0, 0));
     data.artefacts.put("amulet", new EquipmentInfo("Amulet", 200, 1, -1, 1, 1));
     data.artefacts.put("crystal", new EquipmentInfo("Crystal", 210, 2, 1, -1, -1));
+    }
+
+    public InventoryItem(String name, int price, String type, double value) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.value = value;
+    }
+
+    public int getValue() {
+        return (int) value;
+    }
+
+    void incrementValue(double increment) {
+        this.value += increment;
+    }
+
+    void decrementValue(double decrement) {
+        this.value -= decrement;
     }
 
     public static Map<String, WarriorInfo> getWarriorMap(String type) {
