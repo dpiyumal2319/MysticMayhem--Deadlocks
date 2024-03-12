@@ -29,7 +29,7 @@ public class App {
                     System.out.println("To enter the shop, type 'shop'.");
                     System.out.println("To exit, type 'exit'.");
                     while (true) {
-                        System.out.print("Enter your choice[store]/[exit]: ");
+                        System.out.print("Enter your choice[shop]/[exit]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
                             user.Store();

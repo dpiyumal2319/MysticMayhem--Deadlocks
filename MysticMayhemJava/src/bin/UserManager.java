@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserManager implements Serializable{
+public class UserManager implements Serializable {
     private static final String USERS_FILE = "users.ser";
     private static final String NUMBER_OF_USERS_FILE = "numberOfUsers.ser";
 
@@ -17,7 +17,12 @@ public class UserManager implements Serializable{
     }
 
     public static int loadNumberOfUsers() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(NUMBER_OF_USERS_FILE))) {
+        File file = new File(NUMBER_OF_USERS_FILE);
+        if (!file.exists()) {
+            return 0; // Return 0 if the file does not exist
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
             return in.readInt();
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,6 +40,11 @@ public class UserManager implements Serializable{
 
     @SuppressWarnings("unchecked")
     public static Map<String, User> loadUsers() {
+        File file = new File(USERS_FILE);
+        if (!file.exists()) {
+            return new HashMap<>();
+        }
+
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(USERS_FILE))) {
             return (Map<String, User>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
