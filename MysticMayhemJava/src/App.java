@@ -4,16 +4,21 @@ import bin.UserManager;
 import java.util.Map;
 import java.util.Scanner;
 
+// ANSI escape codes for text color
+public static final String RESET = "\u001B[0m";
+public static final String RED = "\u001B[31m";
+public static final String GREEN = "\u001B[32m";
+public static final String YELLOW = "\u001B[33m";
+public static final String BLUE = "\u001B[34m";
+
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to Mystic Mayhem!");
         Map<String, User> users = UserManager.loadUsers();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Login[L]");
-            System.out.println("Register[R]");
-            System.out.println("Exit[E]");
-            System.out.print("Enter your choice[L]/[R]/[E]: ");
+            System.out.println(YELLOW+"Login[L]    "+RESET+GREEN+"Register[R]     "+RESET+RED+"Exit[E]     "+RESET);
+            System.out.print("Enter your choice"+YELLOW+"[L]"+RESET+"/"+GREEN+"[R]"+RESET+"/"+RED+"[E]"+RESET+": ");
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("L")) {
                 System.out.print("Enter your username: ");
@@ -55,7 +60,7 @@ public class App {
                         System.out.println("Select your home ground:");
                         System.out.println("Hillcrest [H]");
                         System.out.println("Marshland [M]");
-                        System.out.println("Desert [M]");
+                        System.out.println("Desert [D]");
                         System.out.println("Arcane [A]");
                         System.out.print("Enter the  corresponding letter to your home ground choice: ");
                         String homeGroundChoice;
