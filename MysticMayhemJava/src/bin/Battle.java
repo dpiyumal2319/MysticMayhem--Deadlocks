@@ -46,12 +46,12 @@ public abstract class Battle {
         Arrays.sort(user2Attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
                 .thenComparing(Warrior::getAttackPriority));
         Arrays.sort(user2Defence, Comparator.comparing(Warrior::getBattleDefense)
-                .thenComparing(Warrior::getDefensePriority, Comparator.reverseOrder()));
+                .thenComparing(Warrior::getDefensePriority));
 
         Arrays.sort(user1Attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
                 .thenComparing(Warrior::getAttackPriority));
         Arrays.sort(user1Defence, Comparator.comparing(Warrior::getBattleDefense)
-                .thenComparing(Warrior::getDefensePriority, Comparator.reverseOrder()));
+                .thenComparing(Warrior::getDefensePriority));
 
         // Battle 10 turns
         Warrior attacker;
@@ -113,12 +113,18 @@ public abstract class Battle {
                 int exchangeMoney = opponent.getMoney() / 10;
                 currentUser.increaseMoney(exchangeMoney);
                 opponent.decreaseMoney(exchangeMoney);
+                System.out.println("You won " + exchangeMoney + " coins." + "You have " + currentUser.getMoney()
+                        + " coins now.");
+                System.out.println("You won 1 XP");
             } else {
                 System.out.println(opponent.userName + " won!");
                 opponent.increaseXp(1);
                 int exchangeMoney = currentUser.getMoney() / 10;
                 opponent.increaseMoney(exchangeMoney);
                 currentUser.decreaseMoney(exchangeMoney);
+                System.out.println(opponent.userName + " won " + exchangeMoney + " coins." + opponent.userName
+                        + " has " + opponent.getMoney() + " coins now.");
+                System.out.println(opponent.userName + " won 1 XP");
             }
         } else {
             System.out.println("Draw!");

@@ -83,35 +83,35 @@ public abstract class Warrior extends InventoryItem {
     public void prepareBattle(String battleGround) {
         switch (battleGround) {
             case "Hillcrest" :
-                if (homeLand == "Highlanders") {
+                if (homeLand.equals("Highlanders")) {
                     battleDefense = getDefense() + 1;
                     bonusAttackBuff = 0.2f;
                     bonusTurns = 1;
-                } else if (battleGround == "Sunchildren" || battleGround == "Marshlanders") {
+                } else if (homeLand.equals("Sunchildren") || homeLand.equals("Marshlanders")) {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
             case "Marshland" :
-                if (homeLand == "Marshlanders") {
+                if (homeLand.equals("Marshlanders")) {
                     battleDefense = getDefense() + 2;
-                } else if (homeLand == "Sunchildren") {
+                } else if (homeLand.equals("Sunchildren")) {
                     battleAttack = getAttack() - 1;
-                } else if (homeLand == "Mystics") {
+                } else if (homeLand.equals("Mystics")) {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
             case "Desert" :
-                if (homeLand == "Marshlanders") {
+                if (homeLand.equals("Marshlanders")) {
                     battleHealth = getHealth() - 1;
-                } else if (homeLand == "Sunchildren") {
+                } else if (homeLand.equals("Sunchildren")) {
                     battleAttack = getAttack() + 1;
                 }
                 break;
             case "Arcane" :
-                if (homeLand == "Mystics") {
+                if (homeLand.equals("Mystics")) {
                     battleAttack = getAttack() + 2;
                     healPerAttack = 0.1f;
-                } else if (homeLand == "Highlanders" || homeLand == "Marshlanders") {
+                } else if (homeLand.equals("Highlanders") || homeLand.equals("Marshlanders")) {
                     battleSpeed = getSpeed() - 1;
                     battleDefense = getDefense() - 1;
                 }
@@ -165,3 +165,49 @@ and marshlanders decrease by 1. When attacking in arcane, mystics increase their
 health by 10% after each of their turns.
 
  */
+
+ /*4
+  * public void prepareBattle(String battleGround) {
+        switch (battleGround) {
+            case "Hillcrest" :
+                if (homeLand.equals("Highlanders")) {
+                    battleDefense = getDefense() + 1;
+                    bonusAttackBuff = 0.2f;
+                    bonusTurns = 1;
+                } else if (homeLand == "Sunchildren" || homeLand == "Marshlanders") {
+                    battleSpeed = getSpeed() - 1;
+                }
+                break;
+            case "Marshland" :
+                if (homeLand == "Marshlanders") {
+                    battleDefense = getDefense() + 2;
+                } else if (homeLand == "Sunchildren") {
+                    battleAttack = getAttack() - 1;
+                } else if (homeLand == "Mystics") {
+                    battleSpeed = getSpeed() - 1;
+                }
+                break;
+            case "Desert" :
+                if (homeLand == "Marshlanders") {
+                    battleHealth = getHealth() - 1;
+                } else if (homeLand == "Sunchildren") {
+                    battleAttack = getAttack() + 1;
+                }
+                break;
+            case "Arcane" :
+                if (homeLand == "Mystics") {
+                    battleAttack = getAttack() + 2;
+                    healPerAttack = 0.1f;
+                } else if (homeLand == "Highlanders" || homeLand == "Marshlanders") {
+                    battleSpeed = getSpeed() - 1;
+                    battleDefense = getDefense() - 1;
+                }
+                break;
+        }
+        if (battleAttack == -100) battleAttack = getAttack();
+        if (battleDefense == -100) battleDefense = getDefense();
+        if (battleHealth == -100) battleHealth = getHealth();
+        if (battleSpeed == -100) battleSpeed = getSpeed();
+        if (bonusTurns == -100) bonusTurns = 0;
+    }
+  */
