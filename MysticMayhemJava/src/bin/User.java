@@ -97,9 +97,9 @@ public class User extends SuperUserControls {
                     System.out.println("You don't have any warriors to sell!");
                     continue;
                 } else {
-                    System.out.println("\nWhich warrior do you want to sell?");
-                    System.out.println("Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]");
-                    System.out.println(RED + "Quit[Q]" + RESET + BLUE+", Inventory[I]\n"+RESET);
+                    System.out.println("\nWhich warrior do you want to sell?\n");
+                    System.out.println(BLUE+"Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]"+RESET);
+                    System.out.println(RED + "Quit[Q]" + RESET + BLUE+"\nInventory[I]\n"+RESET);
                     while (true) {
                         System.out.print("Enter your choice, Which warrior you want to sell "+GREEN+"[A/K/M/H/MC]"+RESET+" or " +RED+"Quit[Q]"+RESET+BLUE+"/Inventory[I]: "+RESET);
                         input = scanner.nextLine();
@@ -138,7 +138,7 @@ public class User extends SuperUserControls {
                         System.out.println(BLUE + " Archer[A]\n Knight[K]\n Mage[M]\n Healer[H]\n Mythical\n Creature[MC]\n" + RESET );
                         System.out.println(RED + " Quit[Q]\n" + RESET+BLUE+" Inventory[I]\n"+RESET);
                         while (true) {
-                            System.out.print("Enter your choice, Which warrior you want to buy "+GREEN+"[A/K/M/H/MC]"+RESET+" or "+RED + "Quit[Q]" + RESET+BLUE+"/Inventory[I]:"+RESET);
+                            System.out.print("Enter your choice, Which warrior you want to buy "+GREEN+"[A/K/M/H/MC]"+RESET+" or "+RED + "Quit[Q]" + RESET+BLUE+"/Inventory[I]: "+RESET);
                             input = scanner.nextLine();
                             if (input.equalsIgnoreCase("A")) {
                                 buyWarrior(squad.getArcher(), "Archer");
@@ -288,7 +288,7 @@ public class User extends SuperUserControls {
     private void buyWarrior(Warrior warrior, String type) {
         printMoney();
         if (warrior != null) {
-            System.out.println("\nYou already have this warrior!");
+            System.out.println(RED+"\nYou already have this warrior!"+RESET);
             sellWarrior(warrior);
         } else if (warrior == null) {
             System.out.println("Do you want to buy a new " + type + "?");
@@ -334,7 +334,7 @@ public class User extends SuperUserControls {
             System.out.println("Do you want to sell your " + warrior.name + " for " + warrior.getValue() + " coins?");
             System.out.println("Yes[Y] or No[N]");
             while (true) {
-                System.out.println("\nEnter your choice"+BRIGHT_GREEN+ "[Y/N]: "+RESET);
+                System.out.println("\nEnter your choice "+BRIGHT_GREEN+ "[Y/N]: "+RESET);
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
                     getMoneyFrom(warrior);
