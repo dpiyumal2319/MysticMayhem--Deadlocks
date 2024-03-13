@@ -162,27 +162,35 @@ public abstract class Battle {
     static int i = 0, j = 0;
 
     private static Warrior getAttacker(Warrior[] squad) {
-        if (i == 5) {
-            i = 0;
-        }
+        int starting_position = i;
         while (i < 5) {
             if (squad[i].battleHealth > 0) {
                 return squad[i];
             }
             i++;
+            if (i == 5) {
+                i = 0;
+            }
+            if (i == starting_position) {
+                return null;
+            }
         }
         return null;
     }
 
     private static Warrior getDefender(Warrior[] squad) {
-        if (j == 5) {
-            j = 0;
-        }
+        int starting_position = j;
         while (j < 5) {
-            if (squad[j].getHealth() > 0) {
+            if (squad[j].battleHealth > 0) {
                 return squad[j];
             }
             j++;
+            if (j == 5) {
+                j = 0;
+            }
+            if (j == starting_position) {
+                return null;
+            }
         }
         return null;
     }
