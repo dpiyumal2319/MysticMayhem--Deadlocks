@@ -5,14 +5,15 @@ import bin.UserManager;
 import java.util.Map;
 import java.util.Scanner;
 
-// ANSI escape codes for text color
-public static final String RESET = "\u001B[0m";
-public static final String RED = "\u001B[31m";
-public static final String GREEN = "\u001B[32m";
-public static final String YELLOW = "\u001B[33m";
-public static final String BLUE = "\u001B[34m";
+
 
 public class App {
+    // ANSI escape codes for text color
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
     public static void main(String[] args) throws Exception {
         
        
