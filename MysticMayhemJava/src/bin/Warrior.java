@@ -7,7 +7,8 @@ public abstract class Warrior extends InventoryItem {
     public final int attackPriority;
     public final int defensePriority;
     public final String homeLand;
-    public int battleAttack = -100, battleDefense = -100, battleHealth = -100, battleSpeed = -100, bonusTurns = -100;
+    public int battleAttack = -100, battleDefense = -100, battleSpeed = -100, bonusTurns = -100;
+    public float battleHealth = -100f;
     public float bonusAttackBuff = 0f, healPerAttack =  0f;
     private Waredrobe woredrobe = new Waredrobe();
 
@@ -120,12 +121,29 @@ public abstract class Warrior extends InventoryItem {
         if (battleDefense == -100) battleDefense = getDefense();
         if (battleHealth == -100) battleHealth = getHealth();
         if (battleSpeed == -100) battleSpeed = getSpeed();
+        if (bonusTurns == -100) bonusTurns = 0;
+    }
+
+    int getBattleSpeed() {
+        return battleSpeed;
+    }
+
+    int getBattleDefense() {
+        return battleDefense;
+    }
+
+    public int getAttackPriority() {
+        return attackPriority;
+    }
+
+    public int getDefensePriority() {
+        return defensePriority;
     }
 
     public void resetBattle() {
         battleAttack = -100;
         battleDefense = -100;
-        battleHealth = -100;
+        battleHealth = -100f;
         battleSpeed = -100;
         bonusTurns = -100;
         bonusAttackBuff = 0f;
