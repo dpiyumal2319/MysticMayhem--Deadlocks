@@ -35,6 +35,7 @@ public abstract class Battle {
         }
     }
 
+    
     private static User getRandomUser(Map<String, User> Users) {
         // Convert the values of the Users map to an array
         User[] usersArray = Users.values().toArray(new User[0]);
