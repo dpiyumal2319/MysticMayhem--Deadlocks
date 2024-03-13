@@ -363,6 +363,7 @@ public class User extends SuperUserControls {
             }
         }
     }
+    
 
     private void printEquipmentMap(String type) {
         Map<String, EquipmentInfo> equipmentMap = InventoryItem.getEquipmentMap(type);
@@ -371,12 +372,13 @@ public class User extends SuperUserControls {
                 System.out.println(key + ":");
                 System.out.println("\tAttack: " + equipmentMap.get(key).extraAttack);
                 System.out.println("\tDefense: " + equipmentMap.get(key).extraDefense);
-                System.out.println("\tHealth: " + equipmentMap.get(key).extraDefense);
-                System.out.println("\tSpeed: " + equipmentMap.get(key).extraDefense);
+                System.out.println("\tHealth: " + equipmentMap.get(key).extraHealth);
+                System.out.println("\tSpeed: " + equipmentMap.get(key).extraSpeed);
                 System.out.println("\tPrice: " + equipmentMap.get(key).price);
             }
         }
     }
+    
 
     private void removeSquadMate(String type) {
         switch (type) {

@@ -64,7 +64,7 @@ public class App {
                             break;
                         } else if (input.equals("battle")) {
                             if (user.isAllWarriorsAwailable()) {
-                                if (nuOfEligibleUsers < 2) {
+                                if (nuOfEligibleUsers < 1) {
                                     System.out.println("Not enough users to start the battle!");
                                 } else {
                                     Battle.start(user, users);
