@@ -238,6 +238,7 @@ public class User extends SuperUserControls {
                 if (input.equalsIgnoreCase("Y")) {
                     warrior.removeEquipment(type);
                     System.out.println("\nYou have removed the " + type + " from your " + warrior.type + ".");
+                    break;
                 } else if (input.equalsIgnoreCase("N")) {
                     return;
                 } else {
