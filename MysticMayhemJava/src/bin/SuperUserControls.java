@@ -3,7 +3,7 @@ package bin;
 import java.io.Serializable;
 
 public class SuperUserControls implements Serializable{
-    private int money = 5000;
+    private int money = 500;
 
     protected void giveMoneyFor(InventoryItem item) {
         money -= item.price;
