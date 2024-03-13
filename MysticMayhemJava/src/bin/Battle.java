@@ -81,25 +81,25 @@ public abstract class Battle {
     // return filteredUsers;
     // }
 
-    // private static void sortAttackArray(Warrior[] array) {
-    //     Arrays.sort(array, (w1, w2) -> {
-    //         if (w1.battleSpeed != w2.battleSpeed) {
-    //             return Integer.compare(w2.battleSpeed, w1.battleSpeed); // Sort by battleSpeed descending
-    //         } else {
-    //             return Integer.compare(w1.attackPriority, w2.attackPriority); // Sort by attackPriority ascending
-    //         }
-    //     });
-    // }
+    private static void sortAttackArray(Warrior[] array) {
+        Arrays.sort(array, (w1, w2) -> {
+            if (w1.battleSpeed != w2.battleSpeed) {
+                return Integer.compare(w2.battleSpeed, w1.battleSpeed); // Sort by battleSpeed descending
+            } else {
+                return Integer.compare(w1.attackPriority, w2.attackPriority); // Sort by attackPriority ascending
+            }
+        });
+    }
 
-    // private static void sortDefenseArray(Warrior[] array) {
-    //     Arrays.sort(array, (w1, w2) -> {
-    //         if (w1.battleDefense != w2.battleDefense) {
-    //             return Integer.compare(w1.battleDefense, w2.battleDefense); // Sort by battleDefense ascending
-    //         } else {
-    //             return Integer.compare(w1.defensePriority, w2.defensePriority); // Sort by defensePriority ascending
-    //         }
-    //     });
-    // }
+    private static void sortDefenseArray(Warrior[] array) {
+        Arrays.sort(array, (w1, w2) -> {
+            if (w1.battleDefense != w2.battleDefense) {
+                return Integer.compare(w1.battleDefense, w2.battleDefense); // Sort by battleDefense ascending
+            } else {
+                return Integer.compare(w1.defensePriority, w2.defensePriority); // Sort by defensePriority ascending
+            }
+        });
+    }
 
     public static void startBattleWithOpponent(User current_user, User opponent) {
         // Get the warriors of the current user and the opponent
@@ -137,15 +137,20 @@ public abstract class Battle {
         }
 
         // Sort arrays for current_user's squad
-        Arrays.sort(squad_current_user_attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
-                .thenComparing(Warrior::getAttackPriority));
-        Arrays.sort(squad_current_user_defense, Comparator.comparing(Warrior::getBattleDefense)
-                .thenComparing(Warrior::getDefensePriority));
+        // Arrays.sort(squad_current_user_attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
+        //         .thenComparing(Warrior::getAttackPriority));
+        // Arrays.sort(squad_current_user_defense, Comparator.comparing(Warrior::getBattleDefense)
+        //         .thenComparing(Warrior::getDefensePriority));
 
-        Arrays.sort(squad_opponent_attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
-                .thenComparing(Warrior::getAttackPriority));
-        Arrays.sort(squad_opponent_defense, Comparator.comparing(Warrior::getBattleDefense)
-                .thenComparing(Warrior::getDefensePriority));
+        // Arrays.sort(squad_opponent_attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
+        //         .thenComparing(Warrior::getAttackPriority));
+        // Arrays.sort(squad_opponent_defense, Comparator.comparing(Warrior::getBattleDefense)
+        //         .thenComparing(Warrior::getDefensePriority));
+
+        sortAttackArray(squad_current_user_attack);
+        sortDefenseArray(squad_current_user_defense);
+        sortAttackArray(squad_opponent_attack);
+        sortDefenseArray(squad_opponent_defense);
 
         int number_of_turns = 0;
         while (number_of_turns < 10) {
@@ -215,17 +220,20 @@ public abstract class Battle {
     static int i = 0, j = 0;
 
     private static Warrior getAttacker(Warrior[] squad) {
+        if (i == 5) {
+            i = 0;
+        }
         int starting_position = i;
+
         while (i < 5) {
             i++;
             if (squad[i-1].battleHealth > 0) {
                 return squad[i-1];
             }
-
-        
             if (i == 5) {
                 i = 0;
             }
+        
             if (i == starting_position) {
                 return null;
             }
@@ -234,16 +242,19 @@ public abstract class Battle {
     }
 
     private static Warrior getDefender(Warrior[] squad) {
+        if (j == 5) {
+            j = 0;
+        }
         int starting_position = j;
         while (j < 5) {
             j++;
             if (squad[j-1].battleHealth > 0) {
                 return squad[j-1];
             }
-            
             if (j == 5) {
                 j = 0;
             }
+
             if (j == starting_position) {
                 return null;
             }
@@ -254,7 +265,11 @@ public abstract class Battle {
     static int m = 0, n = 0;
     
     private static Warrior getAttackeropp(Warrior[] squad) {
+        if (m == 5) {
+            m = 0;
+        }
         int starting_position = m;
+
         while (m < 5) {
             m++;
             if (squad[m-1].battleHealth > 0) {
@@ -272,7 +287,11 @@ public abstract class Battle {
     }
 
     private static Warrior getDefenderopp(Warrior[] squad) {
+        if (n == 5) {
+            n = 0;
+        }
         int starting_position = n;
+
         while (n < 5) {
             n++;
             if (squad[n-1].battleHealth > 0) {
