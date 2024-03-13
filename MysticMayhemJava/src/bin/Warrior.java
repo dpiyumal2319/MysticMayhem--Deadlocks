@@ -7,7 +7,8 @@ public abstract class Warrior extends InventoryItem {
     public final int attackPriority;
     public final int defensePriority;
     public final String homeLand;
-    public int battleAttack = -100, battleDefense = -100, battleHealth = -100, battleSpeed = -100, bonusTurns = -100;
+    public int battleAttack = -100, battleDefense = -100, battleSpeed = -100, bonusTurns = -100;
+    public float battleHealth = -100f;
     public float bonusAttackBuff = 0f, healPerAttack =  0f;
     private Waredrobe woredrobe = new Waredrobe();
 
@@ -82,11 +83,98 @@ public abstract class Warrior extends InventoryItem {
     public void prepareBattle(String battleGround) {
         switch (battleGround) {
             case "Hillcrest" :
-                if (homeLand == "Highlanders") {
+                if (homeLand.equals("Highlanders")) {
                     battleDefense = getDefense() + 1;
                     bonusAttackBuff = 0.2f;
                     bonusTurns = 1;
-                } else if (battleGround == "Sunchildren" || battleGround == "Marshlanders") {
+                } else if (homeLand.equals("Sunchildren") || homeLand.equals("Marshlanders")) {
+                    battleSpeed = getSpeed() - 1;
+                }
+                break;
+            case "Marshland" :
+                if (homeLand.equals("Marshlanders")) {
+                    battleDefense = getDefense() + 2;
+                } else if (homeLand.equals("Sunchildren")) {
+                    battleAttack = getAttack() - 1;
+                } else if (homeLand.equals("Mystics")) {
+                    battleSpeed = getSpeed() - 1;
+                }
+                break;
+            case "Desert" :
+                if (homeLand.equals("Marshlanders")) {
+                    battleHealth = getHealth() - 1;
+                } else if (homeLand.equals("Sunchildren")) {
+                    battleAttack = getAttack() + 1;
+                }
+                break;
+            case "Arcane" :
+                if (homeLand.equals("Mystics")) {
+                    battleAttack = getAttack() + 2;
+                    healPerAttack = 0.1f;
+                } else if (homeLand.equals("Highlanders") || homeLand.equals("Marshlanders")) {
+                    battleSpeed = getSpeed() - 1;
+                    battleDefense = getDefense() - 1;
+                }
+                break;
+        }
+        if (battleAttack == -100) battleAttack = getAttack();
+        if (battleDefense == -100) battleDefense = getDefense();
+        if (battleHealth == -100) battleHealth = getHealth();
+        if (battleSpeed == -100) battleSpeed = getSpeed();
+        if (bonusTurns == -100) bonusTurns = 0;
+    }
+
+    int getBattleSpeed() {
+        return battleSpeed;
+    }
+
+    int getBattleDefense() {
+        return battleDefense;
+    }
+
+    public int getAttackPriority() {
+        return attackPriority;
+    }
+
+    public int getDefensePriority() {
+        return defensePriority;
+    }
+
+    public void resetBattle() {
+        battleAttack = -100;
+        battleDefense = -100;
+        battleHealth = -100f;
+        battleSpeed = -100;
+        bonusTurns = -100;
+        bonusAttackBuff = 0f;
+        healPerAttack = 0f;
+    }
+}
+
+
+/*
+ * In Hillcrest, the attack and defence of highlanders increase by 1 while the speed of
+marshlanders and sunchildren decrease by 1. When attacking in Hillcrest, each highlander
+can follow each of their turns with a bonus turn with 20% of their attack power.
+In Marshland, the defence of marshlanders increases by 2 while the attack of sunchildren
+decreases by 1. The speed of mystics also decreases by 1.
+In Desert, the health of marshlanders decreases by 1 while the attack of sunchildren
+increases by 1.
+In Arcane, the attack of mystics increases by 2 while the speed and defence of highlanders
+and marshlanders decrease by 1. When attacking in arcane, mystics increase their own
+health by 10% after each of their turns.
+
+ */
+
+ /*4
+  * public void prepareBattle(String battleGround) {
+        switch (battleGround) {
+            case "Hillcrest" :
+                if (homeLand.equals("Highlanders")) {
+                    battleDefense = getDefense() + 1;
+                    bonusAttackBuff = 0.2f;
+                    bonusTurns = 1;
+                } else if (homeLand == "Sunchildren" || homeLand == "Marshlanders") {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
@@ -120,30 +208,6 @@ public abstract class Warrior extends InventoryItem {
         if (battleDefense == -100) battleDefense = getDefense();
         if (battleHealth == -100) battleHealth = getHealth();
         if (battleSpeed == -100) battleSpeed = getSpeed();
+        if (bonusTurns == -100) bonusTurns = 0;
     }
-
-    public void resetBattle() {
-        battleAttack = -100;
-        battleDefense = -100;
-        battleHealth = -100;
-        battleSpeed = -100;
-        bonusTurns = -100;
-        bonusAttackBuff = 0f;
-        healPerAttack = 0f;
-    }
-}
-
-
-/*
- * In Hillcrest, the attack and defence of highlanders increase by 1 while the speed of
-marshlanders and sunchildren decrease by 1. When attacking in Hillcrest, each highlander
-can follow each of their turns with a bonus turn with 20% of their attack power.
-In Marshland, the defence of marshlanders increases by 2 while the attack of sunchildren
-decreases by 1. The speed of mystics also decreases by 1.
-In Desert, the health of marshlanders decreases by 1 while the attack of sunchildren
-increases by 1.
-In Arcane, the attack of mystics increases by 2 while the speed and defence of highlanders
-and marshlanders decrease by 1. When attacking in arcane, mystics increase their own
-health by 10% after each of their turns.
-
- */
+  */

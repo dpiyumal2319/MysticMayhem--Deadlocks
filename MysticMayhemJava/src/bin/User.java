@@ -27,15 +27,27 @@ public class User extends SuperUserControls {
         return xp;
     }
 
-    public void Store() {
+    public void increaseXp(int amount) {
+        xp += amount;
+    }
+
+    public void decreaseXp(int amount) {
+        xp -= amount;
+    }
+
+    public boolean Store() {
         System.out.println("Welcome to the store " + this.userName + "!");
+        System.out.println("You can always select Exit without saving[QS] in main menu if you don't want to save your changes.");
         printMoney();
         System.out.println("Do you want to buy[B] or sell[S]?");
         System.out.println("Inventory/Squad [I]");
         System.out.println("Quit[Q]");
         while (true) {
-            System.out.println("Enter your choice [B/S/I/Q]: ");
+            System.out.println("Enter your choice [B/S/I/Q/QS]: ");
             input = scanner.nextLine();
+            if (input.equalsIgnoreCase("QS")) {
+                return false;
+            }
             if (input.equalsIgnoreCase("Q")) {
                 break;
             } else if (input.equalsIgnoreCase("I"))
@@ -146,6 +158,7 @@ public class User extends SuperUserControls {
         }
         System.out.println("Thank you for visiting the store " + this.userName + "!");
         System.out.println("Goodbye!");
+        return true;
     }
 
     private void buyEquipment(Warrior warrior) {
@@ -350,6 +363,7 @@ public class User extends SuperUserControls {
             }
         }
     }
+    
 
     private void printEquipmentMap(String type) {
         Map<String, EquipmentInfo> equipmentMap = InventoryItem.getEquipmentMap(type);
@@ -358,12 +372,13 @@ public class User extends SuperUserControls {
                 System.out.println(key + ":");
                 System.out.println("\tAttack: " + equipmentMap.get(key).extraAttack);
                 System.out.println("\tDefense: " + equipmentMap.get(key).extraDefense);
-                System.out.println("\tHealth: " + equipmentMap.get(key).extraDefense);
-                System.out.println("\tSpeed: " + equipmentMap.get(key).extraDefense);
+                System.out.println("\tHealth: " + equipmentMap.get(key).extraHealth);
+                System.out.println("\tSpeed: " + equipmentMap.get(key).extraSpeed);
                 System.out.println("\tPrice: " + equipmentMap.get(key).price);
             }
         }
     }
+    
 
     private void removeSquadMate(String type) {
         switch (type) {
