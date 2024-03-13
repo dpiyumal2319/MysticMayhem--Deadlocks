@@ -105,15 +105,15 @@ public abstract class Battle {
         // Get the warriors of the current user and the opponent
         Warrior[] squad_current_user = new Warrior[5];
         Warrior[] squad_opponent = new Warrior[5];
-        squad_current_user[0] = current_user.squad.getArcher(current_user.homeGround);
-        squad_current_user[1] = current_user.squad.getMage(current_user.homeGround);
-        squad_current_user[2] = current_user.squad.getKnight(current_user.homeGround);
-        squad_current_user[3] = current_user.squad.getMage(current_user.homeGround);
-        squad_current_user[4] = current_user.squad.getMythicalCreature(current_user.homeGround);
+        squad_current_user[0] = current_user.squad.getArcher(opponent.homeGround);
+        squad_current_user[1] = current_user.squad.getMage(opponent.homeGround);
+        squad_current_user[2] = current_user.squad.getKnight(opponent.homeGround);
+        squad_current_user[3] = current_user.squad.getHealer(opponent.homeGround);
+        squad_current_user[4] = current_user.squad.getMythicalCreature(opponent.homeGround);
         squad_opponent[0] = opponent.squad.getArcher(opponent.homeGround);
         squad_opponent[1] = opponent.squad.getMage(opponent.homeGround);
         squad_opponent[2] = opponent.squad.getKnight(opponent.homeGround);
-        squad_opponent[3] = opponent.squad.getMage(opponent.homeGround);
+        squad_opponent[3] = opponent.squad.getHealer(opponent.homeGround);
         squad_opponent[4] = opponent.squad.getMythicalCreature(opponent.homeGround);
 
         // Arrays for current_user's squad
@@ -137,17 +137,20 @@ public abstract class Battle {
         }
 
         // Sort arrays for current_user's squad
-        sortAttackArray(squad_current_user_attack);
-        sortDefenseArray(squad_current_user_defense);
+        Arrays.sort(squad_current_user_attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
+                .thenComparing(Warrior::getAttackPriority));
+        Arrays.sort(squad_current_user_defense, Comparator.comparing(Warrior::getBattleDefense)
+                .thenComparing(Warrior::getDefensePriority));
 
-        // Sort arrays for opponent's squad
-        sortAttackArray(squad_opponent_attack);
-        sortDefenseArray(squad_opponent_defense);
+        Arrays.sort(squad_opponent_attack, Comparator.comparing(Warrior::getBattleSpeed, Comparator.reverseOrder())
+                .thenComparing(Warrior::getAttackPriority));
+        Arrays.sort(squad_opponent_defense, Comparator.comparing(Warrior::getBattleDefense)
+                .thenComparing(Warrior::getDefensePriority));
 
         int number_of_turns = 0;
         while (number_of_turns < 10) {
             Warrior attacker_current_user = getAttacker(squad_current_user_attack);
-            Warrior attacker_opponent = getAttacker(squad_opponent_attack);
+            Warrior attacker_opponent = getAttackeropp(squad_opponent_attack);
             if (attacker_current_user == null) {
                 System.out.println("You lost the battle!");
                 resetBattle(current_user, opponent);
@@ -162,21 +165,43 @@ public abstract class Battle {
                 Warrior lowest_health = getWeakestAttacker(squad_current_user);
                 attack(attacker_current_user, lowest_health);
 
+                System.out.println("Your " + attacker_current_user.type + "[" + attacker_current_user.battleHealth + "] " + attacker_current_user.name
+                        + " healed your " + lowest_health.type + "[" + lowest_health.battleHealth + "] "
+                        + lowest_health.name);
+
             } else {
-                Warrior defender_opponent = getDefender(squad_opponent_defense);
+                Warrior defender_opponent = getDefenderopp(squad_opponent_defense);
                 attack(attacker_current_user, defender_opponent);
+
+                System.out.println("Your " + attacker_current_user.type + "[" + attacker_current_user.battleHealth + "] " + attacker_current_user.name
+                        + " attacked " + opponent.userName + "'s " + defender_opponent.type + "[" + defender_opponent.battleHealth + "] "
+                        + defender_opponent.name);
+
                 if (attacker_current_user.bonusTurns == 1) {
                     bonusAttack(attacker_current_user, defender_opponent);
+                    System.out.println("Bonus attack from " + attacker_current_user.name + "[" + attacker_current_user.battleHealth + "] " + " to "
+                            + defender_opponent.name + "[" + defender_opponent.battleHealth + "]");
                 }
             }
             if (attacker_opponent instanceof Healer) {
                 Warrior lowest_health = getWeakestAttacker(squad_opponent);
                 attack(attacker_opponent, lowest_health);
+
+                System.out.println(opponent.userName + "'s " + attacker_opponent.type + "[" + attacker_opponent.battleHealth + "] " + attacker_opponent.name
+                        + " healed your " + lowest_health.type + "[" + lowest_health.battleHealth + "] "
+                        + lowest_health.name);
             } else {
                 Warrior defender_curent_user = getDefender(squad_current_user_defense);
                 attack(attacker_opponent, defender_curent_user);
+
+                System.out.println(opponent.userName + "'s " + attacker_opponent.type + "[" + attacker_opponent.battleHealth + "] " + attacker_opponent.name
+                        + " attacked " + "your " + defender_curent_user.type + "[" + defender_curent_user.battleHealth + "] "
+                        + defender_curent_user.name);
+
                 if (attacker_opponent.bonusTurns == 1) {
                     bonusAttack(attacker_opponent, defender_curent_user);
+                    System.out.println("Bonus attack from " + attacker_opponent.name + "[" + attacker_opponent.battleHealth + "] " + " to "
+                            + defender_curent_user.name + "[" + defender_curent_user.battleHealth + "]");
                 }
             }
             number_of_turns++;
@@ -192,11 +217,12 @@ public abstract class Battle {
     private static Warrior getAttacker(Warrior[] squad) {
         int starting_position = i;
         while (i < 5) {
-            if (squad[i].battleHealth > 0) {
-                return squad[i];
+            i++;
+            if (squad[i-1].battleHealth > 0) {
+                return squad[i-1];
             }
 
-            i++;
+        
             if (i == 5) {
                 i = 0;
             }
@@ -210,10 +236,11 @@ public abstract class Battle {
     private static Warrior getDefender(Warrior[] squad) {
         int starting_position = j;
         while (j < 5) {
-            if (squad[j].battleHealth > 0) {
-                return squad[j];
-            }
             j++;
+            if (squad[j-1].battleHealth > 0) {
+                return squad[j-1];
+            }
+            
             if (j == 5) {
                 j = 0;
             }
@@ -224,9 +251,47 @@ public abstract class Battle {
         return null;
     }
 
+    static int m = 0, n = 0;
+    
+    private static Warrior getAttackeropp(Warrior[] squad) {
+        int starting_position = m;
+        while (m < 5) {
+            m++;
+            if (squad[m-1].battleHealth > 0) {
+                return squad[m-1];
+            }
+            
+            if (m == 5) {
+                m = 0;
+            }
+            if (m == starting_position) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private static Warrior getDefenderopp(Warrior[] squad) {
+        int starting_position = n;
+        while (n < 5) {
+            n++;
+            if (squad[n-1].battleHealth > 0) {
+                return squad[n-1];
+            }
+            
+            if (n == 5) {
+                n = 0;
+            }
+            if (n == starting_position) {
+                return null;
+            }
+        }
+        return null;
+    }
+
     private static Warrior getWeakestAttacker(Warrior[] squad) {
         Warrior weakestAttacker = null;
-        int minHealth = Integer.MAX_VALUE; // Set initial minimum health to the maximum possible value
+        float minHealth = Integer.MAX_VALUE; // Set initial minimum health to the maximum possible value
 
         for (Warrior warrior : squad) {
             if (warrior != null && warrior.battleHealth < minHealth) {
@@ -239,16 +304,13 @@ public abstract class Battle {
     }
 
     private static void attack(Warrior attacker, Warrior defender) {
-        System.out.println(attacker.name);
         if (attacker instanceof Healer) {
             defender.battleHealth += attacker.battleAttack * 0.1;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
-            System.out.println(
-                    attacker.name + " heals " + defender.name + " for " + (attacker.battleAttack * 0.1) + " health.");
+            
         } else {
             defender.battleHealth -= attacker.battleAttack * 0.5 - defender.battleDefense * 0.1;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
-            System.out.println(attacker.name + " attacks " + defender.name );
         }
     }
 
@@ -257,21 +319,21 @@ public abstract class Battle {
         if (attacker instanceof Healer) {
             defender.battleHealth += attacker.battleAttack * 0.1 * 1.2;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
-            System.out.println(
-                    attacker.name + " heals " + defender.name + " for " + (attacker.battleAttack * 0.1 * 1.2) + " health.");
 
         } else {
             defender.battleHealth -= attacker.battleAttack * 0.5 * 1.2 - defender.battleDefense * 0.1;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
-            System.out.println(attacker.name + " attacks " + defender.name );
         }
 
     }
 
     static void resetBattle(User current_user, User opponent) {
+        m=0;
+        n=0;
         i = 0;
         j = 0;
         current_user.squad.resetBattle();
         opponent.squad.resetBattle();
     }
 }
+
