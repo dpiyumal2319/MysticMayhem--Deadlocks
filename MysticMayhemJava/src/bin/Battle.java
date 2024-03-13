@@ -4,6 +4,9 @@ import bin.Warriors.*;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+
+import javax.sound.sampled.SourceDataLine;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,20 +65,22 @@ public abstract class Battle {
             else
                 defender = getWarriorUsr2Def(user2Defence);
             attack(attacker, defender);
-            if (attacker instanceof Healer)
-                System.out.println("Your " + attacker.type + "[" + attacker.battleHealth + "] " + attacker.name
-                        + " healed your " + defender.type + "[" + defender.battleHealth + "] "
-                        + defender.name);
-            else
-                System.out.println("Your " + attacker.type + "[" + attacker.battleHealth + "] " + attacker.name
-                        + " attacked " + opponent.userName + "'s " + defender.type + "[" + defender.battleHealth + "] "
-                        + defender.name);
+            if (attacker instanceof Healer) {
+                System.out.println(": - ) : Your " + attacker.type + "[" + attacker.battleHealth + "] " + attacker.name
+                        + " <3  >>  <3  >>  <3  >>  <3" + opponent.userName + " : " + defender.type + "[" + defender.battleHealth + "] " + defender.name+ "\n");
+            } else {
+                System.out.println(": - ) : Your " + attacker.type + "[" + attacker.battleHealth + "] " + attacker.name
+                        + " >> >> >> >> >> >> >> " + opponent.userName + "'s " + defender.type + "[" + defender.battleHealth + "] "
+                        + defender.name + "\n");
+            }
+            wait(1000);
             if (attacker.bonusTurns > 0) {
                 if (attacker instanceof Healer)
                     defender = getLowestHealthWarrior(user1Defence);
                 else
                     defender = getWarriorUsr2Def(user2Defence);
                 bonusAttack(attacker, defender);
+                wait(1000);
             }
             if (!isBattleStillGoing(user1Defence, user2Defence))
                 break;
@@ -87,19 +92,25 @@ public abstract class Battle {
             else
                 defender = getWarriorUsr1Def(user1Defence);
             attack(attacker, defender);
-            if (attacker instanceof Healer)
-                System.out.println(opponent.userName + "'s " + attacker.type + "[" + attacker.battleHealth + "] "
-                        + attacker.name + " healed your " + defender.type + "[" + defender.battleHealth + "] "
-                        + defender.name);
-            else
-                System.out.println(opponent.userName + "'s " + attacker.type + "[" + attacker.battleHealth + "] "
-                        + attacker.name + " attacked " + "your " + defender.type + "[" + defender.battleHealth + "] "
-                        + defender.name);
+            if (attacker instanceof Healer) {
+                System.out.println(": - ( : "+opponent.userName + " : " + attacker.type + "[" + attacker.battleHealth + "] "
+                        + attacker.name + " <3  >>  <3  >>  <3  >>  <3" + opponent.userName + " : " + defender.type + "[" +defender.battleHealth + "] " + defender.name+ "\n");
+            } else {
+                System.out.println(": - ( : " + opponent.userName + "'s " + attacker.type + "[" + attacker.battleHealth + "] "
+                        + attacker.name + " >> >> >> >> >> >> >> " + "Your " + defender.type + "[" + defender.battleHealth + "] "
+                        + defender.name + "\n");
+            }
+            wait(1000);
+                // System.out.println(opponent.userName + "'s " + attacker.type + "[" + attacker.battleHealth + "] "
+                //         + attacker.name + " attacked " + "your " + defender.type + "[" + defender.battleHealth + "] "
+                //         + defender.name);
             if (attacker.bonusTurns > 0) {
                 if (attacker.type == "Healer")
                     defender = getLowestHealthWarrior(user2Defence);
                 else
                     defender = getWarriorUsr2Def(user1Defence);
+                bonusAttack(attacker, defender);
+                wait(1000);
             }
         }
         if (!isBattleStillGoing(user1Defence, user2Defence)) {
@@ -146,8 +157,10 @@ public abstract class Battle {
 
             // Get the user from the random entry
             User randomUser = randomEntry.getValue();
-            if (randomUser == currentUser || !randomUser.isAllWarriorsAwailable()) continue;
-            System.out.println("Do you want to battle with " + randomUser.userName + " : " + randomUser.xp);
+            if (randomUser == currentUser || !randomUser.isAllWarriorsAwailable())
+                continue;
+            System.out.println("Do you want to battle with " + randomUser.userName
+                + " : " + randomUser.xp);
             Scanner scnner = new Scanner(System.in);
             while (true) {
                 System.out.println("Enter your choice[Y]/[N]");
@@ -342,8 +355,16 @@ public abstract class Battle {
             float battleDamage = 0.5f * attWarrior.battleAttack - 0.1f * defWarrior.battleDefense;
             defWarrior.battleHealth -= battleDamage + battleDamage * attWarrior.bonusAttackBuff;
             attWarrior.battleHealth += attWarrior.healPerAttack * attWarrior.battleHealth;
-            System.out.println("Bonus attack from " + attWarrior.name + "[" + attWarrior.battleHealth + "] " + " to "
-                    + defWarrior.name + "[" + defWarrior.battleHealth + "]");
+            System.out.println("* Bonus attack from " + attWarrior.name + "[" + attWarrior.battleHealth + "] " + " to "
+                    + defWarrior.name + "[" + defWarrior.battleHealth + "]" + "\n");
+        }
+    }
+
+    public static void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
         }
     }
 }
