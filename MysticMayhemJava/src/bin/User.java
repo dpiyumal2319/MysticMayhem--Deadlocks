@@ -19,8 +19,19 @@ public class User extends SuperUserControls {
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String BRIGHT_GREEN = "\u001B[32m";
     public static final String YELLOW = "\u001B[33m";
     public static final String BLUE = "\u001B[34m";
+    public static final String MAGENTA = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+    public static final String BRIGHT_BLACK = "\u001B[90m";
+    public static final String BRIGHT_RED = "\u001B[91m";
+    public static final String BRIGHT_YELLOW = "\u001B[93m";
+    public static final String BRIGHT_BLUE = "\u001B[94m";
+    public static final String BRIGHT_MAGENTA = "\u001B[95m";
+    public static final String BRIGHT_WHITE = "\u001B[97m";
 
 
     public User(String userName, int currentUsers, String homeGround) {
@@ -61,13 +72,15 @@ public class User extends SuperUserControls {
         // Print bottom frame line
         System.out.println(bold + "+" + "-".repeat(storeWelcomeMsg.length() + 4) + "+" + reset+ '\n');
 
-        System.out.println("You can always select Exit without saving[QS] in main menu if you don't want to save your changes.");
+        System.out.println("You can always select Exit without saving[QS] in main menu if you don't want to save your changes.\n");
+        System.out.println(MAGENTA+"You're in the shop :"+RESET);
         printMoney();
-        System.out.println("\nDo you want to " +BLUE + "buy[B]" + RESET+" or "+ BLUE + "sell[S]?" + RESET);
+        System.out.println("\n" +BLUE + "buy[B]\n" + "sell[S]?" + RESET);
         System.out.println(BLUE +"Inventory/Squad [I]"+RESET);
         System.out.println(RED + "Quit[Q]" + RESET);
+        System.out.println(RED+"Quit without saving[QS] \n"+RESET);
         while (true) {
-            System.out.println("Enter your choice"+ GREEN+ "[B/S/I/Q/QS]"+ RESET +": ");
+            System.out.print("Enter your choice "+ GREEN+ "[B/S/I/Q/QS]"+ RESET +": ");
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("QS")) {
                 return false;
@@ -88,8 +101,7 @@ public class User extends SuperUserControls {
                     System.out.println("Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]");
                     System.out.println(RED + "Quit[Q]" + RESET + BLUE+", Inventory[I]\n"+RESET);
                     while (true) {
-                        System.out.println(
-                                "Enter your choice, Which warrior you want to sell "+GREEN+"[A/K/M/H/MC]"+RESET+" or" +RED+"Quit[Q]"+RESET+BLUE+"/Inventory[I]: "+RESET);
+                        System.out.print("Enter your choice, Which warrior you want to sell "+GREEN+"[A/K/M/H/MC]"+RESET+" or" +RED+"Quit[Q]"+RESET+BLUE+"/Inventory[I]: "+RESET);
                         input = scanner.nextLine();
                         if (input.equalsIgnoreCase("A"))
                             sellWarrior(squad.getArcher());
@@ -106,7 +118,7 @@ public class User extends SuperUserControls {
                         else if (input.equalsIgnoreCase("I"))
                             printInventory();
                         else {
-                            System.out.println("\n"+RED+"\u2717"+RESET+"Invalid choice!");
+                            System.out.println("\n"+RED+"Invalid choice!"+RESET);
                             continue;
                         }
                     }
@@ -144,7 +156,7 @@ public class User extends SuperUserControls {
                             } else if (input.equalsIgnoreCase("I")) {
                                 printInventory();
                             } else {
-                                System.out.println("\n"+RED+"\u2717"+RESET+"Invalid choice!");
+                                System.out.println("\n"+RED+"Invalid choice!"+RESET);
                                 continue;
                             }
                         }
@@ -165,7 +177,7 @@ public class User extends SuperUserControls {
                             } else if (input.equalsIgnoreCase("MC")) {
                                 buyEquipment(squad.getMythicalCreature());
                             } else {
-                                System.out.println("\n"+RED+"\u2717"+RESET+"Invalid choice!");
+                                System.out.println("\n"+RED+"Invalid choice!"+RESET);
                                 continue;
                             }
                             break;
@@ -185,7 +197,7 @@ public class User extends SuperUserControls {
         }
 
         System.out.println("\nThank you for visiting the store " + this.userName + "!\n");
-        System.out.println("\uD83D\uDC4B Goodbye!");
+        System.out.println("\u001B[1mGoodbye!\u001B[0m");
         return true;
     }
 
@@ -344,7 +356,7 @@ public class User extends SuperUserControls {
     }
 
     private void printMoney() {
-        System.out.println("You have " + getMoney() + " coins.");
+        System.out.println(YELLOW+"You have " + getMoney() + " coins."+RESET);
     }
 
     public void printInventory() {
@@ -352,27 +364,27 @@ public class User extends SuperUserControls {
         if (squad.getArcher() != null) {
             squad.getArcher().printInfo();
         } else {
-            System.out.println("\tArcher: None");
+            System.out.println(CYAN+"\tArcher: None"+RESET);
         }
         if (squad.getKnight() != null) {
             squad.getKnight().printInfo();
         } else {
-            System.out.println("\tKnight: None");
+            System.out.println(CYAN+"\tKnight: None"+RESET);
         }
         if (squad.getMage() != null) {
             squad.getMage().printInfo();
         } else {
-            System.out.println("\tMage: None");
+            System.out.println(CYAN+"\tMage: None"+RESET);
         }
         if (squad.getHealer() != null) {
             squad.getHealer().printInfo();
         } else {
-            System.out.println("\tHealer: None");
+            System.out.println(CYAN+"\tHealer: None"+RESET);
         }
         if (squad.getMythicalCreature() != null) {
             squad.getMythicalCreature().printInfo();
         } else {
-            System.out.println("\tMythical Creature: None");
+            System.out.println(CYAN+"\tMythical Creature: None"+RESET);
         }
         printMoney();
     }

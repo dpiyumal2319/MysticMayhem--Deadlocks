@@ -3,6 +3,23 @@ package bin;
 import bin.Collections.*;
 
 public abstract class Warrior extends InventoryItem {
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String BRIGHT_GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String MAGENTA = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+    public static final String BRIGHT_BLACK = "\u001B[90m";
+    public static final String BRIGHT_RED = "\u001B[91m";
+    public static final String BRIGHT_YELLOW = "\u001B[93m";
+    public static final String BRIGHT_BLUE = "\u001B[94m";
+    public static final String BRIGHT_MAGENTA = "\u001B[95m";
+    public static final String BRIGHT_WHITE = "\u001B[97m";
+
     private int attack, defense, health, speed;
     public final int attackPriority;
     public final int defensePriority;
@@ -48,14 +65,14 @@ public abstract class Warrior extends InventoryItem {
     }
 
     public void printInfo() {
-        System.out.println("\t" + type + " : " + name);
+        System.out.println(CYAN+"\t" + type + " : " + name);
         System.out.println("\t\tArmor :" + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name));
         System.out.println("\t\tArtefact :" + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
         System.out.println("\t\tAttak :" + getAttack());
         System.out.println("\t\tDefense :" + getDefense());
         System.out.println("\t\tHealth :" + getHealth());
         System.out.println("\t\tSpeed :" + getSpeed());
-        System.out.println("\t\tValue :" + this.getValue());
+        System.out.println("\t\tValue :" + this.getValue()+RESET);
     }
 
     InventoryItem addEquipment(String type, String name) {
