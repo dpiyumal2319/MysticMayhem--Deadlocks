@@ -9,15 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-/*
- * todo balance only healer remain sitauation 
- */
-
 public abstract class Battle {
-    private static int i = 0;
-    private static int j = 0;
-    private static int m = 0;
-    private static int n = 0;
+    private static int user1AttackPointer = 0;
+    private static int user2AttackPointer = 0;
+    private static int user1DefencePointer = 0;
+    private static int user2DefencePointer = 0;
 
     public static void start(User currentUser, Map<String, User> users) {
         System.out.println("Battle started!");
@@ -131,10 +127,10 @@ public abstract class Battle {
         }
         currentUser.squad.resetBattle();
         opponent.squad.resetBattle();
-        i = 0;
-        j = 0;
-        m = 0;
-        n = 0;
+        user1AttackPointer = 0;
+        user2AttackPointer = 0;
+        user1DefencePointer = 0;
+        user2DefencePointer = 0;
     }
 
     public static User selectOponent(Map<String, User> users, User currentUser) {
@@ -150,7 +146,7 @@ public abstract class Battle {
 
             // Get the user from the random entry
             User randomUser = randomEntry.getValue();
-            if (randomUser == currentUser) continue;
+            if (randomUser == currentUser || !randomUser.isAllWarriorsAwailable()) continue;
             System.out.println("Do you want to battle with " + randomUser.userName + " : " + randomUser.xp);
             Scanner scnner = new Scanner(System.in);
             while (true) {
@@ -258,12 +254,12 @@ public abstract class Battle {
     public static Warrior getWarriorUsr1Atk(Warrior[] warrior) {
         Warrior warr = null;
         while (true) {
-            if (isAlive(warrior[i])) {
-                warr = warrior[i];
+            if (isAlive(warrior[user1AttackPointer])) {
+                warr = warrior[user1AttackPointer];
             }
-            i++;
-            if (i == 5) {
-                i = 0;
+            user1AttackPointer++;
+            if (user1AttackPointer == 5) {
+                user1AttackPointer = 0;
             }
             if (warr != null)
                 return warr;
@@ -273,12 +269,12 @@ public abstract class Battle {
     public static Warrior getWarriorUsr2Atk(Warrior[] warrior) {
         Warrior warr = null;
         while (true) {
-            if (isAlive(warrior[j])) {
-                warr = warrior[j];
+            if (isAlive(warrior[user2AttackPointer])) {
+                warr = warrior[user2AttackPointer];
             }
-            j++;
-            if (j == 5) {
-                j = 0;
+            user2AttackPointer++;
+            if (user2AttackPointer == 5) {
+                user2AttackPointer = 0;
             }
             if (warr != null)
                 return warr;
@@ -288,12 +284,12 @@ public abstract class Battle {
     public static Warrior getWarriorUsr1Def(Warrior[] warrior) {
         Warrior warr = null;
         while (true) {
-            if (isAlive(warrior[m])) {
-                warr = warrior[m];
+            if (isAlive(warrior[user1DefencePointer])) {
+                warr = warrior[user1DefencePointer];
             }
-            m++;
-            if (m == 5) {
-                m = 0;
+            user1DefencePointer++;
+            if (user1DefencePointer == 5) {
+                user1DefencePointer = 0;
             }
             if (warr != null)
                 return warr;
@@ -303,12 +299,12 @@ public abstract class Battle {
     public static Warrior getWarriorUsr2Def(Warrior[] warrior) {
         Warrior warr = null;
         while (true) {
-            if (isAlive(warrior[n])) {
-                warr = warrior[n];
+            if (isAlive(warrior[user2DefencePointer])) {
+                warr = warrior[user2DefencePointer];
             }
-            n++;
-            if (n == 5) {
-                n = 0;
+            user2DefencePointer++;
+            if (user2DefencePointer == 5) {
+                user2DefencePointer = 0;
             }
             if (warr != null)
                 return warr;

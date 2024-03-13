@@ -11,21 +11,36 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        int nuOfEligibleUsers = 0;
         System.out.println("Welcome to Mystic Mayhem!");
         Map<String, User> users = UserManager.loadUsers();
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            nuOfEligibleUsers = eligibleUsers(users);
+            System.out.println("Currently there are " + nuOfEligibleUsers + " you can battle with.");
             System.out.println("Login[L]");
             System.out.println("Register[R]");
             System.out.println("Exit[E]");
-            System.out.print("Enter your choice[L]/[R]/[E]: ");
+            System.out.println("DeleteAccount[D]");
+            System.out.print("Enter your choice[L]/[R]/[E]/[D]: ");
             String choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("L")) {
+            if (choice.equalsIgnoreCase("D")){
+                System.out.print("Enter your username: ");
+                String username = scanner.nextLine();
+                if (users.containsKey(username)) {
+                    users.remove(username);
+                    UserManager.saveUsers(users);
+                    System.out.println("User deleted successfully!");
+                } else {
+                    System.out.println("User not found!");
+                }
+            }
+            else if (choice.equalsIgnoreCase("L")) {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
                     User user = users.get(username);
-                    System.out.println("Successfully logged in to "+ user.userName+ " : " + user.userID);
+                    System.out.println("Successfully logged in to " + user.userName + " : " + user.userID);
                     System.out.println("Welcome back, " + user.userName + "!");
                     System.out.println("You have " + user.getMoney() + " gold coins.");
                     System.out.println("You have " + user.getxp() + " xp.");
@@ -38,13 +53,27 @@ public class App {
                         System.out.print("Enter your choice[shop]/[exit]/[battle]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
-                            user.Store();
-                            UserManager.saveUsers(users);
+                            boolean save = user.Store();
+                            if (save) {
+                                UserManager.saveUsers(users);
+                                System.out.println("Saved successfully!");
+                            } else {
+                                System.out.println("Exitted without saving!");
+                            }
                         } else if (input.equals("exit")) {
                             break;
                         } else if (input.equals("battle")) {
-                            Battle.start(user, users);
-                            UserManager.saveUsers(users);
+                            if (user.isAllWarriorsAwailable()) {
+                                if (nuOfEligibleUsers < 2) {
+                                    System.out.println("Not enough users to start the battle!");
+                                } else {
+                                    Battle.start(user, users);
+                                    UserManager.saveUsers(users);
+                                }
+                            } else {
+                                System.out.println(
+                                        "You do not have all warriors. Please buy all warriors to enter the battle.");
+                            }
                         } else {
                             System.out.println("Invalid choice!");
                         }
@@ -64,7 +93,7 @@ public class App {
                         System.out.println("Select your home ground:");
                         System.out.println("Hillcrest [H]");
                         System.out.println("Marshland [M]");
-                        System.out.println("Desert [M]");
+                        System.out.println("Desert [D]");
                         System.out.println("Arcane [A]");
                         System.out.print("Enter the  corresponding letter to your home ground choice: ");
                         String homeGroundChoice;
@@ -104,5 +133,15 @@ public class App {
         }
         scanner.close();
         System.out.println("Goodbye!");
+    }
+
+    public static int eligibleUsers(Map<String, User> users) {
+        int count = 0;
+        for (User user : users.values()) {
+            if (user.isAllWarriorsAwailable()) {
+                count++;
+            }
+        }
+        return count;
     }
 }
