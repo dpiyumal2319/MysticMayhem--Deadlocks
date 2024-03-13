@@ -1,14 +1,15 @@
 package bin;
 
-import bin.Warriors.*;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+
+import bin.Warriors.*;
 
 public abstract class Battle {
     private static int user1AttackPointer = 0;
@@ -126,7 +127,6 @@ public abstract class Battle {
                 System.out.println("You won 1 XP");
             } else {
                 System.out.println(opponent.userName + " won!");
-                opponent.increaseXp(1);
                 int exchangeMoney = currentUser.getMoney() / 10;
                 opponent.increaseMoney(exchangeMoney);
                 currentUser.decreaseMoney(exchangeMoney);
