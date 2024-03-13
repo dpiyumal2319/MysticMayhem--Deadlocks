@@ -108,8 +108,8 @@ public abstract class Battle {
                 System.out.println(currentUser.userID + " won!");
                 currentUser.increaseXp(1);
                 int exchangeMoney = opponent.getMoney() / 10;
-                currentUser.increaseMoney(exchangeMoney);
-                opponent.decreaseMoney(exchangeMoney);
+                currentUser.incrementMoney(exchangeMoney);
+                opponent.decrementMoney(exchangeMoney);
                 System.out.println("You won " + exchangeMoney + " coins." + "You have " + currentUser.getMoney()
                         + " coins now.");
                 System.out.println("You won 1 XP");
@@ -117,8 +117,8 @@ public abstract class Battle {
                 System.out.println(opponent.userName + " won!");
                 opponent.increaseXp(1);
                 int exchangeMoney = currentUser.getMoney() / 10;
-                opponent.increaseMoney(exchangeMoney);
-                currentUser.decreaseMoney(exchangeMoney);
+                opponent.incrementMoney(exchangeMoney);
+                currentUser.decrementMoney(exchangeMoney);
                 System.out.println(opponent.userName + " won " + exchangeMoney + " coins." + opponent.userName
                         + " has " + opponent.getMoney() + " coins now.");
                 System.out.println(opponent.userName + " won 1 XP");

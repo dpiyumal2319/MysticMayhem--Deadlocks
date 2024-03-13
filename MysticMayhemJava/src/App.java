@@ -30,6 +30,7 @@ public class App {
         Map<String, User> users = UserManager.loadUsers();
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            int nuOfEligibleUsers = eligibleUsers(users);
             System.out.println(YELLOW+"Login[L]    "+RESET+GREEN+"Register[R]     "+RESET+RED+"Exit[E]     "+RESET);
             System.out.print("Enter your choice"+YELLOW+"[L]"+RESET+"/"+GREEN+"[R]"+RESET+"/"+RED+"[E]"+RESET+": ");
             String choice = scanner.nextLine();
