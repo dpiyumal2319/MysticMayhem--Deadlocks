@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import bin.Squad;
 
 import bin.Warriors.Healer;
 
@@ -135,9 +136,11 @@ public abstract class Battle {
             Warrior attacker_opponent = getAttacker(squad_opponent_attack);
             if (attacker_current_user == null) {
                 System.out.println("You lost the battle!");
+                resetBattle(current_user, opponent);
                 break;
             } else if (attacker_opponent == null) {
                 System.out.println("You won the battle!");
+                resetBattle(current_user, opponent);
                 break;
             }
 
@@ -163,6 +166,10 @@ public abstract class Battle {
                 }
             }
             number_of_turns++;
+            if (number_of_turns == 10) {
+                resetBattle(current_user, opponent);
+                System.out.println("The battle ended in a draw!");
+            }
         }
     }
 
@@ -174,7 +181,7 @@ public abstract class Battle {
             if (squad[i].battleHealth > 0) {
                 return squad[i];
             }
-            
+
             i++;
             if (i == 5) {
                 i = 0;
@@ -218,10 +225,29 @@ public abstract class Battle {
     }
 
     private static void attack(Warrior attacker, Warrior defender) {
-        defender.battleHealth -= attacker.battleAttack * 0.5 - defender.battleDefense * 0.1;
-        
+        if (attacker instanceof Healer) {
+            defender.battleHealth += attacker.battleAttack * 0.1;
+            attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+        } else {
+            defender.battleHealth -= attacker.battleAttack * 0.5 - defender.battleDefense * 0.1;
+            attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+        }
     }
+
     private static void bonusAttack(Warrior attacker, Warrior defender) {
-        defender.battleHealth -= attacker.battleAttack * 0.5 * 1.2 - defender.battleDefense * 0.1;
+        if (attacker instanceof Healer) {
+            defender.battleHealth += attacker.battleAttack * 0.1 * 1.2;
+            attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+        } else {
+            defender.battleHealth -= attacker.battleAttack * 0.5 * 1.2 - defender.battleDefense * 0.1;
+            attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+        }
+    }
+
+    static void resetBattle(User current_user, User opponent) {
+        i = 0;
+        j = 0;
+        current_user.squad.resetBattle();
+        opponent.squad.resetBattle();
     }
 }
