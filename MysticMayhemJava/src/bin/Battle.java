@@ -81,25 +81,25 @@ public abstract class Battle {
     // return filteredUsers;
     // }
 
-    private static void sortAttackArray(Warrior[] array) {
-        Arrays.sort(array, (w1, w2) -> {
-            if (w1.battleSpeed != w2.battleSpeed) {
-                return Integer.compare(w2.battleSpeed, w1.battleSpeed); // Sort by battleSpeed descending
-            } else {
-                return Integer.compare(w1.attackPriority, w2.attackPriority); // Sort by attackPriority ascending
-            }
-        });
-    }
+    // private static void sortAttackArray(Warrior[] array) {
+    //     Arrays.sort(array, (w1, w2) -> {
+    //         if (w1.battleSpeed != w2.battleSpeed) {
+    //             return Integer.compare(w2.battleSpeed, w1.battleSpeed); // Sort by battleSpeed descending
+    //         } else {
+    //             return Integer.compare(w1.attackPriority, w2.attackPriority); // Sort by attackPriority ascending
+    //         }
+    //     });
+    // }
 
-    private static void sortDefenseArray(Warrior[] array) {
-        Arrays.sort(array, (w1, w2) -> {
-            if (w1.battleDefense != w2.battleDefense) {
-                return Integer.compare(w1.battleDefense, w2.battleDefense); // Sort by battleDefense ascending
-            } else {
-                return Integer.compare(w1.defensePriority, w2.defensePriority); // Sort by defensePriority ascending
-            }
-        });
-    }
+    // private static void sortDefenseArray(Warrior[] array) {
+    //     Arrays.sort(array, (w1, w2) -> {
+    //         if (w1.battleDefense != w2.battleDefense) {
+    //             return Integer.compare(w1.battleDefense, w2.battleDefense); // Sort by battleDefense ascending
+    //         } else {
+    //             return Integer.compare(w1.defensePriority, w2.defensePriority); // Sort by defensePriority ascending
+    //         }
+    //     });
+    // }
 
     public static void startBattleWithOpponent(User current_user, User opponent) {
         // Get the warriors of the current user and the opponent
