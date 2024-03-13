@@ -1,5 +1,6 @@
 package bin;
 
+
 import bin.Warriors.*;
 import java.util.Map;
 import java.util.Random;
@@ -347,3 +348,4 @@ public abstract class Battle {
         }
     }
 }
+
