@@ -1,8 +1,13 @@
+import bin.Battle;
 import bin.User;
 import bin.UserManager;
 
 import java.util.Map;
 import java.util.Scanner;
+
+/*Todo
+ * Balance when other users and current user do not have all warriors.
+ */
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -28,14 +33,18 @@ public class App {
                     user.printInventory();
                     System.out.println("To enter the shop, type 'shop'.");
                     System.out.println("To exit, type 'exit'.");
+                    System.out.println("To enter the battle, type 'battle'.");
                     while (true) {
-                        System.out.print("Enter your choice[shop]/[exit]: ");
+                        System.out.print("Enter your choice[shop]/[exit]/[battle]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
                             user.Store();
                             UserManager.saveUsers(users);
                         } else if (input.equals("exit")) {
                             break;
+                        } else if (input.equals("battle")) {
+                            Battle.start_battle(user, users);
+                            UserManager.saveUsers(users);
                         } else {
                             System.out.println("Invalid choice!");
                         }

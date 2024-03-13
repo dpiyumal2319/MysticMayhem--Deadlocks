@@ -12,7 +12,7 @@ import bin.Warriors.Healer;
 
 public abstract class Battle {
 
-    public static void start_battle(User current_user, Map<String, User> Users) {
+    public static void start(User current_user, Map<String, User> Users) {
         System.out.println("Welcome to the battle!");
         // Get the XP of the current user
         int current_xp = current_user.getxp();
@@ -34,48 +34,51 @@ public abstract class Battle {
             }
         }
     }
+
     private static User getRandomUser(Map<String, User> Users) {
         // Convert the values of the Users map to an array
         User[] usersArray = Users.values().toArray(new User[0]);
-    
+
         // Generate a random index within the bounds of the usersArray
         Random random = new Random();
         int index = random.nextInt(usersArray.length);
-    
+
         // Return the randomly selected user
         return usersArray[index];
     }
 
     // private static User getRandomUser(Map<String, User> Users, int current_xp) {
-    //     // Filter users with XP approximately near to the current user's XP
-    //     Map<String, User> filteredUsers = filterUsersByXP(Users, current_xp);
+    // // Filter users with XP approximately near to the current user's XP
+    // Map<String, User> filteredUsers = filterUsersByXP(Users, current_xp);
 
-    //     // Randomly select a user from the filtered list
-    //     Random random = new Random();
-    //     int index = random.nextInt(filteredUsers.size());
-    //     User opponent = filteredUsers.values().toArray(new User[0])[index];
+    // // Randomly select a user from the filtered list
+    // Random random = new Random();
+    // int index = random.nextInt(filteredUsers.size());
+    // User opponent = filteredUsers.values().toArray(new User[0])[index];
 
-    //     return opponent;
+    // return opponent;
     // }
 
-    // private static Map<String, User> filterUsersByXP(Map<String, User> Users, int current_xp) {
-    //     // Create a filtered map to store users with XP approximately near to the
-    //     // current user's XP
-    //     Map<String, User> filteredUsers = new HashMap<>();
+    // private static Map<String, User> filterUsersByXP(Map<String, User> Users, int
+    // current_xp) {
+    // // Create a filtered map to store users with XP approximately near to the
+    // // current user's XP
+    // Map<String, User> filteredUsers = new HashMap<>();
 
-    //     // Define a threshold for XP difference
-    //     int xpThreshold = 50; // Adjust this threshold as needed
+    // // Define a threshold for XP difference
+    // int xpThreshold = 50; // Adjust this threshold as needed
 
-    //     // Iterate through all users and add those with XP within the threshold to the
-    //     // filtered map
-    //     for (Map.Entry<String, User> entry : Users.entrySet()) {
-    //         User user = entry.getValue();
-    //         if (Math.abs(user.getxp() - current_xp) <= xpThreshold) {
-    //             filteredUsers.put(entry.getKey(), user);
-    //         }
-    //     }
+    // // Iterate through all users and add those with XP within the threshold to
+    // the
+    // // filtered map
+    // for (Map.Entry<String, User> entry : Users.entrySet()) {
+    // User user = entry.getValue();
+    // if (Math.abs(user.getxp() - current_xp) <= xpThreshold) {
+    // filteredUsers.put(entry.getKey(), user);
+    // }
+    // }
 
-    //     return filteredUsers;
+    // return filteredUsers;
     // }
 
     private static void sortAttackArray(Warrior[] array) {
@@ -236,23 +239,33 @@ public abstract class Battle {
     }
 
     private static void attack(Warrior attacker, Warrior defender) {
+        System.out.println(attacker.name);
         if (attacker instanceof Healer) {
             defender.battleHealth += attacker.battleAttack * 0.1;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+            System.out.println(
+                    attacker.name + " heals " + defender.name + " for " + (attacker.battleAttack * 0.1) + " health.");
         } else {
             defender.battleHealth -= attacker.battleAttack * 0.5 - defender.battleDefense * 0.1;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+            System.out.println(attacker.name + " attacks " + defender.name );
         }
     }
 
     private static void bonusAttack(Warrior attacker, Warrior defender) {
+
         if (attacker instanceof Healer) {
             defender.battleHealth += attacker.battleAttack * 0.1 * 1.2;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+            System.out.println(
+                    attacker.name + " heals " + defender.name + " for " + (attacker.battleAttack * 0.1 * 1.2) + " health.");
+
         } else {
             defender.battleHealth -= attacker.battleAttack * 0.5 * 1.2 - defender.battleDefense * 0.1;
             attacker.battleHealth += attacker.healPerAttack * attacker.battleHealth;
+            System.out.println(attacker.name + " attacks " + defender.name );
         }
+
     }
 
     static void resetBattle(User current_user, User opponent) {
