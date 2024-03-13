@@ -144,9 +144,13 @@ public abstract class Battle {
             if (attacker_current_user instanceof Healer) {
                 Warrior lowest_health = getWeakestAttacker(squad_current_user);
                 attack(attacker_current_user, lowest_health);
+
             } else {
                 Warrior defender_opponent = getDefender(squad_opponent_defense);
                 attack(attacker_current_user, defender_opponent);
+                if (attacker_current_user.bonusTurns == 1) {
+                    bonusAttack(attacker_current_user, defender_opponent);
+                }
             }
             if (attacker_opponent instanceof Healer) {
                 Warrior lowest_health = getWeakestAttacker(squad_opponent);
@@ -154,6 +158,9 @@ public abstract class Battle {
             } else {
                 Warrior defender_curent_user = getDefender(squad_current_user_defense);
                 attack(attacker_opponent, defender_curent_user);
+                if (attacker_opponent.bonusTurns == 1) {
+                    bonusAttack(attacker_opponent, defender_curent_user);
+                }
             }
             number_of_turns++;
         }
@@ -167,6 +174,7 @@ public abstract class Battle {
             if (squad[i].battleHealth > 0) {
                 return squad[i];
             }
+            
             i++;
             if (i == 5) {
                 i = 0;
@@ -211,6 +219,9 @@ public abstract class Battle {
 
     private static void attack(Warrior attacker, Warrior defender) {
         defender.battleHealth -= attacker.battleAttack * 0.5 - defender.battleDefense * 0.1;
-
+        
+    }
+    private static void bonusAttack(Warrior attacker, Warrior defender) {
+        defender.battleHealth -= attacker.battleAttack * 0.5 * 1.2 - defender.battleDefense * 0.1;
     }
 }
