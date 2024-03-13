@@ -27,6 +27,14 @@ public class User extends SuperUserControls {
         return xp;
     }
 
+    public void increaseXp(int amount) {
+        xp += amount;
+    }
+
+    public void decreaseXp(int amount) {
+        xp -= amount;
+    }
+
     public void Store() {
         System.out.println("Welcome to the store " + this.userName + "!");
         printMoney();

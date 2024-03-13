@@ -43,7 +43,8 @@ public class App {
                         } else if (input.equals("exit")) {
                             break;
                         } else if (input.equals("battle")) {
-                            Battle.start_battle(user, users);
+
+                            Battle.start(user, users);
                             UserManager.saveUsers(users);
                         } else {
                             System.out.println("Invalid choice!");
