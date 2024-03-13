@@ -1,16 +1,16 @@
 package bin;
 import java.util.Map;
 import java.util.Scanner;
-import bin.User;
-import bin.Warriors.*;
 import java.util.Random;
-import java.util.ArrayList;
+
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
+
 
 
 public abstract class Battle {
-    private Map<String, User> filterUsersByXP(Map<String, User> Users, int current_xp) {
+    private static Map<String, User> filterUsersByXP(Map<String, User> Users, int current_xp) {
         // Create a filtered map to store users with XP approximately near to the current user's XP
         Map<String, User> filteredUsers = new HashMap<>();
     
@@ -27,7 +27,7 @@ public abstract class Battle {
     
         return filteredUsers;
     }
-    private User getRandomUser(Map<String, User> Users, int current_xp) {
+    private static User getRandomUser(Map<String, User> Users, int current_xp) {
         // Filter users with XP approximately near to the current user's XP
         Map<String, User> filteredUsers = filterUsersByXP(Users, current_xp);
     
@@ -39,7 +39,7 @@ public abstract class Battle {
         return opponent;
     }
 
-    public void start_battle(User current_user,Map<String,User> Users){
+    public static void start_battle(User current_user,Map<String,User> Users){
         System.out.println("Welcome to the battle!");
         // Get the XP of the current user
         int current_xp = current_user.getxp();
@@ -62,7 +62,27 @@ public abstract class Battle {
         }
         
     } 
-     public void startBattleWithOpponent(User current_user, User opponent) {   
+//Attack call function
+    static void attack(Warrior attacker, Warrior defender) {
+        double damage ;
+        // Calculate the damage based on the attacker's attack and defender's defense
+        double normal_damage = 0.5*(attacker.battleAttack) - 0.1*(defender.battleDefense);
+        if (attacker.bonusTurns>0){           
+            double bonus_damage = (normal_damage)*(attacker.bonusAttackBuff);
+            damage = normal_damage + bonus_damage;
+        }
+        else{
+            damage = normal_damage;
+        }
+        defender.battleHealth = defender.battleHealth - damage;
+        attacker.battleHealth = defender.battleHealth + (attacker.battleHealth)*(attacker.healPerAttack);
+       
+        
+        System.out.println(attacker.name + " attacked " + defender.name + " for " + damage + " damage!");
+        
+    }
+
+     public static void startBattleWithOpponent(User current_user, User opponent) {   
         Warrior[] squad_current_user = new Warrior[5];
         Warrior[] squad_opponent = new Warrior[5];
         //Assigning the warriors to the squad of the currentuser
@@ -77,8 +97,102 @@ public abstract class Battle {
         squad_opponent[2] = opponent.squad.getKnight(opponent.homeGround);
         squad_opponent[3] = opponent.squad.getMage(opponent.homeGround);
         squad_opponent[4] = opponent.squad.getMythicalCreature(opponent.homeGround);
+
+        //ge the copys of squad_arrays
+        Warrior[] speed_current_user = squad_current_user;
+        Warrior[] defence_current_user = squad_current_user;
+        Warrior[] speed_opponent = squad_opponent;
+        Warrior[] defense_opponent = squad_current_user;
         
+        // Sort by speed (descending) using custom comparator
+        Comparator<Warrior> speedDescendingComparator = (w1, w2) -> Integer.compare(w2.battleSpeed, w1.battleSpeed);
+
+        // Sort by defense (ascending) using lambda expression
+        Comparator<Warrior> defenseAscendingComparator = Comparator.comparingInt(w -> w.battleDefense);
+
+        // Sort copies based on specific criteria
+        Arrays.sort(speed_current_user, speedDescendingComparator);
+        Arrays.sort(defence_current_user, defenseAscendingComparator);
+        Arrays.sort(speed_opponent, speedDescendingComparator);
+        Arrays.sort(defense_opponent, defenseAscendingComparator);
+        // Start the battle
+        int num_of_battles = 0;
+        boolean current_user_turn = true;
+    
+        while (num_of_battles < 10) {
+            for (int i = 0; i < 5; i++) {
+                // Get the current warriors
+                Warrior current_warrior;
+                Warrior opponent_warrior;
+                if (current_user_turn) {
+                    current_warrior = speed_current_user[i];
+                    opponent_warrior = defense_opponent[i];
+                } else {
+                    current_warrior = speed_opponent[i];
+                    opponent_warrior = defence_current_user[i];
+                }
+                
+                // Attack the opponent's warrior
+                attack(current_warrior, opponent_warrior);
+                
+                // Check if the opponent's warrior is defeated
+                if (opponent_warrior.battleHealth <= 0) {
+                    System.out.println(opponent_warrior.name + " is dead");
+                    // Remove the defeated warrior from the opponent's squad
+                    if (current_user_turn) {
+                        defense_opponent[i] = null;
+                    } else {
+                        defence_current_user[i] = null;
+                    }
+                }
+                
+                // Check if both squads are completely defeated
+                if (Arrays.stream(defense_opponent).allMatch(w -> w == null) &&
+                    Arrays.stream(defence_current_user).allMatch(w -> w == null)) {
+                    System.out.println("The battle ended in a draw!");
+                    return;
+                }
+
+                 // Check if the current warrior is a Highlander in Hillcrest and grant bonus turn
+                 if (current_user.homeGround.equals("Hillcrest") && current_warrior.name == "Highlander") {
+                    // Highlander gets a bonus turn with 20% of their attack power
+                    double bonus_damage = 0.2 * current_warrior.battleAttack;
+                    double bonus_turn_damage = 0.5 * current_warrior.battleAttack - 0.1 * opponent_warrior.battleDefense + bonus_damage;
+                    opponent_warrior.battleHealth -= bonus_turn_damage;
+
+                    // Output bonus turn details
+                    System.out.println(current_warrior.name + " takes a bonus turn and attacks " + opponent_warrior.name + " for " + bonus_turn_damage + " damage!");
+                }
+            }
+            
+            // Alternate turns
+            current_user_turn = !current_user_turn;
+            num_of_battles++;
+        }
+        
+        // Check if any squad has warriors remaining
+        if (Arrays.stream(defense_opponent).allMatch(w -> w == null)) {
+            System.out.println("Congratulations! You have defeated " + opponent.userName + "!");
+            // Update the XP of the current user
+            current_user.xp = current_user.getxp() + 1;
+            // Update the coin value of the current user
+            current_user.incrementMoney((int) (opponent.getMoney() * 0.1));
+            // Update the coin value of the opponent
+            opponent.decrementMoney((int) (current_user.getMoney() * 0.1));
+        } else if (Arrays.stream(defence_current_user).allMatch(w -> w == null)) {
+            System.out.println(opponent.userName + " has defeated you!");
+            // Update the XP of the current user
+            opponent.xp = opponent.getxp() + 1;
+            // Update the coin value of the current user
+            opponent.incrementMoney((int) (current_user.getMoney() * 0.1));
+            // Update the coin value of the opponent
+            current_user.decrementMoney((int) (opponent.getMoney() * 0.1));
+        }
+        
+
             
     }
 
 }
+
+

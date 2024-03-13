@@ -1,26 +1,21 @@
 package bin;
 
-import bin.Collections.*;
-
 public abstract class Warrior extends InventoryItem {
-    private int attack, defense, health, speed;
+    protected int attack, defense, health, speed;
     public final int attackPriority;
     public final int defensePriority;
-    public final String homeLand;
-    public int battleAttack = -100, battleDefense = -100, battleHealth = -100, battleSpeed = -100, bonusTurns = -100;
+    public final String homeGround;
+    public int battleAttack = -100, battleDefense = -100,  battleSpeed = -100, bonusTurns = -100;
+    public double battleHealth = -100;
     public float bonusAttackBuff = 0f, healPerAttack =  0f;
-    private Waredrobe woredrobe = new Waredrobe();
 
-    public Warrior(int attackPriority, int defensePriority,WarriorInfo info, String type) {
-        super(info.name, info.price, type, info.price * 0.9);
-        this.attack = info.attack;
-        this.defense = info.defense;
-        this.health = info.health;
-        this.speed = info.speed;
+    public Warrior(int attackPriority, int defensePriority, String homeGround) {
         this.attackPriority = attackPriority;
         this.defensePriority = defensePriority;
-        this.homeLand = info.homeLand;
+        this.homeGround = homeGround;
     }
+
+    private Waredrobe woredrobe = new Waredrobe();
 
     public int getAttack() {
         return attack + woredrobe.getAttackBoost();
@@ -47,14 +42,14 @@ public abstract class Warrior extends InventoryItem {
     }
 
     public void printInfo() {
-        System.out.println("\t" + type + " : " + name);
+        System.out.println(type + " : " + name);
         System.out.println("\t\tArmor :" + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name));
         System.out.println("\t\tArtefact :" + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
         System.out.println("\t\tAttak :" + getAttack());
         System.out.println("\t\tDefense :" + getDefense());
         System.out.println("\t\tHealth :" + getHealth());
         System.out.println("\t\tSpeed :" + getSpeed());
-        System.out.println("\t\tValue :" + this.getValue());
+        System.out.println("\t\tValue :" + value);
     }
 
     InventoryItem addEquipment(String type, String name) {
@@ -64,7 +59,7 @@ public abstract class Warrior extends InventoryItem {
         } else if (type.equals("Artefact")) {
             item = woredrobe.addArtefact(name);
         }
-        this.incrementValue(item.getValue());
+        this.value += item.value;
         return item;
     }
 
@@ -75,14 +70,14 @@ public abstract class Warrior extends InventoryItem {
         } else if (type.equals("Artefact")) {
             item = woredrobe.removeArtefact();
         }
-        this.decrementValue(item.getValue());
+        this.value -= item.value;
         return item;
     }
 
     public void prepareBattle(String battleGround) {
         switch (battleGround) {
             case "Hillcrest" :
-                if (homeLand == "Highlanders") {
+                if (homeGround == "Highlanders") {
                     battleDefense = getDefense() + 1;
                     bonusAttackBuff = 0.2f;
                     bonusTurns = 1;
@@ -91,26 +86,26 @@ public abstract class Warrior extends InventoryItem {
                 }
                 break;
             case "Marshland" :
-                if (homeLand == "Marshlanders") {
+                if (homeGround == "Marshlanders") {
                     battleDefense = getDefense() + 2;
-                } else if (homeLand == "Sunchildren") {
+                } else if (homeGround == "Sunchildren") {
                     battleAttack = getAttack() - 1;
-                } else if (homeLand == "Mystics") {
+                } else if (homeGround == "Mystics") {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
             case "Desert" :
-                if (homeLand == "Marshlanders") {
+                if (homeGround == "Marshlanders") {
                     battleHealth = getHealth() - 1;
-                } else if (homeLand == "Sunchildren") {
+                } else if (homeGround == "Sunchildren") {
                     battleAttack = getAttack() + 1;
                 }
                 break;
             case "Arcane" :
-                if (homeLand == "Mystics") {
+                if (homeGround == "Mystics") {
                     battleAttack = getAttack() + 2;
                     healPerAttack = 0.1f;
-                } else if (homeLand == "Highlanders" || homeLand == "Marshlanders") {
+                } else if (homeGround == "Highlanders" || homeGround == "Marshlanders") {
                     battleSpeed = getSpeed() - 1;
                     battleDefense = getDefense() - 1;
                 }

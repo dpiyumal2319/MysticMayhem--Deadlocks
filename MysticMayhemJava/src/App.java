@@ -1,3 +1,4 @@
+import bin.Battle;
 import bin.User;
 import bin.UserManager;
 
@@ -85,6 +86,9 @@ public class App {
                     UserManager.saveUsers(users);
                     System.out.println("User registered successfully!");
                     currentUsers++;
+                    //edited for text
+                    
+                    Battle.start_battle(user,users);
                 }
             } else if (choice.equalsIgnoreCase("E")) {
                 UserManager.saveUsers(users);
