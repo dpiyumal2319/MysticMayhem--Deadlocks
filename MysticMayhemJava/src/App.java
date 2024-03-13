@@ -21,18 +21,18 @@ public class App {
             System.out.print("Enter your choice"+YELLOW+"[L]"+RESET+"/"+GREEN+"[R]"+RESET+"/"+RED+"[E]"+RESET+": ");
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("L")) {
-                System.out.print("Enter your username: ");
+                System.out.print("\nEnter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
                     User user = users.get(username);
                     System.out.println("Successfully logged in to "+ user.userName+ " : " + user.userID);
                     System.out.println("Welcome back, " + user.userName + "!");
-                    System.out.println("You have " + user.getMoney() + " gold coins.");
-                    System.out.println("You have " + user.getxp() + " xp.");
-                    System.out.println("Your home ground is " + user.homeGround + ".");
+                    System.out.println("\nYou have " + user.getMoney() + " \uD83D\uDCB0"+"gold coins.");
+                    System.out.println("\nYou have " + user.getxp() + " xp.");
+                    System.out.println("\nYour home ground is " + user.homeGround + ".");
                     user.printInventory();
-                    System.out.println("To enter the shop, type 'shop'.");
-                    System.out.println("To exit, type 'exit'.");
+                    System.out.println("To enter the shop, type '" + BLUE + "shop" + RESET + "'.");
+                    System.out.println("To exit, type '" + BLUE + "exit" + RESET + "'.");
                     while (true) {
                         System.out.print("Enter your choice[shop]/[exit]: ");
                         String input = scanner.nextLine();
