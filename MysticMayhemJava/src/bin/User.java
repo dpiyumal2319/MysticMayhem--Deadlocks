@@ -1,7 +1,6 @@
 package bin;
 
 import java.util.Scanner;
-import java.util.concurrent.locks.ReadWriteLock;
 import java.util.Map;
 import bin.Collections.*;
 import bin.Warriors.*;
@@ -445,15 +444,5 @@ public class User extends SuperUserControls {
         } else {
             return true;
         }
-    }
-
-    public void incrementMoney(int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'incrementMoney'");
-    }
-
-    public void decrementMoney(int i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'decrementMoney'");
     }
 }

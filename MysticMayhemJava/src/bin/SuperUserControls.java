@@ -16,4 +16,12 @@ public class SuperUserControls implements Serializable{
     public int getMoney() {
         return money;
     }
+
+    public void incrementMoney(int increment) {
+        money += increment;
+    }
+
+    public void decrementMoney(int decrement) {
+        money -= decrement;
+    }
 }
