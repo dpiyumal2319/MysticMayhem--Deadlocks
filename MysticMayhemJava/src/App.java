@@ -13,7 +13,19 @@ public static final String BLUE = "\u001B[34m";
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Welcome to Mystic Mayhem!");
+        
+       
+        System.out.println("  __  __                 _     _            __  __                   _                        ");
+        System.out.println(" |  \\/  |               | |   (_)          |  \\/  |                 | |                       ");
+        System.out.println(" | \\  / |  _   _   ___  | |_   _    ___    | \\  / |   __ _   _   _  | |__     ___   _ __ ___  ");
+        System.out.println(" | |\\/| | | | | | / __| | __| | |  / __|   | |\\/| |  / _` | | | | | | '_ \\   / _ \\ | '_ ` _ \\ ");
+        System.out.println(" | |  | | | |_| | \\__ \\ | |_  | | | (__    | |  | | | (_| | | |_| | | | | | |  __/ | | | | | |");
+        System.out.println(" |_|  |_|  \\__, | |___/  \\__| |_|  \\___|   |_|  |_|  \\__,_|  \\__, | |_| |_|  \\___| |_| |_| |_|");
+        System.out.println("            __/ |                                             __/ |                           ");
+        System.out.println("           |___/                                             |___/                            "+"THE DEADLOCKS");
+
+        
+        System.out.println(YELLOW + "Welcome to Mystic Mayhem!" + RESET);
         Map<String, User> users = UserManager.loadUsers();
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -34,7 +46,7 @@ public class App {
                     System.out.println("To enter the shop, type '" + BLUE + "shop" + RESET + "'.");
                     System.out.println("To exit, type '" + BLUE + "exit" + RESET + "'.");
                     while (true) {
-                        System.out.print("Enter your choice[shop]/[exit]: ");
+                        System.out.print("\nEnter your choice[shop]/[exit]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
                             user.Store();
@@ -42,27 +54,27 @@ public class App {
                         } else if (input.equals("exit")) {
                             break;
                         } else {
-                            System.out.println("Invalid choice!");
+                            System.out.println("\n"+RED+"\u2717"+RESET+"Invalid choice!");
                         }
                     }
                 } else {
-                    System.out.println("User not found!");
+                    System.out.println(RED + "User not found" + "\\u0021" + "!" + RESET);
                 }
             } else if (choice.equalsIgnoreCase("R")) {
-                System.out.print("Enter your username: ");
+                System.out.print("\nEnter your username: ");
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
-                    System.out.println("Username already exists!");
+                    System.out.println("\n ******** Username already exists! ********");
                 } else {
                     // Selecting the Homeground by user choise
                     String homeGround;
                     while (true) {
-                        System.out.println("Select your home ground:");
+                        System.out.println("\nSelect your home ground:");
                         System.out.println("Hillcrest [H]");
                         System.out.println("Marshland [M]");
                         System.out.println("Desert [D]");
                         System.out.println("Arcane [A]");
-                        System.out.print("Enter the  corresponding letter to your home ground choice: ");
+                        System.out.print("\nEnter the  corresponding letter to your home ground choice: ");
                         String homeGroundChoice;
 
                         homeGroundChoice = scanner.nextLine();
@@ -88,17 +100,17 @@ public class App {
                     users.put(username, user);
                     UserManager.saveNumberOfUsers(currentUsers);
                     UserManager.saveUsers(users);
-                    System.out.println("User registered successfully!");
+                    System.out.println(YELLOW +"User registered successfully!"+RESET);
                     currentUsers++;
                 }
             } else if (choice.equalsIgnoreCase("E")) {
                 UserManager.saveUsers(users);
                 break;
             } else {
-                System.out.println("Invalid choice!");
+                System.out.println("\n"+RED+"\u2717"+RESET+"Invalid choice!");
             }
         }
         scanner.close();
-        System.out.println("Goodbye!");
+        System.out.println(YELLOW + "Goodbye!"+RESET);
     }
 }
