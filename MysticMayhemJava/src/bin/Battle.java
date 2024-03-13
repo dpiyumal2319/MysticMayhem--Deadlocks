@@ -17,7 +17,7 @@ public abstract class Battle {
         // Get the XP of the current user
         int current_xp = current_user.getxp();
         // Randomly select a user from the Users map based on their XP
-        User opponent = getRandomUser(Users, current_xp);
+        User opponent = getRandomUser(Users);
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Do you want to battle " + opponent.userName + "? (Y/N)");
@@ -28,44 +28,55 @@ public abstract class Battle {
                 break;
             } else if (choice.equalsIgnoreCase("N")) {
                 // Get another random user
-                opponent = getRandomUser(Users, current_xp);
+                opponent = getRandomUser(Users);
             } else {
                 System.out.println("Invalid choice! Please enter Y or N.");
             }
         }
     }
-
-    private static User getRandomUser(Map<String, User> Users, int current_xp) {
-        // Filter users with XP approximately near to the current user's XP
-        Map<String, User> filteredUsers = filterUsersByXP(Users, current_xp);
-
-        // Randomly select a user from the filtered list
+    private static User getRandomUser(Map<String, User> Users) {
+        // Convert the values of the Users map to an array
+        User[] usersArray = Users.values().toArray(new User[0]);
+    
+        // Generate a random index within the bounds of the usersArray
         Random random = new Random();
-        int index = random.nextInt(filteredUsers.size());
-        User opponent = filteredUsers.values().toArray(new User[0])[index];
-
-        return opponent;
+        int index = random.nextInt(usersArray.length);
+    
+        // Return the randomly selected user
+        return usersArray[index];
     }
 
-    private static Map<String, User> filterUsersByXP(Map<String, User> Users, int current_xp) {
-        // Create a filtered map to store users with XP approximately near to the
-        // current user's XP
-        Map<String, User> filteredUsers = new HashMap<>();
+    // private static User getRandomUser(Map<String, User> Users, int current_xp) {
+    //     // Filter users with XP approximately near to the current user's XP
+    //     Map<String, User> filteredUsers = filterUsersByXP(Users, current_xp);
 
-        // Define a threshold for XP difference
-        int xpThreshold = 50; // Adjust this threshold as needed
+    //     // Randomly select a user from the filtered list
+    //     Random random = new Random();
+    //     int index = random.nextInt(filteredUsers.size());
+    //     User opponent = filteredUsers.values().toArray(new User[0])[index];
 
-        // Iterate through all users and add those with XP within the threshold to the
-        // filtered map
-        for (Map.Entry<String, User> entry : Users.entrySet()) {
-            User user = entry.getValue();
-            if (Math.abs(user.getxp() - current_xp) <= xpThreshold) {
-                filteredUsers.put(entry.getKey(), user);
-            }
-        }
+    //     return opponent;
+    // }
 
-        return filteredUsers;
-    }
+    // private static Map<String, User> filterUsersByXP(Map<String, User> Users, int current_xp) {
+    //     // Create a filtered map to store users with XP approximately near to the
+    //     // current user's XP
+    //     Map<String, User> filteredUsers = new HashMap<>();
+
+    //     // Define a threshold for XP difference
+    //     int xpThreshold = 50; // Adjust this threshold as needed
+
+    //     // Iterate through all users and add those with XP within the threshold to the
+    //     // filtered map
+    //     for (Map.Entry<String, User> entry : Users.entrySet()) {
+    //         User user = entry.getValue();
+    //         if (Math.abs(user.getxp() - current_xp) <= xpThreshold) {
+    //             filteredUsers.put(entry.getKey(), user);
+    //         }
+    //     }
+
+    //     return filteredUsers;
+    // }
 
     private static void sortAttackArray(Warrior[] array) {
         Arrays.sort(array, (w1, w2) -> {
