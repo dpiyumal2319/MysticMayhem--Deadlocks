@@ -154,8 +154,8 @@ public abstract class Battle {
             System.out.println("Do you want to battle with " + randomUser.userName + " : " + randomUser.xp);
             Scanner scnner = new Scanner(System.in);
             while (true) {
-                String choice = scnner.nextLine();
                 System.out.println("Enter your choice[Y]/[N]");
+                String choice = scnner.nextLine();
                 if (choice.equalsIgnoreCase("Y")) {
                     return randomUser;
                 } else if (choice.equalsIgnoreCase("N"))
