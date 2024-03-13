@@ -82,8 +82,12 @@ public class App {
                     System.out.println("User not found!");
                 }
             } else if (choice.equalsIgnoreCase("R")) {
+                String name;
+                String username;
                 System.out.print("Enter your username: ");
-                String username = scanner.nextLine();
+                username = scanner.nextLine();
+                System.out.print("Enter your name: ");
+                name = scanner.nextLine();
                 if (users.containsKey(username)) {
                     System.out.println("Username already exists!");
                 } else {
@@ -117,7 +121,7 @@ public class App {
                         }
                     }
                     int currentUsers = UserManager.loadNumberOfUsers();
-                    User user = new User(username, currentUsers++, homeGround);
+                    User user = new User(name ,username, currentUsers++, homeGround);
                     users.put(username, user);
                     UserManager.saveNumberOfUsers(currentUsers);
                     UserManager.saveUsers(users);

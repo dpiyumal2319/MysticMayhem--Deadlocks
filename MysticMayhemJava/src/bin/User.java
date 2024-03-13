@@ -1,12 +1,17 @@
 package bin;
 
 import java.util.Scanner;
+import java.util.jar.Attributes.Name;
+
+import javax.print.attribute.standard.MediaSize.NA;
+
 import java.util.Map;
 import bin.Collections.*;
 import bin.Warriors.*;
 
 public class User extends SuperUserControls {
     private static final int UserIdStart = 100000;
+    public final String name;
     public final int userID;
     public final String homeGround;
     public int xp;
@@ -15,7 +20,8 @@ public class User extends SuperUserControls {
     static Scanner scanner = new Scanner(System.in);
     static String input;
 
-    public User(String userName, int currentUsers, String homeGround) {
+    public User(String name,String userName, int currentUsers, String homeGround) {
+        this.name = name;
         this.userID = UserIdStart + currentUsers + 1;
         this.xp = 0;
         this.userName = userName;
@@ -199,6 +205,7 @@ public class User extends SuperUserControls {
                 if (input.equalsIgnoreCase("Y")) {
                     warrior.removeEquipment(type);
                     System.out.println("You have removed the " + type + " from your " + warrior.type + ".");
+                    break;
                 } else if (input.equalsIgnoreCase("N")) {
                     return;
                 } else {
