@@ -108,7 +108,7 @@ public abstract class Battle {
                 System.out.println(currentUser.userID + " won!");
                 currentUser.increaseXp(1);
                 int exchangeMoney = opponent.getMoney() / 10;
-                currentUser.incrementMoney(exchangeMoney);(exchangeMoney);
+                currentUser.incrementMoney(exchangeMoney);
                 opponent.decrementMoney(exchangeMoney);
                 System.out.println("You won " + exchangeMoney + " coins." + "You have " + currentUser.getMoney()
                         + " coins now.");
