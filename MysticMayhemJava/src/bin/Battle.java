@@ -87,10 +87,11 @@ public abstract class Battle {
         // Battle of 10 turns
         Warrior attacker;
         Warrior defender;
+        float preHealth;
         System.out.println("\nStarting Battle! " + Colors.GREEN + currentUser.userName + Colors.RESET + " vs "
                 + Colors.RED + opponent.userName + Colors.RESET + " on " + Colors.YELLOW_BACKGROUND + Colors.BLACK
                 + Colors.BOLD + battleGround + " ground" + Colors.RESET + "!!" + "\n");
-        System.out.println("Display Structure: Owner Type[Current Health] Name\n");
+        System.out.println("Display Structure: Attacker's_Owner Type[Health before attack] Name ~~ ~~ ~~ ~~ ~~ Reciever's_Owner Type[Health After Attack] Name\n");
         for (int i = 0; i < 10; i++) {
             if (!isBattleStillGoing(userDefence, opponentDefence))
                 break;
@@ -102,19 +103,20 @@ public abstract class Battle {
                 defender = getLowestHealthWarrior(userDefence);
             else
                 defender = getWarriorUsr2Def(opponentDefence);
+            preHealth = attacker.battleHealth;
             attack(attacker, defender);
 
             // Printing the attack
             if (attacker instanceof Healer) {
                 System.out.println(Colors.GREEN + Colors.BOLD + "You healing" + Colors.RESET + " : Your "
-                        + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                        + attacker.type + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
                         + Colors.hearsSet + " Your " + defender.type + "["
                         + String.format("%.1f", defender.battleHealth)
                         + "] " + defender.name + "\n");
 
             } else {
                 System.out.println(Colors.GREEN + Colors.BOLD + "You attacking" + Colors.RESET + " : Your "
-                        + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                        + attacker.type + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
                         + Colors.rightArrowSet + opponent.userName + "'s " + defender.type + "["
                         + String.format("%.1f", defender.battleHealth)
                         + "] "
@@ -127,19 +129,20 @@ public abstract class Battle {
                     defender = getLowestHealthWarrior(userDefence);
                 else
                     defender = getWarriorUsr2Def(opponentDefence);
+                preHealth = attacker.battleHealth;
                 bonusAttack(attacker, defender);
 
                 if (attacker instanceof Healer) {
                     System.out.println(Colors.GREEN + Colors.BOLD + "You healing" + Colors.RESET + " : Your "
                             + Colors.YELLOW + "Bonus turn " + Colors.RESET
-                            + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                            + attacker.type + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
                             + Colors.hearsSet + " Your " + defender.type + "["
                             + String.format("%.1f", defender.battleHealth)
                             + "] " + defender.name + "\n");
                 } else {
                     System.out.println(Colors.GREEN + Colors.BOLD + "You attacking" + Colors.RESET + " : Your "
                             + Colors.YELLOW + "Bonus Attack " + Colors.RESET + attacker.type + "["
-                            + String.format("%.1f", attacker.battleHealth)
+                            + String.format("%.1f", preHealth)
                             + "] " + attacker.name
                             + Colors.rightArrowSet + opponent.userName + "'s " + defender.type + "["
                             + String.format("%.1f", defender.battleHealth)
@@ -159,16 +162,17 @@ public abstract class Battle {
                 defender = getLowestHealthWarrior(opponentDefence);
             else
                 defender = getWarriorUsr1Def(userDefence);
+            preHealth = attacker.battleHealth;
             attack(attacker, defender);
             if (attacker instanceof Healer) {
                 System.out.println(Colors.RED + Colors.BOLD + "Opponent healing" + Colors.RESET + " : "
-                        + opponent.userName + " " + attacker.type + "[" + String.format("%.1f", attacker.battleHealth)
+                        + opponent.userName + " " + attacker.type + "[" + String.format("%.1f", preHealth)
                         + "] "
                         + attacker.name + Colors.hearsSet + opponent.userName + " : " + defender.type
                         + "[" + String.format("%.1f", defender.battleHealth) + "] " + defender.name + "\n");
             } else {
                 System.out.println(Colors.RED + Colors.BOLD + "Opponent attacking" + Colors.RESET + " : "
-                        + opponent.userName + "'s " + attacker.type + "[" + String.format("%.1f", attacker.battleHealth)
+                        + opponent.userName + "'s " + attacker.type + "[" + String.format("%.1f", preHealth)
                         + "] "
                         + attacker.name + Colors.rightArrowSet + "Your " + defender.type + "["
                         + String.format("%.1f", defender.battleHealth) + "] "
@@ -180,19 +184,20 @@ public abstract class Battle {
                     defender = getLowestHealthWarrior(opponentDefence);
                 else
                     defender = getWarriorUsr2Def(userDefence);
+                preHealth = attacker.battleHealth;
                 bonusAttack(attacker, defender);
                 if (attacker instanceof Healer) {
                     System.out.println(Colors.RED + Colors.BOLD + "Opponent healing" + Colors.RESET + " : "
                             + opponent.userName + "'s" + Colors.YELLOW + "Bonus turn " + Colors.RESET + attacker.type
                             + "["
-                            + String.format("%.1f", attacker.battleHealth)
+                            + String.format("%.1f", preHealth)
                             + "] "
                             + attacker.name + Colors.hearsSet + opponent.userName + " : " + defender.type
                             + "[" + String.format("%.1f", defender.battleHealth) + "] " + defender.name + "\n");
                 } else {
                     System.out.println(Colors.RED + Colors.BOLD + "Opponent attacking" + Colors.RESET + " : "
                             + opponent.userName + "'s " + Colors.YELLOW + "Bonus turn " + Colors.RESET + attacker.type
-                            + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                            + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
                             + Colors.rightArrowSet + "Your " + defender.type + "["
                             + String.format("%.1f", defender.battleHealth)
                             + "] " + defender.name + Colors.RED + (isAlive(defender) ? "\n" : " Died.\n")
@@ -216,7 +221,7 @@ public abstract class Battle {
                         " coins now.");
                 System.out.println("You won " + Colors.YELLOW + " 1 " + Colors.RESET + " XP. You have " + Colors.YELLOW
                         + currentUser.xp + Colors.RESET + " XP now.");
-                // If oponent won
+            // If oponent won
             } else {
                 System.out.println(Colors.RED + " " + opponent.userName + " Won!" + Colors.RESET);
                 int exchangeMoney = currentUser.getMoney() / 10;
@@ -239,38 +244,6 @@ public abstract class Battle {
         user2DefencePointer = 0;
         System.out.println(Colors.MAGENTA + "Battle Ended!" + Colors.RESET);
     }
-
-    // public static User selectOponent(Map<String, User> users, User currentUser) {
-
-    // while (true) {
-    // // random umteger below 10
-    // // Convert map entries to a list
-    // List<Map.Entry<String, User>> entries = new ArrayList<>(users.entrySet());
-
-    // // Select a random entry
-    // Random random = new Random();
-    // Map.Entry<String, User> randomEntry =
-    // entries.get(random.nextInt(entries.size()));
-
-    // // Get the user from the random entry
-    // User randomUser = randomEntry.getValue();
-    // if (randomUser == currentUser || !randomUser.isAllWarriorsAwailable())
-    // continue;
-    // System.out.println("Do you want to battle with " + randomUser.userName
-    // + " : " + randomUser.xp);
-    // Scanner scnner = new Scanner(System.in);
-    // while (true) {
-    // System.out.println("Enter your choice[Y]/[N]");
-    // String choice = scnner.nextLine();
-    // if (choice.equalsIgnoreCase("Y")) {
-    // return randomUser;
-    // } else if (choice.equalsIgnoreCase("N"))
-    // break;
-    // else
-    // System.out.println("Wrong Choice");
-    // }
-    // }
-    // }
 
     // Check whether the warrior is alive
     public static Boolean isAlive(Warrior warrior) {
