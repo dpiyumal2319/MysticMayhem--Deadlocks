@@ -88,11 +88,33 @@ public abstract class Battle {
         Warrior attacker;
         Warrior defender;
         float preHealth;
-        System.out.println("\nStarting Battle! " + Colors.GREEN + currentUser.userName + Colors.RESET + " vs "
+        System.out.println("\nBattle " + Colors.GREEN + currentUser.userName + Colors.RESET + " vs "
                 + Colors.RED + opponent.userName + Colors.RESET + " on " + Colors.YELLOW_BACKGROUND + Colors.BLACK
                 + Colors.BOLD + battleGround + " ground" + Colors.RESET + "!!" + "\n");
+
+        // Printing your squad
+        System.out.println(Colors.GREEN + "Your Squad" + Colors.RESET + " : ");
+        for (int i = 0; i < 5; i++) {
+            userAttack[i].printBattleInfo();
+        }
+
+        // Printing oponent's squad
+        System.out.println(Colors.RED +" "+opponent.userName +"'s Squad" + Colors.RESET + " : ");
+        for (int i = 0; i < 5; i++) {
+            oponentAttack[i].printBattleInfo();
+        }
+
         System.out.println(
                 "Display Structure: Attacker's_Owner Type[Health before attack] Name ~~ ~~ ~~ ~~ ~~ Reciever's_Owner Type[Health After Attack] Name\n");
+
+        //Starting battle
+        System.out.print(Colors.YELLOW + "Battle starting in: ");
+        for (int i = 3; i > 0; i--) {
+            System.out.print(i + " ");
+            wait(1000);
+        }
+        System.out.println("Start!" + Colors.RESET);
+
         for (int i = 0; i < 10; i++) {
             if (!isBattleStillGoing(userDefence, opponentDefence))
                 break;
@@ -126,7 +148,8 @@ public abstract class Battle {
             // For the attackers healed right after they attack
             if (attacker.healPerAttack > 0)
                 System.out.println(Colors.hearsSet + "Attacker healed "
-                        + attacker.type + "[" + String.format("%.1f",attacker.battleHealth) + "] " + attacker.name + "\n");
+                        + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                        + "\n");
             wait(1000);
             // If attacker has bonus turns, then bonus attack
             if (attacker.bonusTurns > 0) {
@@ -156,7 +179,8 @@ public abstract class Battle {
                 }
                 if (attacker.healPerAttack > 0)
                     System.out.println(Colors.hearsSet + "Attacker healed "
-                            + attacker.type + "[" + String.format("%.1f",attacker.battleHealth) + "] " + attacker.name + "\n");
+                            + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                            + "\n");
                 wait(1000);
             }
 
@@ -188,7 +212,8 @@ public abstract class Battle {
             }
             if (attacker.healPerAttack > 0)
                 System.out.println(Colors.hearsSet + "Attacker healed "
-                        + attacker.type + "[" + String.format("%.1f",attacker.battleHealth) + "] " + attacker.name + "\n");
+                        + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                        + "\n");
             wait(1000);
             if (attacker.bonusTurns > 0) {
                 if (attacker instanceof Healer)
@@ -216,7 +241,8 @@ public abstract class Battle {
                 }
                 if (attacker.healPerAttack > 0)
                     System.out.println(Colors.hearsSet + "Attacker healed "
-                            + attacker.type + "[" + String.format("%.1f",attacker.battleHealth) + "] " + attacker.name + "\n");
+                            + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
+                            + "\n");
                 wait(1000);
             }
         }

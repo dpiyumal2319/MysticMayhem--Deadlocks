@@ -41,10 +41,10 @@ public class InventoryItem implements Serializable{
     data.mages.put("conjurer", new WarriorInfo("Conjurer", 14, 18, 15, 12, 195, "Highlanders"));
     data.mages.put("eldritch", new WarriorInfo("Eldritch", 18, 19, 17, 14, 270, "Mystics"));
 
-    data.mythicalCreatures.put("dragon", new WarriorInfo("Dragon", 15, 12, 14, 8, 120, "MythicalCreatures"));
-    data.mythicalCreatures.put("basilisk", new WarriorInfo("Basilisk", 10, 15, 11, 12, 165, "MythicalCreatures"));
-    data.mythicalCreatures.put("hydra", new WarriorInfo("Hydra", 15, 12, 16, 11, 205, "MythicalCreatures"));
-    data.mythicalCreatures.put("phoenix", new WarriorInfo("Phoenix", 17, 17, 13, 19, 275, "MythicalCreatures"));
+    data.mythicalCreatures.put("dragon", new WarriorInfo("Dragon", 15, 12, 14, 8, 120, "Sunchildren"));
+    data.mythicalCreatures.put("basilisk", new WarriorInfo("Basilisk", 10, 15, 11, 12, 165, "Marshlanders"));
+    data.mythicalCreatures.put("hydra", new WarriorInfo("Hydra", 15, 12, 16, 11, 205, "Marshlanders"));
+    data.mythicalCreatures.put("phoenix", new WarriorInfo("Phoenix", 17, 17, 13, 19, 275, "Sunchildren"));
     
     data.armors.put("chainmail", new EquipmentInfo("Chainmail", 70, 0, 1, 0, -1));
     data.armors.put("regalia", new EquipmentInfo("Regalia", 105, 0, 1, 0, 0));
