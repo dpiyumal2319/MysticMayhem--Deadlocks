@@ -14,6 +14,7 @@ public abstract class UIElements {
     public static final String WHITE = "\u001B[37m";
     public static final String PINK = "\u001B[95m";
     public static final String BOLD = "\u001B[1m";
+    public static final String BRIGHT_YELLOW = "\u001B[93m";
 
     // Background colors
     public static final String BLACK_BACKGROUND = "\u001B[40m";
@@ -37,8 +38,6 @@ public abstract class UIElements {
     public static String Hearts(float heal) {
         return PINK + " <3 >> <3 >> " + "[+" + String.format("%.1f", heal) + "]" + " >> <3 >> <3 " + RESET;
     }
-
-
 
     public static void printLogo() {
         System.out.println(
@@ -97,6 +96,12 @@ public abstract class UIElements {
 
     public static void clearTerminalWithInventory(User user) {
         clearTerminal();
+        printLogo();
         user.printInventory();
+    }
+
+    public static void clearTerminalBattle() {
+        UIElements.printLogo();
+        System.out.println(UIElements.MAGENTA + "Select your Opponent!!" + UIElements.RESET);
     }
 }

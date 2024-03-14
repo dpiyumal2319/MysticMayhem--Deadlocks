@@ -15,10 +15,11 @@ public abstract class Warrior extends InventoryItem {
     public static final String WHITE = "\u001B[37m";
     public static final String BRIGHT_BLACK = "\u001B[90m";
     public static final String BRIGHT_RED = "\u001B[91m";
-    public static final String BRIGHT_YELLOW = "\u001B[93m";
     public static final String BRIGHT_BLUE = "\u001B[94m";
     public static final String BRIGHT_MAGENTA = "\u001B[95m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
+    public static final String BRIGHT_YELLOW = "\u001B[93m";
+    public static final String BRIGHT_CYAN = "\u001B[96m";
 
     private int attack, defense, health, speed;
     public final int attackPriority;
@@ -65,9 +66,9 @@ public abstract class Warrior extends InventoryItem {
     }
 
     public void printInfo() {
-        System.out.println(CYAN + "\t" + type + " : " + name + " + Armor: "
+        System.out.println(BRIGHT_YELLOW + "\t" + type + " : " + name + CYAN + " ~ Armor: "
                 + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name) + " + Artefact: "
-                + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
+                + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name) + BRIGHT_CYAN);
         System.out.print("\t\tAttak: " + getAttack());
         System.out.print("\tDefense: " + getDefense());
         System.out.print("\tHealth: " + getHealth());

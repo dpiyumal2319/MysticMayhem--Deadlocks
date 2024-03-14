@@ -31,11 +31,12 @@ public class User extends SuperUserControls {
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
     public static final String BRIGHT_BLACK = "\u001B[90m";
-    public static final String BRIGHT_RED = "\u001B[91m";
-    public static final String BRIGHT_YELLOW = "\u001B[93m";
+    public static final String BRIGHT_RED = "\u001B[91m";;
     public static final String BRIGHT_BLUE = "\u001B[94m";
     public static final String BRIGHT_MAGENTA = "\u001B[95m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
+    public static final String BRIGHT_YELLOW = "\u001B[93m";
+    public static final String BRIGHT_CYAN = "\u001B[96m";
 
     public User(String name, String userName, int currentUsers, String homeGround) {
         this.name = name;
@@ -54,19 +55,25 @@ public class User extends SuperUserControls {
         xp += amount;
     }
 
+    public void resetUser() {
+        this.squad = new Squad();
+        resetMoney();
+    }
+
     public boolean Store() {
         while (true) {
             UIElements.clearTerminal();
+            UIElements.printLogo();
             UIElements.printShopBanner(name);
             System.out.println(YELLOW +
                     "You can always select Exit without saving" + RED + "[QS]" + RESET + YELLOW
                     + " in main menu if you don't want to save your changes.\n" + RESET);
             printInventory();
             System.out.println(MAGENTA + "\nShop menu" + RESET);
-            System.out.println("\n" + BLUE + "buy[B]\n" + "sell[S]?" + "Inventory[I]"+ RESET);
+            System.out.println("\n" + BRIGHT_YELLOW + "buy[B]\n" + "sell[S]?" + RESET);
             System.out.println(RED + "Quit[Q]" + RESET);
             System.out.println(RED + "Quit without saving[QS] \n" + RESET);
-            System.out.print("Enter your choice " + GREEN + "[B/S/I/Q/QS]" + RESET + ": ");
+            System.out.print("Enter your choice " + GREEN + "[B/S/Q/QS]" + RESET + ": ");
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("QS")) {
                 return false;
@@ -86,7 +93,7 @@ public class User extends SuperUserControls {
                         UIElements.clearTerminalWithInventory(this);
                         System.out.println("\nWhich warrior do you want to sell?\n");
                         System.out
-                                .println(BLUE + "Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]"
+                                .println(BRIGHT_YELLOW + "Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]"
                                         + RESET);
                         System.out.println(RED + "Quit[Q]" + RESET);
                         System.out.print("Enter your choice " + GREEN + "[A/K/M/H/MC]"
@@ -112,21 +119,20 @@ public class User extends SuperUserControls {
                     }
                 }
             } else if (input.equalsIgnoreCase("B")) {
-                System.out.print("\n");
-                printMoney();
-                System.out.println("What do you want to buy?\n");
-
-                System.out.println(BLUE + "Warrior[W]\nEquipment[E]\n" + RED + "Quit[Q]\n" + RESET);
-
                 while (true) {
+                    System.out.print("\n");
+                    printMoney();
+                    System.out.println("What do you want to buy?\n");
+
+                    System.out.println(BRIGHT_YELLOW + "Warrior[W]\nEquipment[E]\n" + RED + "Quit[Q]\n" + RESET);
                     System.out.print(
-                            "Enter your choice, What do you want to buy " + BRIGHT_GREEN + "[W/E/I/Q]: " + RESET);
+                            "Enter your choice, What do you want to buy " + BRIGHT_GREEN + "[W/E/Q]: " + RESET);
                     input = scanner.nextLine();
                     if (input.equalsIgnoreCase("W")) {
                         while (true) {
                             UIElements.clearTerminalWithInventory(this);
                             System.out.println("\nWhich warrior do you want to buy?\n");
-                            System.out.println(BLUE
+                            System.out.println(BRIGHT_YELLOW
                                     + " Archer[A]\n Knight[K]\n Mage[M]\n Healer[H]\n Mythical\n Creature[MC]\n"
                                     + RESET);
                             System.out.println(RED + " Quit[Q]\n" + RESET);
@@ -157,7 +163,7 @@ public class User extends SuperUserControls {
                             UIElements.clearTerminalWithInventory(this);
                             System.out.println("For which warrior do you want to buy equipment?");
                             System.out.println(
-                                    BLUE + "Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]" + RESET);
+                                    BRIGHT_YELLOW + "Archer[A], Knight[K], Mage[M], Healer[H], Mythical Creature[MC]" + RESET);
                             System.out.print("\nEnter your choice"
                                     + BRIGHT_GREEN + "[A,K,M,H,MC]: " + RESET);
                             input = scanner.nextLine();
@@ -207,9 +213,9 @@ public class User extends SuperUserControls {
         while (true) {
             UIElements.clearTerminalWithInventory(this);
             System.out.println("\nWhich equipment do you want to buy?\n");
-            System.out.println(BLUE + "Armor[A]\nArtefact[AR]" + RESET);
+            System.out.println(BRIGHT_YELLOW + "Armor[A]\nArtefact[AR]" + RESET);
             System.out.println(RED + "\nQuit[Q]" + RESET);
-            System.out.print("\nEnter your choice " + GREEN + "[A/AR/Q/I]" + RESET + ": ");
+            System.out.print("\nEnter your choice " + GREEN + "[A/AR/Q]" + RESET + ": ");
             input = scanner.nextLine();
             if (input.equalsIgnoreCase("A")) {
                 buyOrReplaceEquip(warrior, "Armor");
@@ -233,7 +239,7 @@ public class User extends SuperUserControls {
                 System.out.println(RED + "You already have this equipment!\n" + RESET);
                 System.out.println("Do you want to remove it?. " + RED + "No money will be refunded." + RESET);
                 System.out.println("\nYes[Y] or No[N]");
-                System.out.println("Enter your choice [Y/N]:");
+                System.out.println("Enter your choice [Y/N]: ");
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Y")) {
                     warrior.removeEquipment(type);
@@ -258,7 +264,7 @@ public class User extends SuperUserControls {
                     System.out.println("\nWhich " + type + " do you want to buy?\n");
                     printEquipmentMap(type);
                     printMoney();
-                    System.out.print("Enter the type of " + type + BLUE + " [name] " + RESET + "or " + RED + "Quit[Q]"
+                    System.out.print("Enter the type of " + type + BRIGHT_YELLOW + " [name] " + RESET + "or " + RED + "Quit[Q]"
                             + RESET);
                     input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Q")) {
@@ -307,8 +313,8 @@ public class User extends SuperUserControls {
                         System.out.println("Which " + type + " do you want to buy?\n");
                         printWarriorMap(type);
                         printMoney();
-                        System.out.println("Enter the type of " + type + BLUE + " [name] " + RESET + "or " + RED
-                                + "Quit[Q]:" + RESET);
+                        System.out.println("Enter the type of " + type + BRIGHT_YELLOW + " [name] " + RESET + "or " + RED
+                                + "Quit[Q]: " + RESET);
                         input = scanner.nextLine();
                         if (InventoryItem.getWarriorMap(type).containsKey(input)) {
                             if (getMoney() >= InventoryItem.getWarriorMap(type).get(input.toLowerCase()).price) {
@@ -373,7 +379,7 @@ public class User extends SuperUserControls {
     }
 
     private void printMoney() {
-        System.out.println(YELLOW + "You have " + getMoney() + " coins." + RESET);
+        System.out.println(YELLOW + "You have " + getMoney() + " coins. \n" + RESET);
     }
 
     public void printInventory() {
@@ -381,27 +387,27 @@ public class User extends SuperUserControls {
         if (squad.getArcher() != null) {
             squad.getArcher().printInfo();
         } else {
-            System.out.println(CYAN + "\tArcher: None" + RESET);
+            System.out.println(BRIGHT_YELLOW + "\tArcher: None" + RESET);
         }
         if (squad.getKnight() != null) {
             squad.getKnight().printInfo();
         } else {
-            System.out.println(CYAN + "\tKnight: None" + RESET);
+            System.out.println(BRIGHT_YELLOW + "\tKnight: None" + RESET);
         }
         if (squad.getMage() != null) {
             squad.getMage().printInfo();
         } else {
-            System.out.println(CYAN + "\tMage: None" + RESET);
+            System.out.println(BRIGHT_YELLOW + "\tMage: None" + RESET);
         }
         if (squad.getHealer() != null) {
             squad.getHealer().printInfo();
         } else {
-            System.out.println(CYAN + "\tHealer: None" + RESET);
+            System.out.println(BRIGHT_YELLOW + "\tHealer: None" + RESET);
         }
         if (squad.getMythicalCreature() != null) {
             squad.getMythicalCreature().printInfo();
         } else {
-            System.out.println(CYAN + "\tMythical Creature: None" + RESET);
+            System.out.println(BRIGHT_YELLOW + "\tMythical Creature: None \n" + RESET);
         }
         printMoney();
     }
@@ -410,7 +416,7 @@ public class User extends SuperUserControls {
         Map<String, WarriorInfo> warriorMap = InventoryItem.getWarriorMap(type);
         if (warriorMap != null) {
             for (String key : warriorMap.keySet()) {
-                System.out.println(key + ":" + warriorMap.get(key).price + " coins");
+                System.out.println(CYAN + key + " : " + YELLOW + warriorMap.get(key).price + " coins" + RESET);
                 System.out.print("\tHomeLand: " + warriorMap.get(key).homeLand);
                 System.out.print("\tAttack: " + warriorMap.get(key).attack);
                 System.out.print("\tDefense: " + warriorMap.get(key).defense);
@@ -424,13 +430,14 @@ public class User extends SuperUserControls {
         Map<String, EquipmentInfo> equipmentMap = InventoryItem.getEquipmentMap(type);
         if (equipmentMap != null) {
             for (String key : equipmentMap.keySet()) {
-                System.out.println(key + ":" + equipmentMap.get(key).price + " coins");
+                System.out.println(CYAN + key + " : " + YELLOW + equipmentMap.get(key).price + " coins" + RESET);
                 System.out.print("\tAttck: " + equipmentMap.get(key).extraAttack);
                 System.out.print("\tDefense: " + equipmentMap.get(key).extraDefense);
                 System.out.print("\tHealth: " + equipmentMap.get(key).extraHealth);
                 System.out.println("\tSpeed: " + equipmentMap.get(key).extraSpeed);
             }
         }
+        System.out.println("\n");
     }
 
     private void removeSquadMate(String type) {

@@ -26,4 +26,8 @@ public class SuperUserControls implements Serializable{
         money -= decrement;
 
     }
+
+    protected void resetMoney() {
+        money = 500;
+    }
 }

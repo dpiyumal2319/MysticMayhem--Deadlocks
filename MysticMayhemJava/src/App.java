@@ -67,9 +67,9 @@ public class App {
                         UIElements.wait(UIElements.timeBetween);
                         user.printInventory();
                         UIElements.wait(UIElements.timeBetween);
-                        System.out.println("To enter the shop, type '" + BLUE + "shop" + RESET + "'.");
-                        System.out.println("To exit, type '" + BLUE + "exit" + RESET + "'.");
-                        System.out.println("To enter the battle, type " + BLUE + "'battle'" + RESET + ".");
+                        System.out.println("To enter the shop, type '" + BRIGHT_YELLOW + "shop" + RESET + "'.");
+                        System.out.println("To exit, type '" + BRIGHT_YELLOW + "exit" + RESET + "'.");
+                        System.out.println("To enter the battle, type " + BRIGHT_YELLOW + "'battle'" + RESET + ".");
                         System.out.print("\nEnter your choice " + BRIGHT_GREEN + "[shop]/[exit]/[battle]: " + RESET);
 
                         String input = scanner.nextLine();
@@ -133,10 +133,10 @@ public class App {
                     String homeGround;
                     while (true) {
                         System.out.println("\nSelect your home ground:\n");
-                        System.out.println(BLUE + "Hillcrest [H]" + RESET);
-                        System.out.println(BLUE + "Marshland [M]" + RESET);
-                        System.out.println(BLUE + "Desert [D]" + RESET);
-                        System.out.println(BLUE + "Arcane [A]" + RESET);
+                        System.out.println(BRIGHT_YELLOW + "Hillcrest [H]" + RESET);
+                        System.out.println(BRIGHT_YELLOW + "Marshland [M]" + RESET);
+                        System.out.println(BRIGHT_YELLOW + "Desert [D]" + RESET);
+                        System.out.println(BRIGHT_YELLOW + "Arcane [A]" + RESET);
                         System.out.print("\nEnter the corresponding letter to your home ground choice: ");
                         String homeGroundChoice;
 

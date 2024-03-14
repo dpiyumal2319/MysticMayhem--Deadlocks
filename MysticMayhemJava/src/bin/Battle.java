@@ -18,8 +18,7 @@ public abstract class Battle {
     private static int user2DefencePointer = 0;
 
     public static void start(User currentUser, Map<String, User> users) {
-        UIElements.printLogo();
-        System.out.println(UIElements.MAGENTA + "Select your Opponent!!" + UIElements.RESET);
+        UIElements.clearTerminalBattle();
         Scanner scanner = new Scanner(System.in);
 
         // Choosing a random oponent
@@ -37,16 +36,17 @@ public abstract class Battle {
             User randomUser = randomEntry.getValue();
             if (randomUser == currentUser || !randomUser.isAllWarriorsAwailable())
                 continue;
-            System.out.println("\nDo you want to battle with " + UIElements.BLUE + randomUser.userName
-                    + " : " + randomUser.xp + " XP" + UIElements.RESET + " ?\n");
+            System.out.println("\nDo you want to battle with " + UIElements.BRIGHT_YELLOW + randomUser.userName
+                    + " : " + randomUser.xp + " XP" + UIElements.RESET + " ?\n");  
             while (true) {
                 System.out.println("Yes[Y] or No[N], to exit battle[Q]");
                 String choice = scanner.nextLine();
                 if (choice.equalsIgnoreCase("Y")) {
                     opponent = randomUser;
                     break;
-                } else if (choice.equalsIgnoreCase("N"))
-                    break;
+                } else if (choice.equalsIgnoreCase("N")){
+                    UIElements.clearTerminalBattle();
+                    break;}
                 else if (choice.equalsIgnoreCase("Q")) {
                     System.out.println("Exiting battle...");
                     UIElements.wait(500);
@@ -276,7 +276,7 @@ public abstract class Battle {
                         + currentUser.xp + UIElements.RESET + " XP now.");
                 // If oponent won
             } else {
-                System.out.println(UIElements.RED + " " + opponent.userName + " Won!\n" + UIElements.RESET);
+                System.out.println(UIElements.RED  + opponent.userName + " Won!\n" + UIElements.RESET);
                 int exchangeMoney = currentUser.getMoney() / 10;
                 opponent.incrementMoney(exchangeMoney);
                 opponent.increaseXp(1);
