@@ -17,11 +17,13 @@ public class SuperUserControls implements Serializable{
         return money;
     }
 
-    public void increaseMoney(int amount) {
-        money += amount;
+
+    public void incrementMoney(int increment) {
+        money += increment;
     }
 
-    public void decreaseMoney(int amount) {
-        money -= amount;
+    public void decrementMoney(int decrement) {
+        money -= decrement;
+
     }
 }
