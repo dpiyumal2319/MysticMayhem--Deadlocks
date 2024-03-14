@@ -319,6 +319,11 @@ public class User extends SuperUserControls {
                         }
                     }
                 }
+                else if (input.equalsIgnoreCase("N")) {
+                    return;
+                } else {
+                    System.out.println("\n" + RED + "Invalid choice!" + RESET);
+                }
             }
         }
     }

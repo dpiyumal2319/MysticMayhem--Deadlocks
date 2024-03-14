@@ -50,7 +50,7 @@ public class App {
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
                     System.out.println("Logging in...");
-                    UIElements.wait(2000);
+                    UIElements.wait(1250);
                     User user = users.get(username);
                     System.out.println("\nSuccessfully logged in to " + user.userName + " : " + user.userID);
                     UIElements.wait(500);
@@ -95,16 +95,18 @@ public class App {
                                 } else {
                                     UIElements.clearTerminal();
                                     Battle.start(user, users);
+                                    System.out.println("Saving...");
+                                    UIElements.wait(1000);
                                     UserManager.saveUsers(users);
                                     System.out.println("Saved successfully!");
-                                    UIElements.wait(2000);
+                                    UIElements.wait(500);
                                 }
                             } else {
                                 System.out.println(
                                         "You do not have all warriors. Please buy all warriors to enter the battle.");
                             }
                         } else {
-                            System.out.println("\n" + BRIGHT_RED + "\u2717" + RESET + "Invalid choice!");
+                            System.out.println("\n" + BRIGHT_RED + "Invalid choice!" + RESET);
                             UIElements.wait(500);
                         }
                     }

@@ -2,7 +2,7 @@ package bin;
 
 public abstract class UIElements {
     // Text colors
-    public static int timeBetween = 50;
+    public static int timeBetween = 20;
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
     public static final String RED = "\u001B[31m";
