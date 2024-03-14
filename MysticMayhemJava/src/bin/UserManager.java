@@ -201,178 +201,122 @@ public class UserManager implements Serializable {
         // Dummy 10
         User user10 = new User("ZoltanChivay", "dwarf", dummyUserNu++, "Arcane");
         user10.squad.setArcher(new Archer("sagittarius"));
-        user10.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user10.squad.setKnight(new Knight("swiftblade"));
         user10.squad.setMage(new Mage("eldritch"));
-        user10.squad.getMage().getWoredrobe().addArmor("regalia");
-        user10.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user10.squad.setHealer(new Healer("lifebringer"));
-        user10.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user10.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user10.squad.setMythicalCreature(new MythicalCreature("hydra"));
-        user10.increaseXp(165);
-        user10.decreaseMoney(100);
+        user10.increaseXp(5);
+        user10.decreaseMoney(300);
         users.put(user10.userName, user10);
 
         // Dummy 11
         User user11 = new User("TyrionLannister", "imp", dummyUserNu++, "Arcane");
         user11.squad.setArcher(new Archer("sagittarius"));
-        user11.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user11.squad.setKnight(new Knight("swiftblade"));
         user11.squad.setMage(new Mage("eldritch"));
-        user11.squad.getMage().getWoredrobe().addArmor("regalia");
-        user11.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user11.squad.setHealer(new Healer("lifebringer"));
-        user11.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user11.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user11.squad.setMythicalCreature(new MythicalCreature("hydra"));
-        user11.increaseXp(180);
+        user11.increaseXp(6);
         user11.increaseMoney(200);
         users.put(user11.userName, user11);
 
         // Dummy 12
         User user12 = new User("AryaStark", "assassin", dummyUserNu++, "Marshland");
         user12.squad.setArcher(new Archer("sunfire"));
-        user12.squad.getArcher().getWoredrobe().addArmor("regalia");
-        user12.squad.getArcher().getWoredrobe().addArtefact("crystal");
         user12.squad.setKnight(new Knight("cavalier"));
         user12.squad.setMage(new Mage("illusionist"));
-        user12.squad.getMage().getWoredrobe().addArmor("fleece");
-        user12.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user12.squad.setHealer(new Healer("alchemist"));
-        user12.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user12.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user12.squad.setMythicalCreature(new MythicalCreature("basilisk"));
-        user12.increaseXp(195);
-        user12.decreaseMoney(300);
+        user12.increaseXp(9);
+        user12.decreaseMoney(100);
         users.put(user12.userName, user12);
 
         // Dummy 13
         User user13 = new User("JonSnow", "nightWatch", dummyUserNu++, "Hillcrest");
         user13.squad.setArcher(new Archer("zing"));
-        user13.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user13.squad.setKnight(new Knight("zoro"));
         user13.squad.setMage(new Mage("conjurer"));
-        user13.squad.getMage().getWoredrobe().addArmor("regalia");
-        user13.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user13.squad.setHealer(new Healer("medic"));
-        user13.squad.getHealer().getWoredrobe().addArmor("fleece");
         user13.squad.setMythicalCreature(new MythicalCreature("dragon"));
-        user13.increaseXp(210);
+        user13.increaseXp(10);
         user13.increaseMoney(400);
         users.put(user13.userName, user13);
 
         // Dummy 14
         User user14 = new User("SansaStark", "queenOfNorth", dummyUserNu++, "Arcane");
         user14.squad.setArcher(new Archer("sagittarius"));
-        user14.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user14.squad.setKnight(new Knight("swiftblade"));
         user14.squad.setMage(new Mage("eldritch"));
-        user14.squad.getMage().getWoredrobe().addArmor("regalia");
-        user14.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user14.squad.setHealer(new Healer("lifebringer"));
-        user14.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user14.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user14.squad.setMythicalCreature(new MythicalCreature("hydra"));
-        user14.increaseXp(225);
-        user14.decreaseMoney(500);
+        user14.increaseXp(4);
+        user14.decreaseMoney(50);
         users.put(user14.userName, user14);
 
         // Dummy 15
         User user15 = new User("BranStark", "raven", dummyUserNu++, "Desert");
         user15.squad.setArcher(new Archer("sunfire"));
-        user15.squad.getArcher().getWoredrobe().addArmor("regalia");
-        user15.squad.getArcher().getWoredrobe().addArtefact("crystal");
         user15.squad.setKnight(new Knight("cavalier"));
         user15.squad.setMage(new Mage("illusionist"));
-        user15.squad.getMage().getWoredrobe().addArmor("fleece");
-        user15.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user15.squad.setHealer(new Healer("alchemist"));
-        user15.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user15.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user15.squad.setMythicalCreature(new MythicalCreature("basilisk"));
-        user15.increaseXp(240);
-        user15.increaseMoney(600);
+        user15.increaseXp(10);
+        user15.increaseMoney(300);
         users.put(user15.userName, user15);
 
         // Dummy 16
         User user16 = new User("JohnDoe", "human", dummyUserNu++, "Arcane");
         user16.squad.setArcher(new Archer("sagittarius"));
-        user16.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user16.squad.setKnight(new Knight("swiftblade"));
         user16.squad.setMage(new Mage("eldritch"));
-        user16.squad.getMage().getWoredrobe().addArmor("regalia");
-        user16.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user16.squad.setHealer(new Healer("lifebringer"));
-        user16.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user16.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user16.squad.setMythicalCreature(new MythicalCreature("hydra"));
-        user16.increaseXp(255);
-        user16.decreaseMoney(700);
+        user16.increaseXp(6);
+        user16.decreaseMoney(200);
         users.put(user16.userName, user16);
 
         // Dummy 17
         User user17 = new User("JaneSmith", "Somehuman", dummyUserNu++, "Arcane");
         user17.squad.setArcher(new Archer("sagittarius"));
-        user17.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user17.squad.setKnight(new Knight("swiftblade"));
         user17.squad.setMage(new Mage("eldritch"));
-        user17.squad.getMage().getWoredrobe().addArmor("regalia");
-        user17.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user17.squad.setHealer(new Healer("lifebringer"));
-        user17.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user17.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user17.squad.setMythicalCreature(new MythicalCreature("hydra"));
-        user17.increaseXp(270);
-        user17.increaseMoney(800);
+        user17.increaseXp(10);
+        user17.increaseMoney(300);
         users.put(user17.userName, user17);
 
         // Dummy 18
         User user18 = new User("AliceJohnson", "sweeny", dummyUserNu++, "Marshland");
         user18.squad.setArcher(new Archer("sunfire"));
-        user18.squad.getArcher().getWoredrobe().addArmor("regalia");
-        user18.squad.getArcher().getWoredrobe().addArtefact("crystal");
         user18.squad.setKnight(new Knight("cavalier"));
         user18.squad.setMage(new Mage("illusionist"));
-        user18.squad.getMage().getWoredrobe().addArmor("fleece");
-        user18.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user18.squad.setHealer(new Healer("alchemist"));
-        user18.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user18.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user18.squad.setMythicalCreature(new MythicalCreature("basilisk"));
-        user18.increaseXp(285);
-        user18.decreaseMoney(900);
+        user18.increaseXp(4);
+        user18.decreaseMoney(150);
         users.put(user18.userName, user18);
 
         // Dummy 19
         User user19 = new User("RobertJohnson", "robert", dummyUserNu++, "Hillcrest");
         user19.squad.setArcher(new Archer("zing"));
-        user19.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user19.squad.setKnight(new Knight("zoro"));
         user19.squad.setMage(new Mage("conjurer"));
-        user19.squad.getMage().getWoredrobe().addArmor("regalia");
-        user19.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user19.squad.setHealer(new Healer("medic"));
-        user19.squad.getHealer().getWoredrobe().addArmor("fleece");
         user19.squad.setMythicalCreature(new MythicalCreature("dragon"));
-        user19.increaseXp(300);
-        user19.increaseMoney(1000);
+        user19.increaseXp(10);
+        user19.increaseMoney(100);
         users.put(user19.userName, user19);
 
         // Dummy 20
         User user20 = new User("EmilyDavis", "davis", dummyUserNu++, "Arcane");
         user20.squad.setArcher(new Archer("sagittarius"));
-        user20.squad.getArcher().getWoredrobe().addArmor("chainmail");
         user20.squad.setKnight(new Knight("swiftblade"));
         user20.squad.setMage(new Mage("eldritch"));
-        user20.squad.getMage().getWoredrobe().addArmor("regalia");
-        user20.squad.getMage().getWoredrobe().addArtefact("excalibur");
         user20.squad.setHealer(new Healer("lifebringer"));
-        user20.squad.getHealer().getWoredrobe().addArmor("fleece");
-        user20.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user20.squad.setMythicalCreature(new MythicalCreature("hydra"));
-        user20.increaseXp(315);
-        user20.decreaseMoney(1100);
+        user20.increaseXp(6);
+        user20.decreaseMoney(100);
         users.put(user20.userName, user20);
 
         return users;
