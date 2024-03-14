@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class App {
     // ANSI escape codes for text color
+    private static final int readTime = 1000;
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
     public static final String RED = "\u001B[31m";
@@ -72,7 +73,8 @@ public class App {
                         System.out.print("\nEnter your choice " + BRIGHT_GREEN + "[shop]/[exit]/[battle]: " + RESET);
 
                         String input = scanner.nextLine();
-                        if (input.equals("shop")) {;
+                        if (input.equals("shop")) {
+                            ;
                             boolean save = user.Store();
                             if (save) {
                                 UserManager.saveUsers(users);
@@ -92,6 +94,7 @@ public class App {
                             if (user.isAllWarriorsAwailable()) {
                                 if (nuOfEligibleUsers < 1) {
                                     System.out.println("Not enough users to start the battle!");
+                                    UIElements.wait(readTime);
                                 } else {
                                     UIElements.clearTerminal();
                                     Battle.start(user, users);
@@ -104,6 +107,7 @@ public class App {
                             } else {
                                 System.out.println(
                                         "You do not have all warriors. Please buy all warriors to enter the battle.");
+                                UIElements.wait(readTime);
                             }
                         } else {
                             System.out.println("\n" + BRIGHT_RED + "Invalid choice!" + RESET);
@@ -112,6 +116,7 @@ public class App {
                     }
                 } else {
                     System.out.println(BRIGHT_RED + "User not found" + "!" + RESET);
+                    UIElements.wait(readTime);
                 }
             } else if (choice.equalsIgnoreCase("R")) {
                 String name;
@@ -122,6 +127,7 @@ public class App {
                 name = scanner.nextLine();
                 if (users.containsKey(username)) {
                     System.out.println(RED + "\n ******** Username already exists! ********\n" + RESET);
+                    UIElements.wait(readTime);
                 } else {
                     // Selecting the Homeground by user choise
                     String homeGround;
@@ -158,6 +164,7 @@ public class App {
                     UserManager.saveNumberOfUsers(currentUsers);
                     UserManager.saveUsers(users);
                     System.out.println(BRIGHT_GREEN + "User registered successfully!\n" + RESET);
+                    UIElements.wait(readTime);
                     currentUsers++;
                 }
             } else if (choice.equalsIgnoreCase("E")) {
@@ -165,6 +172,7 @@ public class App {
                 break;
             } else {
                 System.out.println("\n" + BRIGHT_RED + "Invalid choice!" + RESET);
+                UIElements.wait(readTime);
             }
         }
         scanner.close();

@@ -94,4 +94,9 @@ public abstract class UIElements {
 
         System.out.println("\n\n");
     }
+
+    public static void clearTerminalWithInventory(User user) {
+        clearTerminal();
+        user.printInventory();
+    }
 }
