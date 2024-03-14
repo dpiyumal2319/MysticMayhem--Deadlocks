@@ -70,7 +70,7 @@ public class UserManager implements Serializable {
         user1.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user1.squad.setMythicalCreature(new MythicalCreature("dragon"));
         user1.increaseXp(32);
-        user1.decreaseMoney(285);
+        user1.decrementMoney(285);
         users.put(user1.userName, user1);
 
         // Dummy 2
@@ -85,7 +85,7 @@ public class UserManager implements Serializable {
         user2.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user2.squad.setMythicalCreature(new MythicalCreature("phoenix"));
         user2.increaseXp(45);
-        user2.increaseMoney(100);
+        user2.incrementMoney(100);
         users.put(user2.userName, user2);
 
         // Dummy 3
@@ -101,7 +101,7 @@ public class UserManager implements Serializable {
         user3.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user3.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user3.increaseXp(60);
-        user3.increaseMoney(50);
+        user3.incrementMoney(50);
         users.put(user3.userName, user3);
 
         // Dummy 4
@@ -118,7 +118,7 @@ public class UserManager implements Serializable {
         user4.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user4.squad.setMythicalCreature(new MythicalCreature("basilisk"));
         user4.increaseXp(75);
-        user4.increaseMoney(100);
+        user4.incrementMoney(100);
         users.put(user4.userName, user4);
 
         // Dummy 5
@@ -133,7 +133,7 @@ public class UserManager implements Serializable {
         user5.squad.getHealer().getWoredrobe().addArmor("fleece");
         user5.squad.setMythicalCreature(new MythicalCreature("dragon"));
         user5.increaseXp(90);
-        user5.decreaseMoney(100);
+        user5.decrementMoney(100);
         users.put(user5.userName, user5);
 
         // Dummy 6
@@ -149,7 +149,7 @@ public class UserManager implements Serializable {
         user6.squad.getHealer().getWoredrobe().addArtefact("crystal");
         user6.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user6.increaseXp(105);
-        user6.increaseMoney(70);
+        user6.incrementMoney(70);
         users.put(user6.userName, user6);
 
         // Dummy 7
@@ -163,7 +163,7 @@ public class UserManager implements Serializable {
         user7.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user7.squad.setMythicalCreature(new MythicalCreature("phoenix"));
         user7.increaseXp(20);
-        user7.decreaseMoney(300);
+        user7.decrementMoney(300);
         users.put(user7.userName, user7);
 
         // Dummy 8
@@ -180,7 +180,7 @@ public class UserManager implements Serializable {
         user8.squad.getHealer().getWoredrobe().addArtefact("amulet");
         user8.squad.setMythicalCreature(new MythicalCreature("basilisk"));
         user8.increaseXp(135);
-        user8.increaseMoney(700);
+        user8.incrementMoney(700);
         users.put(user8.userName, user8);
 
         // Dummy 9
@@ -195,7 +195,7 @@ public class UserManager implements Serializable {
         user9.squad.getHealer().getWoredrobe().addArmor("fleece");
         user9.squad.setMythicalCreature(new MythicalCreature("dragon"));
         user9.increaseXp(150);
-        user9.increaseMoney(400);
+        user9.incrementMoney(400);
         users.put(user9.userName, user9);
 
         // Dummy 10
@@ -206,7 +206,7 @@ public class UserManager implements Serializable {
         user10.squad.setHealer(new Healer("lifebringer"));
         user10.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user10.increaseXp(5);
-        user10.decreaseMoney(300);
+        user10.decrementMoney(300);
         users.put(user10.userName, user10);
 
         // Dummy 11
@@ -217,7 +217,7 @@ public class UserManager implements Serializable {
         user11.squad.setHealer(new Healer("lifebringer"));
         user11.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user11.increaseXp(6);
-        user11.increaseMoney(200);
+        user11.incrementMoney(200);
         users.put(user11.userName, user11);
 
         // Dummy 12
@@ -228,7 +228,7 @@ public class UserManager implements Serializable {
         user12.squad.setHealer(new Healer("alchemist"));
         user12.squad.setMythicalCreature(new MythicalCreature("basilisk"));
         user12.increaseXp(9);
-        user12.decreaseMoney(100);
+        user12.decrementMoney(100);
         users.put(user12.userName, user12);
 
         // Dummy 13
@@ -239,7 +239,7 @@ public class UserManager implements Serializable {
         user13.squad.setHealer(new Healer("medic"));
         user13.squad.setMythicalCreature(new MythicalCreature("dragon"));
         user13.increaseXp(10);
-        user13.increaseMoney(400);
+        user13.incrementMoney(400);
         users.put(user13.userName, user13);
 
         // Dummy 14
@@ -250,7 +250,7 @@ public class UserManager implements Serializable {
         user14.squad.setHealer(new Healer("lifebringer"));
         user14.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user14.increaseXp(4);
-        user14.decreaseMoney(50);
+        user14.decrementMoney(50);
         users.put(user14.userName, user14);
 
         // Dummy 15
@@ -261,7 +261,7 @@ public class UserManager implements Serializable {
         user15.squad.setHealer(new Healer("alchemist"));
         user15.squad.setMythicalCreature(new MythicalCreature("basilisk"));
         user15.increaseXp(10);
-        user15.increaseMoney(300);
+        user15.incrementMoney(300);
         users.put(user15.userName, user15);
 
         // Dummy 16
@@ -272,7 +272,7 @@ public class UserManager implements Serializable {
         user16.squad.setHealer(new Healer("lifebringer"));
         user16.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user16.increaseXp(6);
-        user16.decreaseMoney(200);
+        user16.decrementMoney(200);
         users.put(user16.userName, user16);
 
         // Dummy 17
@@ -283,7 +283,7 @@ public class UserManager implements Serializable {
         user17.squad.setHealer(new Healer("lifebringer"));
         user17.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user17.increaseXp(10);
-        user17.increaseMoney(300);
+        user17.incrementMoney(300);
         users.put(user17.userName, user17);
 
         // Dummy 18
@@ -294,7 +294,7 @@ public class UserManager implements Serializable {
         user18.squad.setHealer(new Healer("alchemist"));
         user18.squad.setMythicalCreature(new MythicalCreature("basilisk"));
         user18.increaseXp(4);
-        user18.decreaseMoney(150);
+        user18.decrementMoney(150);
         users.put(user18.userName, user18);
 
         // Dummy 19
@@ -305,7 +305,7 @@ public class UserManager implements Serializable {
         user19.squad.setHealer(new Healer("medic"));
         user19.squad.setMythicalCreature(new MythicalCreature("dragon"));
         user19.increaseXp(10);
-        user19.increaseMoney(100);
+        user19.incrementMoney(100);
         users.put(user19.userName, user19);
 
         // Dummy 20
@@ -316,7 +316,7 @@ public class UserManager implements Serializable {
         user20.squad.setHealer(new Healer("lifebringer"));
         user20.squad.setMythicalCreature(new MythicalCreature("hydra"));
         user20.increaseXp(6);
-        user20.decreaseMoney(100);
+        user20.decrementMoney(100);
         users.put(user20.userName, user20);
 
         return users;

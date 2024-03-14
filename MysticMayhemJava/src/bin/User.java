@@ -1,9 +1,6 @@
 package bin;
 
 import java.util.Scanner;
-import java.util.jar.Attributes.Name;
-
-import javax.print.attribute.standard.MediaSize.NA;
 
 import java.util.Map;
 import bin.Collections.*;
@@ -38,7 +35,7 @@ public class User extends SuperUserControls {
     public static final String BRIGHT_MAGENTA = "\u001B[95m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
 
-    public User(String userName, int currentUsers, String homeGround) {
+    public User(String name,String userName, int currentUsers, String homeGround) {
         this.name = name;
         this.userID = UserIdStart + currentUsers + 1;
         this.xp = 0;

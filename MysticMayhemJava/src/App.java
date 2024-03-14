@@ -46,7 +46,7 @@ public class App {
         Map<String, User> users = UserManager.loadUsers();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            int nuOfEligibleUsers = eligibleUsers(users);
+            nuOfEligibleUsers = eligibleUsers(users);
             System.out.println(BRIGHT_MAGENTA+"Login[L]\n"+RESET+BRIGHT_GREEN+"Register[R]\n"+RESET+BRIGHT_RED+"Exit[E]\n"+RESET);
             System.out.print("Enter your choice"+BRIGHT_MAGENTA+" [L]"+RESET+"/"+BRIGHT_GREEN+"[R]"+RESET+"/"+BRIGHT_RED+"[E]"+RESET+": ");
             String choice = scanner.nextLine();
