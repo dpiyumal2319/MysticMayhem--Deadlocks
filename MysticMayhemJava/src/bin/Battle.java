@@ -279,12 +279,11 @@ public abstract class Battle {
                 System.out.println(UIElements.RED + " " + opponent.userName + " Won!\n" + UIElements.RESET);
                 int exchangeMoney = currentUser.getMoney() / 10;
                 opponent.incrementMoney(exchangeMoney);
+                opponent.increaseXp(1);
                 currentUser.decrementMoney(exchangeMoney);
                 System.out.println("You lost " + UIElements.YELLOW + exchangeMoney + UIElements.RESET + " coins." + "You have "
                         + UIElements.YELLOW + currentUser.getMoney() + UIElements.RESET +
                         " coins now.");
-                System.out.println("You lost " + UIElements.YELLOW + " 1 " + UIElements.RESET + " XP. You have " + UIElements.YELLOW
-                        + currentUser.xp + UIElements.RESET + " XP now.");
             }
         } else {
             System.out.println(UIElements.CYAN + "Draw!" + UIElements.RESET);

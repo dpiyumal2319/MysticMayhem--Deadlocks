@@ -52,10 +52,6 @@ public class User extends SuperUserControls {
         xp += amount;
     }
 
-    public void decreaseXp(int amount) {
-        xp -= amount;
-    }
-
     public boolean Store() {
         while (true) {
             UIElements.clearTerminal();
