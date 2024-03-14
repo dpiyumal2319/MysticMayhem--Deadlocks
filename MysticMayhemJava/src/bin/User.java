@@ -133,12 +133,12 @@ public class User extends SuperUserControls {
                             UIElements.clearTerminalWithInventory(this);
                             System.out.println("\nWhich warrior do you want to buy?\n");
                             System.out.println(BRIGHT_YELLOW
-                                    + " Archer[A]\n Knight[K]\n Mage[M]\n Healer[H]\n Mythical\n Creature[MC]\n"
+                                    + " Archer[A]\n Knight[K]\n Mage[M]\n Healer[H]\n Mythical Creature[MC]\n"
                                     + RESET);
                             System.out.println(RED + " Quit[Q]\n" + RESET);
                             System.out.print(
                                     "Enter your choice" + GREEN + "[A/K/M/H/MC]" + RESET
-                                            + " or " + RED + "Quit[Q]" + RESET);
+                                            + " or " + RED + "Quit[Q]: " + RESET);
                             input = scanner.nextLine();
                             if (input.equalsIgnoreCase("A")) {
                                 buyWarrior(squad.getArcher(), "Archer");
@@ -430,7 +430,7 @@ public class User extends SuperUserControls {
         Map<String, EquipmentInfo> equipmentMap = InventoryItem.getEquipmentMap(type);
         if (equipmentMap != null) {
             for (String key : equipmentMap.keySet()) {
-                System.out.println(CYAN + key + " : " + YELLOW + equipmentMap.get(key).price + " coins" + RESET);
+                System.out.println(CYAN + equipmentMap.get(key).name + " : " + YELLOW + equipmentMap.get(key).price + " coins" + RESET);
                 System.out.print("\tAttck: " + equipmentMap.get(key).extraAttack);
                 System.out.print("\tDefense: " + equipmentMap.get(key).extraDefense);
                 System.out.print("\tHealth: " + equipmentMap.get(key).extraHealth);

@@ -70,10 +70,33 @@ public class App {
                         System.out.println("To enter the shop, type '" + BRIGHT_YELLOW + "shop" + RESET + "'.");
                         System.out.println("To exit, type '" + BRIGHT_YELLOW + "exit" + RESET + "'.");
                         System.out.println("To enter the battle, type " + BRIGHT_YELLOW + "'battle'" + RESET + ".");
-                        System.out.print("\nEnter your choice " + BRIGHT_GREEN + "[shop]/[exit]/[battle]: " + RESET);
+                        System.out.println("To reset your account, type " + BRIGHT_YELLOW + "'reset'" + RESET + ".");
+                        System.out.print(
+                                "\nEnter your choice " + BRIGHT_GREEN + "[shop]/[exit]/[battle]/[reset]: " + RESET);
 
                         String input = scanner.nextLine();
-                        if (input.equals("shop")) {
+                        if (input.equals("reset")) {
+                            while (true) {
+                                System.out.println(
+                                        "Are you sure you want to reset your account?" + BRIGHT_GREEN + "[Y/N]"
+                                                + RESET);
+                                String reset = scanner.nextLine();
+                                if (reset.equalsIgnoreCase("Y")) {
+                                    user.resetUser();
+                                    UserManager.saveUsers(users);
+                                    System.out.println("Account reset successfully!");
+                                    UIElements.wait(readTime);
+                                    break;
+                                } else if (reset.equalsIgnoreCase("N")) {
+                                    System.out.println("Account reset cancelled!");
+                                    UIElements.wait(readTime);
+                                    break;
+                                } else {
+                                    System.out.println(RED + "Invalid choice!" + RESET);
+                                    UIElements.wait(500);
+                                }
+                            }
+                        } else if (input.equals("shop")) {
                             ;
                             boolean save = user.Store();
                             if (save) {
