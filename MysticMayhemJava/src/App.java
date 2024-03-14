@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class App {
     // ANSI escape codes for text color
-    private static final int readTime = 1000;
+    private static final int readTime = 2000;
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
     public static final String RED = "\u001B[31m";
