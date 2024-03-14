@@ -28,8 +28,10 @@ public class App {
 
 
     public static void main(String[] args) throws Exception {
+        clearTerminal();
+        int nuOfEligibleUsers = 0;
         
-       
+        
         System.out.println("  __  __                 _     _            __  __                   _                        ");
         System.out.println(" |  \\/  |               | |   (_)          |  \\/  |                 | |                       ");
         System.out.println(" | \\  / |  _   _   ___  | |_   _    ___    | \\  / |   __ _   _   _  | |__     ___   _ __ ___  ");
@@ -69,7 +71,9 @@ public class App {
 
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
+                            clearTerminal();
                             boolean save = user.Store();
+                            clearTerminal();
                             if (save) {
                                 UserManager.saveUsers(users);
                                 System.out.println("Saved successfully!");
@@ -83,8 +87,11 @@ public class App {
                                 if (nuOfEligibleUsers < 1) {
                                     System.out.println("Not enough users to start the battle!");
                                 } else {
+                                    clearTerminal();
                                     Battle.start(user, users);
+                                    clearTerminal();
                                     UserManager.saveUsers(users);
+                                    System.out.println("Saved successfully!");
                                 }
                             } else {
                                 System.out.println(
@@ -98,8 +105,12 @@ public class App {
                     System.out.println(BRIGHT_RED + "User not found" + "!" + RESET);
                 }
             } else if (choice.equalsIgnoreCase("R")) {
-                System.out.print("\nEnter your username: ");
-                String username = scanner.nextLine();
+                String name;
+                String username;
+                System.out.print("Enter your username: ");
+                username = scanner.nextLine();
+                System.out.print("Enter your name: ");
+                name = scanner.nextLine();
                 if (users.containsKey(username)) {
                     System.out.println(RED+"\n ******** Username already exists! ********\n"+RESET);
                 } else {
@@ -133,7 +144,7 @@ public class App {
                         }
                     }
                     int currentUsers = UserManager.loadNumberOfUsers();
-                    User user = new User(username, currentUsers++, homeGround);
+                    User user = new User(name ,username, currentUsers++, homeGround);
                     users.put(username, user);
                     UserManager.saveNumberOfUsers(currentUsers);
                     UserManager.saveUsers(users);
@@ -159,5 +170,11 @@ public class App {
             }
         }
         return count;
+    }
+
+    public static void clearTerminal() {
+        // Use ANSI escape codes to clear the terminal
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

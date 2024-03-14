@@ -26,10 +26,10 @@ public abstract class Warrior extends InventoryItem {
     public final String homeLand;
     public int battleAttack = -100, battleDefense = -100, battleSpeed = -100, bonusTurns = -100;
     public float battleHealth = -100f;
-    public float bonusAttackBuff = 0f, healPerAttack =  0f;
+    public float bonusAttackBuff = 0f, healPerAttack = 0f;
     private Waredrobe woredrobe = new Waredrobe();
 
-    public Warrior(int attackPriority, int defensePriority,WarriorInfo info, String type) {
+    public Warrior(int attackPriority, int defensePriority, WarriorInfo info, String type) {
         super(info.name, info.price, type, info.price * 0.9);
         this.attack = info.attack;
         this.defense = info.defense;
@@ -65,14 +65,14 @@ public abstract class Warrior extends InventoryItem {
     }
 
     public void printInfo() {
-        System.out.println(CYAN+"\t" + type + " : " + name);
-        System.out.println("\t\tArmor :" + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name));
-        System.out.println("\t\tArtefact :" + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
-        System.out.println("\t\tAttak :" + getAttack());
-        System.out.println("\t\tDefense :" + getDefense());
-        System.out.println("\t\tHealth :" + getHealth());
-        System.out.println("\t\tSpeed :" + getSpeed());
-        System.out.println("\t\tValue :" + this.getValue()+RESET);
+        System.out.println(CYAN + "\t" + type + " : " + name + " + Armor: "
+                + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name) + " + Artefact: "
+                + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
+        System.out.print("\tAttak: " + getAttack());
+        System.out.print("\tDefense: " + getDefense());
+        System.out.print("\tHealth: " + getHealth());
+        System.out.print("\tSpeed: " + getSpeed());
+        System.out.println("\tValue: " + this.getValue() + RESET);
     }
 
     InventoryItem addEquipment(String type, String name) {
@@ -99,7 +99,7 @@ public abstract class Warrior extends InventoryItem {
 
     public void prepareBattle(String battleGround) {
         switch (battleGround) {
-            case "Hillcrest" :
+            case "Hillcrest":
                 if (homeLand.equals("Highlanders")) {
                     battleDefense = getDefense() + 1;
                     bonusAttackBuff = 0.2f;
@@ -108,7 +108,7 @@ public abstract class Warrior extends InventoryItem {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
-            case "Marshland" :
+            case "Marshland":
                 if (homeLand.equals("Marshlanders")) {
                     battleDefense = getDefense() + 2;
                 } else if (homeLand.equals("Sunchildren")) {
@@ -117,14 +117,14 @@ public abstract class Warrior extends InventoryItem {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
-            case "Desert" :
+            case "Desert":
                 if (homeLand.equals("Marshlanders")) {
                     battleHealth = getHealth() - 1;
                 } else if (homeLand.equals("Sunchildren")) {
                     battleAttack = getAttack() + 1;
                 }
                 break;
-            case "Arcane" :
+            case "Arcane":
                 if (homeLand.equals("Mystics")) {
                     battleAttack = getAttack() + 2;
                     healPerAttack = 0.1f;
@@ -134,11 +134,16 @@ public abstract class Warrior extends InventoryItem {
                 }
                 break;
         }
-        if (battleAttack == -100) battleAttack = getAttack();
-        if (battleDefense == -100) battleDefense = getDefense();
-        if (battleHealth == -100) battleHealth = getHealth();
-        if (battleSpeed == -100) battleSpeed = getSpeed();
-        if (bonusTurns == -100) bonusTurns = 0;
+        if (battleAttack == -100)
+            battleAttack = getAttack();
+        if (battleDefense == -100)
+            battleDefense = getDefense();
+        if (battleHealth == -100)
+            battleHealth = getHealth();
+        if (battleSpeed == -100)
+            battleSpeed = getSpeed();
+        if (bonusTurns == -100)
+            bonusTurns = 0;
     }
 
     int getBattleSpeed() {
@@ -166,65 +171,13 @@ public abstract class Warrior extends InventoryItem {
         bonusAttackBuff = 0f;
         healPerAttack = 0f;
     }
-}
 
-
-/*
- * In Hillcrest, the attack and defence of highlanders increase by 1 while the speed of
-marshlanders and sunchildren decrease by 1. When attacking in Hillcrest, each highlander
-can follow each of their turns with a bonus turn with 20% of their attack power.
-In Marshland, the defence of marshlanders increases by 2 while the attack of sunchildren
-decreases by 1. The speed of mystics also decreases by 1.
-In Desert, the health of marshlanders decreases by 1 while the attack of sunchildren
-increases by 1.
-In Arcane, the attack of mystics increases by 2 while the speed and defence of highlanders
-and marshlanders decrease by 1. When attacking in arcane, mystics increase their own
-health by 10% after each of their turns.
-
- */
-
- /*4
-  * public void prepareBattle(String battleGround) {
-        switch (battleGround) {
-            case "Hillcrest" :
-                if (homeLand.equals("Highlanders")) {
-                    battleDefense = getDefense() + 1;
-                    bonusAttackBuff = 0.2f;
-                    bonusTurns = 1;
-                } else if (homeLand == "Sunchildren" || homeLand == "Marshlanders") {
-                    battleSpeed = getSpeed() - 1;
-                }
-                break;
-            case "Marshland" :
-                if (homeLand == "Marshlanders") {
-                    battleDefense = getDefense() + 2;
-                } else if (homeLand == "Sunchildren") {
-                    battleAttack = getAttack() - 1;
-                } else if (homeLand == "Mystics") {
-                    battleSpeed = getSpeed() - 1;
-                }
-                break;
-            case "Desert" :
-                if (homeLand == "Marshlanders") {
-                    battleHealth = getHealth() - 1;
-                } else if (homeLand == "Sunchildren") {
-                    battleAttack = getAttack() + 1;
-                }
-                break;
-            case "Arcane" :
-                if (homeLand == "Mystics") {
-                    battleAttack = getAttack() + 2;
-                    healPerAttack = 0.1f;
-                } else if (homeLand == "Highlanders" || homeLand == "Marshlanders") {
-                    battleSpeed = getSpeed() - 1;
-                    battleDefense = getDefense() - 1;
-                }
-                break;
-        }
-        if (battleAttack == -100) battleAttack = getAttack();
-        if (battleDefense == -100) battleDefense = getDefense();
-        if (battleHealth == -100) battleHealth = getHealth();
-        if (battleSpeed == -100) battleSpeed = getSpeed();
-        if (bonusTurns == -100) bonusTurns = 0;
+    public void printBattleInfo() {
+        System.out.println("\t" + type + " : " + name);
+        System.out.print("\t\tHomeLand :" + homeLand);
+        System.out.print("\tAttack :" + battleAttack);
+        System.out.print("\tDefense :" + battleDefense);
+        System.out.print("\tHealth :" + battleHealth);
+        System.out.println("\tSpeed :" + battleSpeed);
     }
-  */
+}

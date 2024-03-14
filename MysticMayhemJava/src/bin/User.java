@@ -1,12 +1,17 @@
 package bin;
 
 import java.util.Scanner;
+import java.util.jar.Attributes.Name;
+
+import javax.print.attribute.standard.MediaSize.NA;
+
 import java.util.Map;
 import bin.Collections.*;
 import bin.Warriors.*;
 
 public class User extends SuperUserControls {
     private static final int UserIdStart = 100000;
+    public final String name;
     public final int userID;
     public final String homeGround;
     public int xp;
@@ -33,8 +38,8 @@ public class User extends SuperUserControls {
     public static final String BRIGHT_MAGENTA = "\u001B[95m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
 
-
     public User(String userName, int currentUsers, String homeGround) {
+        this.name = name;
         this.userID = UserIdStart + currentUsers + 1;
         this.xp = 0;
         this.userName = userName;
@@ -389,12 +394,12 @@ public class User extends SuperUserControls {
         Map<String, WarriorInfo> warriorMap = InventoryItem.getWarriorMap(type);
         if (warriorMap != null) {
             for (String key : warriorMap.keySet()) {
-                System.out.println(key + ":");
-                System.out.println("\tAttack: " + warriorMap.get(key).attack);
-                System.out.println("\tDefense: " + warriorMap.get(key).defense);
-                System.out.println("\tHealth: " + warriorMap.get(key).health);
+                System.out.println(key + ":"+ warriorMap.get(key).price+ " coins");
+                System.out.print("\tHomeLand: " + warriorMap.get(key).homeLand);
+                System.out.print("\tAttack: " + warriorMap.get(key).attack);
+                System.out.print("\tDefense: " + warriorMap.get(key).defense);
+                System.out.print("\tHealth: " + warriorMap.get(key).health);
                 System.out.println("\tSpeed: " + warriorMap.get(key).speed);
-                System.out.println("\tPrice: " + warriorMap.get(key).price);
             }
         }
     }
@@ -404,12 +409,11 @@ public class User extends SuperUserControls {
         Map<String, EquipmentInfo> equipmentMap = InventoryItem.getEquipmentMap(type);
         if (equipmentMap != null) {
             for (String key : equipmentMap.keySet()) {
-                System.out.println(key + ":");
-                System.out.println("\tAttack: " + equipmentMap.get(key).extraAttack);
-                System.out.println("\tDefense: " + equipmentMap.get(key).extraDefense);
-                System.out.println("\tHealth: " + equipmentMap.get(key).extraHealth);
+                System.out.println(key + ":"+ equipmentMap.get(key).price + " coins");
+                System.out.print("\tAttck: " + equipmentMap.get(key).extraAttack);
+                System.out.print("\tDefense: " + equipmentMap.get(key).extraDefense);
+                System.out.print("\tHealth: " + equipmentMap.get(key).extraHealth);
                 System.out.println("\tSpeed: " + equipmentMap.get(key).extraSpeed);
-                System.out.println("\tPrice: " + equipmentMap.get(key).price);
             }
         }
     }
