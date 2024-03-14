@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        clearTerminal();
         int nuOfEligibleUsers = 0;
         System.out.println("Welcome to Mystic Mayhem!");
         Map<String, User> users = UserManager.loadUsers();
@@ -53,7 +54,9 @@ public class App {
                         System.out.print("Enter your choice[shop]/[exit]/[battle]: ");
                         String input = scanner.nextLine();
                         if (input.equals("shop")) {
+                            clearTerminal();
                             boolean save = user.Store();
+                            clearTerminal();
                             if (save) {
                                 UserManager.saveUsers(users);
                                 System.out.println("Saved successfully!");
@@ -67,8 +70,11 @@ public class App {
                                 if (nuOfEligibleUsers < 1) {
                                     System.out.println("Not enough users to start the battle!");
                                 } else {
+                                    clearTerminal();
                                     Battle.start(user, users);
+                                    clearTerminal();
                                     UserManager.saveUsers(users);
+                                    System.out.println("Saved successfully!");
                                 }
                             } else {
                                 System.out.println(
@@ -147,5 +153,11 @@ public class App {
             }
         }
         return count;
+    }
+
+    public static void clearTerminal() {
+        // Use ANSI escape codes to clear the terminal
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

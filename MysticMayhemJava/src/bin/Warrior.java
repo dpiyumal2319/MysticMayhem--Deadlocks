@@ -9,10 +9,10 @@ public abstract class Warrior extends InventoryItem {
     public final String homeLand;
     public int battleAttack = -100, battleDefense = -100, battleSpeed = -100, bonusTurns = -100;
     public float battleHealth = -100f;
-    public float bonusAttackBuff = 0f, healPerAttack =  0f;
+    public float bonusAttackBuff = 0f, healPerAttack = 0f;
     private Waredrobe woredrobe = new Waredrobe();
 
-    public Warrior(int attackPriority, int defensePriority,WarriorInfo info, String type) {
+    public Warrior(int attackPriority, int defensePriority, WarriorInfo info, String type) {
         super(info.name, info.price, type, info.price * 0.9);
         this.attack = info.attack;
         this.defense = info.defense;
@@ -48,14 +48,14 @@ public abstract class Warrior extends InventoryItem {
     }
 
     public void printInfo() {
-        System.out.println("\t" + type + " : " + name);
-        System.out.print("\t\tArmor :" + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name));
-        System.out.print("\tArtefact :" + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
-        System.out.print("\tAttak :" + getAttack());
-        System.out.print("\tDefense :" + getDefense());
-        System.out.print("\tHealth :" + getHealth());
-        System.out.print("\tSpeed :" + getSpeed());
-        System.out.println("\tValue :" + this.getValue());
+        System.out.println("\t" + type + " : " + name + " + Armor: "
+                + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name) + " + Artefact: "
+                + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
+        System.out.print("\tAttak: " + getAttack());
+        System.out.print("\tDefense: " + getDefense());
+        System.out.print("\tHealth: " + getHealth());
+        System.out.print("\tSpeed: " + getSpeed());
+        System.out.println("\tValue: " + this.getValue());
     }
 
     InventoryItem addEquipment(String type, String name) {
@@ -82,7 +82,7 @@ public abstract class Warrior extends InventoryItem {
 
     public void prepareBattle(String battleGround) {
         switch (battleGround) {
-            case "Hillcrest" :
+            case "Hillcrest":
                 if (homeLand.equals("Highlanders")) {
                     battleDefense = getDefense() + 1;
                     bonusAttackBuff = 0.2f;
@@ -91,7 +91,7 @@ public abstract class Warrior extends InventoryItem {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
-            case "Marshland" :
+            case "Marshland":
                 if (homeLand.equals("Marshlanders")) {
                     battleDefense = getDefense() + 2;
                 } else if (homeLand.equals("Sunchildren")) {
@@ -100,14 +100,14 @@ public abstract class Warrior extends InventoryItem {
                     battleSpeed = getSpeed() - 1;
                 }
                 break;
-            case "Desert" :
+            case "Desert":
                 if (homeLand.equals("Marshlanders")) {
                     battleHealth = getHealth() - 1;
                 } else if (homeLand.equals("Sunchildren")) {
                     battleAttack = getAttack() + 1;
                 }
                 break;
-            case "Arcane" :
+            case "Arcane":
                 if (homeLand.equals("Mystics")) {
                     battleAttack = getAttack() + 2;
                     healPerAttack = 0.1f;
@@ -117,11 +117,16 @@ public abstract class Warrior extends InventoryItem {
                 }
                 break;
         }
-        if (battleAttack == -100) battleAttack = getAttack();
-        if (battleDefense == -100) battleDefense = getDefense();
-        if (battleHealth == -100) battleHealth = getHealth();
-        if (battleSpeed == -100) battleSpeed = getSpeed();
-        if (bonusTurns == -100) bonusTurns = 0;
+        if (battleAttack == -100)
+            battleAttack = getAttack();
+        if (battleDefense == -100)
+            battleDefense = getDefense();
+        if (battleHealth == -100)
+            battleHealth = getHealth();
+        if (battleSpeed == -100)
+            battleSpeed = getSpeed();
+        if (bonusTurns == -100)
+            bonusTurns = 0;
     }
 
     int getBattleSpeed() {
@@ -150,13 +155,12 @@ public abstract class Warrior extends InventoryItem {
         healPerAttack = 0f;
     }
 
-
     public void printBattleInfo() {
         System.out.println("\t" + type + " : " + name);
         System.out.print("\t\tHomeLand :" + homeLand);
-        System.out.print("\tAttack :"+ battleAttack);
-        System.out.print("\tDefense :"+ battleDefense);
-        System.out.print("\tHealth :"+ battleHealth);
-        System.out.println("\tSpeed :"+ battleSpeed);
+        System.out.print("\tAttack :" + battleAttack);
+        System.out.print("\tDefense :" + battleDefense);
+        System.out.print("\tHealth :" + battleHealth);
+        System.out.println("\tSpeed :" + battleSpeed);
     }
 }

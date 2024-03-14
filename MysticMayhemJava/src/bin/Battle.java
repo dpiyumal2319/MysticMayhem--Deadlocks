@@ -101,7 +101,7 @@ public abstract class Battle {
 
         wait(3000);
         // Printing oponent's squad
-        System.out.println(Colors.RED + " " + opponent.userName + "'s Squad" + Colors.RESET + " : ");
+        System.out.println(Colors.RED + "\n " + opponent.userName + "'s Squad" + Colors.RESET + " : ");
         wait(1000);
         for (int i = 0; i < 5; i++) {
             oponentAttack[i].printBattleInfo();
@@ -109,16 +109,18 @@ public abstract class Battle {
 
         wait(3000);
         System.out.println(
-                "Display Structure: Attacker's_Owner Type[Health before attack] Name ~~ ~~ ~~ ~~ ~~ Reciever's_Owner Type[Health After Attack] Name\n");
+                "\nDisplay Structure: Attacker's_Owner Type[Health before attack] Name ~~ ~~ ~~ ~~ ~~ Reciever's_Owner Type[Health After Attack] Name\n");
 
         wait(500);
+
         // Starting battle
         System.out.print(Colors.YELLOW + "Battle starting in: ");
         for (int i = 5; i > 0; i--) {
             System.out.print(i + " ");
             wait(1000);
         }
-        System.out.println("Start!" + Colors.RESET);
+        System.out.println("Start!\n" + Colors.RESET);
+        wait(500);
 
         for (int i = 0; i < 10; i++) {
             if (!isBattleStillGoing(userDefence, opponentDefence))
@@ -252,11 +254,12 @@ public abstract class Battle {
             }
         }
         // Checking if all warriors of either team are dead
+        wait(1000);
         if (!isBattleStillGoing(userDefence, opponentDefence)) {
             // If User won
             if (isUser1Won(userDefence, opponentDefence)) {
                 System.out.println(Colors.GREEN + "Congratulations " + Colors.RESET + currentUser.name
-                        + "! You won the battle!");
+                        + "! You won the battle!\n");
                 currentUser.increaseXp(1);
                 int exchangeMoney = opponent.getMoney() / 10;
                 currentUser.increaseMoney(exchangeMoney);
@@ -268,7 +271,7 @@ public abstract class Battle {
                         + currentUser.xp + Colors.RESET + " XP now.");
                 // If oponent won
             } else {
-                System.out.println(Colors.RED + " " + opponent.userName + " Won!" + Colors.RESET);
+                System.out.println(Colors.RED + " " + opponent.userName + " Won!\n" + Colors.RESET);
                 int exchangeMoney = currentUser.getMoney() / 10;
                 opponent.increaseMoney(exchangeMoney);
                 currentUser.decreaseMoney(exchangeMoney);
@@ -287,7 +290,9 @@ public abstract class Battle {
         user2AttackPointer = 0;
         user1DefencePointer = 0;
         user2DefencePointer = 0;
-        System.out.println(Colors.MAGENTA + "Battle Ended!" + Colors.RESET);
+        System.out.println(Colors.MAGENTA + "\n\nBattle Ended!" + Colors.RESET);
+        System.out.println("Press Enter to continue...");
+        scanner.nextLine();
     }
 
     // Check whether the warrior is alive
