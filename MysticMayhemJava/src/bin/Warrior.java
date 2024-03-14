@@ -68,7 +68,7 @@ public abstract class Warrior extends InventoryItem {
         System.out.println(CYAN + "\t" + type + " : " + name + " + Armor: "
                 + (woredrobe.getArmor() == null ? "None" : woredrobe.getArmor().name) + " + Artefact: "
                 + (woredrobe.getArtefact() == null ? "None" : woredrobe.getArtefact().name));
-        System.out.print("\tAttak: " + getAttack());
+        System.out.print("\t\tAttak: " + getAttack());
         System.out.print("\tDefense: " + getDefense());
         System.out.print("\tHealth: " + getHealth());
         System.out.print("\tSpeed: " + getSpeed());

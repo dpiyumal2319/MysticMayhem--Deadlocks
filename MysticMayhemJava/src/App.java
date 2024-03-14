@@ -1,11 +1,10 @@
 import bin.Battle;
+import bin.UIElements;
 import bin.User;
 import bin.UserManager;
 
 import java.util.Map;
 import java.util.Scanner;
-
-
 
 public class App {
     // ANSI escape codes for text color
@@ -25,60 +24,67 @@ public class App {
     public static final String BRIGHT_MAGENTA = "\u001B[95m";
     public static final String BRIGHT_WHITE = "\u001B[97m";
 
-
-
     public static void main(String[] args) throws Exception {
-        clearTerminal();
+        UIElements.clearTerminal();
         int nuOfEligibleUsers = 0;
-        
-        
-        System.out.println("  __  __                 _     _            __  __                   _                        ");
-        System.out.println(" |  \\/  |               | |   (_)          |  \\/  |                 | |                       ");
-        System.out.println(" | \\  / |  _   _   ___  | |_   _    ___    | \\  / |   __ _   _   _  | |__     ___   _ __ ___  ");
-        System.out.println(" | |\\/| | | | | | / __| | __| | |  / __|   | |\\/| |  / _` | | | | | | '_ \\   / _ \\ | '_ ` _ \\ ");
-        System.out.println(" | |  | | | |_| | \\__ \\ | |_  | | | (__    | |  | | | (_| | | |_| | | | | | |  __/ | | | | | |");
-        System.out.println(" |_|  |_|  \\__, | |___/  \\__| |_|  \\___|   |_|  |_|  \\__,_|  \\__, | |_| |_|  \\___| |_| |_| |_|");
-        System.out.println("            __/ |                                             __/ |                           ");
-        System.out.println("           |___/                                             |___/                            "+"-THE DEADLOCKS-");
 
-        
+        System.out.println("Open in maximize window for better experience.");
+        System.out.println("Launching Mystic Mayhem...");
+        UIElements.wait(2500);
         System.out.println(BRIGHT_YELLOW + "\n\nWelcome to Mystic Mayhem!\n" + RESET);
+        UIElements.wait(1000);
         Map<String, User> users = UserManager.loadUsers();
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            UIElements.clearTerminal();
+            UIElements.printLogo();
             nuOfEligibleUsers = eligibleUsers(users);
-            System.out.println(BRIGHT_MAGENTA+"Login[L]\n"+RESET+BRIGHT_GREEN+"Register[R]\n"+RESET+BRIGHT_RED+"Exit[E]\n"+RESET);
-            System.out.print("Enter your choice"+BRIGHT_MAGENTA+" [L]"+RESET+"/"+BRIGHT_GREEN+"[R]"+RESET+"/"+BRIGHT_RED+"[E]"+RESET+": ");
+            System.out.println(BRIGHT_MAGENTA + "Login[L]\n" + RESET + BRIGHT_GREEN + "Register[R]\n" + RESET
+                    + BRIGHT_RED + "Exit[E]\n" + RESET);
+            System.out.print("Enter your choice" + BRIGHT_MAGENTA + " [L]" + RESET + "/" + BRIGHT_GREEN + "[R]" + RESET
+                    + "/" + BRIGHT_RED + "[E]" + RESET + ": ");
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("L")) {
                 System.out.print("\nEnter your username: ");
 
                 String username = scanner.nextLine();
                 if (users.containsKey(username)) {
+                    System.out.println("Logging in...");
+                    UIElements.wait(2000);
                     User user = users.get(username);
                     System.out.println("\nSuccessfully logged in to " + user.userName + " : " + user.userID);
-                    System.out.println(BRIGHT_YELLOW+"Welcome back, " + user.userName + "!"+RESET);
-                    System.out.println(CYAN+"You have " + user.getxp() + " xp."+RESET);
-                    System.out.println(YELLOW+"You have " + user.getMoney()+" gold coins."+RESET);
-                    System.out.println("\nYour home ground is " + user.homeGround + ".\n");
-                    user.printInventory();
-
-                    System.out.println("To enter the shop, type '" + BLUE + "shop" + RESET + "'.");
-                    System.out.println("To exit, type '" + BLUE + "exit" + RESET + "'.");
-                    System.out.println("To enter the battle, type "+BLUE+"'battle'"+RESET+".");
+                    UIElements.wait(500);
                     while (true) {
-                        System.out.print("\nEnter your choice "+BRIGHT_GREEN+"[shop]/[exit]/[battle]: "+RESET);
+                        UIElements.clearTerminal();
+                        UIElements.printLogo();
+                        UIElements.wait(UIElements.timeBetween);
+                        System.out.println(BRIGHT_YELLOW + "Welcome back, " + user.name + "!" + RESET);
+                        UIElements.wait(UIElements.timeBetween);
+                        System.out.println(CYAN + "You have " + user.getxp() + " xp." + RESET);
+                        UIElements.wait(UIElements.timeBetween);
+                        System.out.println("\nYour home ground is " + user.homeGround + ".\n");
+                        UIElements.wait(UIElements.timeBetween);
+                        user.printInventory();
+                        UIElements.wait(UIElements.timeBetween);
+                        System.out.println("To enter the shop, type '" + BLUE + "shop" + RESET + "'.");
+                        System.out.println("To exit, type '" + BLUE + "exit" + RESET + "'.");
+                        System.out.println("To enter the battle, type " + BLUE + "'battle'" + RESET + ".");
+                        System.out.print("\nEnter your choice " + BRIGHT_GREEN + "[shop]/[exit]/[battle]: " + RESET);
 
                         String input = scanner.nextLine();
-                        if (input.equals("shop")) {
-                            clearTerminal();
+                        if (input.equals("shop")) {;
                             boolean save = user.Store();
-                            clearTerminal();
                             if (save) {
                                 UserManager.saveUsers(users);
+                                System.out.println("Saving...");
+                                UIElements.wait(2000);
                                 System.out.println("Saved successfully!");
+                                UIElements.wait(500);
                             } else {
-                                System.out.println("Exitted without saving!");
+                                users = UserManager.loadUsers();
+                                user = users.get(username);
+                                System.out.println("Exitting without saving!");
+                                UIElements.wait(2000);
                             }
                         } else if (input.equals("exit")) {
                             break;
@@ -87,18 +93,19 @@ public class App {
                                 if (nuOfEligibleUsers < 1) {
                                     System.out.println("Not enough users to start the battle!");
                                 } else {
-                                    clearTerminal();
+                                    UIElements.clearTerminal();
                                     Battle.start(user, users);
-                                    clearTerminal();
                                     UserManager.saveUsers(users);
                                     System.out.println("Saved successfully!");
+                                    UIElements.wait(2000);
                                 }
                             } else {
                                 System.out.println(
                                         "You do not have all warriors. Please buy all warriors to enter the battle.");
                             }
                         } else {
-                            System.out.println("\n"+BRIGHT_RED+"\u2717"+RESET+"Invalid choice!");
+                            System.out.println("\n" + BRIGHT_RED + "\u2717" + RESET + "Invalid choice!");
+                            UIElements.wait(500);
                         }
                     }
                 } else {
@@ -112,16 +119,16 @@ public class App {
                 System.out.print("Enter your name: ");
                 name = scanner.nextLine();
                 if (users.containsKey(username)) {
-                    System.out.println(RED+"\n ******** Username already exists! ********\n"+RESET);
+                    System.out.println(RED + "\n ******** Username already exists! ********\n" + RESET);
                 } else {
                     // Selecting the Homeground by user choise
                     String homeGround;
                     while (true) {
                         System.out.println("\nSelect your home ground:\n");
-                        System.out.println(BLUE+"Hillcrest [H]"+RESET);
-                        System.out.println(BLUE+"Marshland [M]"+RESET);
-                        System.out.println(BLUE+"Desert [D]"+RESET);
-                        System.out.println(BLUE+"Arcane [A]"+RESET);
+                        System.out.println(BLUE + "Hillcrest [H]" + RESET);
+                        System.out.println(BLUE + "Marshland [M]" + RESET);
+                        System.out.println(BLUE + "Desert [D]" + RESET);
+                        System.out.println(BLUE + "Arcane [A]" + RESET);
                         System.out.print("\nEnter the corresponding letter to your home ground choice: ");
                         String homeGroundChoice;
 
@@ -140,26 +147,26 @@ public class App {
                             homeGround = "Arcane";
                             break;
                         } else {
-                            System.out.println(RED+"Invalid option! Please try again."+RESET);
+                            System.out.println(RED + "Invalid option! Please try again." + RESET);
                         }
                     }
                     int currentUsers = UserManager.loadNumberOfUsers();
-                    User user = new User(name ,username, currentUsers++, homeGround);
+                    User user = new User(name, username, currentUsers++, homeGround);
                     users.put(username, user);
                     UserManager.saveNumberOfUsers(currentUsers);
                     UserManager.saveUsers(users);
-                    System.out.println(BRIGHT_GREEN +"User registered successfully!\n"+RESET);
+                    System.out.println(BRIGHT_GREEN + "User registered successfully!\n" + RESET);
                     currentUsers++;
                 }
             } else if (choice.equalsIgnoreCase("E")) {
                 UserManager.saveUsers(users);
                 break;
             } else {
-                System.out.println("\n"+BRIGHT_RED+"Invalid choice!"+RESET);
+                System.out.println("\n" + BRIGHT_RED + "Invalid choice!" + RESET);
             }
         }
         scanner.close();
-        System.out.println(YELLOW + "Goodbye!"+RESET);
+        System.out.println(YELLOW + "Goodbye!" + RESET);
     }
 
     public static int eligibleUsers(Map<String, User> users) {
@@ -170,11 +177,5 @@ public class App {
             }
         }
         return count;
-    }
-
-    public static void clearTerminal() {
-        // Use ANSI escape codes to clear the terminal
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 }

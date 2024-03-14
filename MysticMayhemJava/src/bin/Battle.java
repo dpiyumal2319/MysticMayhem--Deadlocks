@@ -18,7 +18,8 @@ public abstract class Battle {
     private static int user2DefencePointer = 0;
 
     public static void start(User currentUser, Map<String, User> users) {
-        System.out.println(Colors.MAGENTA + "Battle started! , Select your Opponent!!" + Colors.RESET);
+        UIElements.printLogo();
+        System.out.println(UIElements.MAGENTA + "Select your Opponent!!" + UIElements.RESET);
         Scanner scanner = new Scanner(System.in);
 
         // Choosing a random oponent
@@ -36,17 +37,21 @@ public abstract class Battle {
             User randomUser = randomEntry.getValue();
             if (randomUser == currentUser || !randomUser.isAllWarriorsAwailable())
                 continue;
-            System.out.println("\nDo you want to battle with " + Colors.BLUE + randomUser.userName
-                    + " : " + randomUser.xp + " XP" + Colors.RESET + " ?\n");
+            System.out.println("\nDo you want to battle with " + UIElements.BLUE + randomUser.userName
+                    + " : " + randomUser.xp + " XP" + UIElements.RESET + " ?\n");
             while (true) {
-                System.out.println("Yes[Y] or No[N]");
+                System.out.println("Yes[Y] or No[N], to exit battle[Q]");
                 String choice = scanner.nextLine();
                 if (choice.equalsIgnoreCase("Y")) {
                     opponent = randomUser;
                     break;
                 } else if (choice.equalsIgnoreCase("N"))
                     break;
-                else
+                else if (choice.equalsIgnoreCase("Q")) {
+                    System.out.println("Exiting battle...");
+                    UIElements.wait(500);
+                    return;
+                } else
                     System.out.println("Wrong Choice");
             }
             if (opponent != null)
@@ -88,39 +93,39 @@ public abstract class Battle {
         Warrior attacker;
         Warrior defender;
         float preHealth;
-        System.out.println("\nBattle " + Colors.GREEN + currentUser.userName + Colors.RESET + " vs "
-                + Colors.RED + opponent.userName + Colors.RESET + " on " + Colors.YELLOW_BACKGROUND + Colors.BLACK
-                + Colors.BOLD + battleGround + " ground" + Colors.RESET + "!!" + "\n");
+        System.out.println("\nBattle " + UIElements.GREEN + currentUser.userName + UIElements.RESET + " vs "
+                + UIElements.RED + opponent.userName + UIElements.RESET + " on " + UIElements.YELLOW_BACKGROUND + UIElements.BLACK
+                 + battleGround + " ground" + UIElements.RESET + "!!" + "\n");
 
         // Printing your squad
-        System.out.println(Colors.GREEN + "Your Squad" + Colors.RESET + " : ");
-        wait(1000);
+        System.out.println(UIElements.GREEN + "Your Squad" + UIElements.RESET + " : ");
+        UIElements.wait(1000);
         for (int i = 0; i < 5; i++) {
             userAttack[i].printBattleInfo();
         }
 
-        wait(3000);
+        UIElements.wait(2000);
         // Printing oponent's squad
-        System.out.println(Colors.RED + "\n " + opponent.userName + "'s Squad" + Colors.RESET + " : ");
-        wait(1000);
+        System.out.println(UIElements.RED + "\n " + opponent.userName + "'s Squad" + UIElements.RESET + " : ");
+        UIElements.wait(1000);
         for (int i = 0; i < 5; i++) {
             oponentAttack[i].printBattleInfo();
         }
 
-        wait(3000);
+        UIElements.wait(2000);
         System.out.println(
                 "\nDisplay Structure: Attacker's_Owner Type[Health before attack] Name ~~ ~~ ~~ ~~ ~~ Reciever's_Owner Type[Health After Attack] Name\n");
 
-        wait(500);
+        UIElements.wait(500);
 
         // Starting battle
-        System.out.print(Colors.YELLOW + "Battle starting in: ");
+        System.out.print(UIElements.YELLOW + "Battle starting in: ");
         for (int i = 5; i > 0; i--) {
             System.out.print(i + " ");
-            wait(1000);
+            UIElements.wait(750);
         }
-        System.out.println("Start!\n" + Colors.RESET);
-        wait(500);
+        System.out.println("Start!\n" + UIElements.RESET);
+        UIElements.wait(500);
 
         for (int i = 0; i < 10; i++) {
             if (!isBattleStillGoing(userDefence, opponentDefence))
@@ -138,26 +143,26 @@ public abstract class Battle {
 
             // Printing the attack
             if (attacker instanceof Healer) {
-                System.out.println(Colors.GREEN + Colors.BOLD + "You healing" + Colors.RESET + " : Your "
+                System.out.println(UIElements.GREEN + UIElements.BOLD + "You healing" + UIElements.RESET + " : Your "
                         + attacker.type + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
-                        + Colors.Hearts(damage) + " Your " + defender.type + "["
+                        + UIElements.Hearts(damage) + " Your " + defender.type + "["
                         + String.format("%.1f", defender.battleHealth)
                         + "] " + defender.name + "\n");
 
             } else {
-                System.out.println(Colors.GREEN + Colors.BOLD + "You attacking" + Colors.RESET + " : Your "
+                System.out.println(UIElements.GREEN + UIElements.BOLD + "You attacking" + UIElements.RESET + " : Your "
                         + attacker.type + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
-                        + Colors.RedArrows(damage) + opponent.userName + "'s " + defender.type + "["
+                        + UIElements.RedArrows(damage) + opponent.userName + "'s " + defender.type + "["
                         + String.format("%.1f", defender.battleHealth)
                         + "] "
-                        + defender.name + Colors.RED + (isAlive(defender) ? "\n" : " Died.\n") + Colors.RESET);
+                        + defender.name + UIElements.RED + (isAlive(defender) ? "\n" : " Died.\n") + UIElements.RESET);
             }
             // For the attackers healed right after they attack
             if (attacker.healPerAttack > 0)
-                System.out.println(Colors.hearsSet + "Attacker healed "
+                System.out.println(UIElements.hearsSet + "Attacker healed "
                         + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
                         + "\n");
-            wait(1000);
+            UIElements.wait(1000);
             // If attacker has bonus turns, then bonus attack
             if (attacker.bonusTurns > 0) {
                 if (attacker instanceof Healer)
@@ -168,27 +173,27 @@ public abstract class Battle {
                 damage = bonusAttack(attacker, defender);
 
                 if (attacker instanceof Healer) {
-                    System.out.println(Colors.GREEN + Colors.BOLD + "You healing" + Colors.RESET + " : Your "
-                            + Colors.YELLOW + "Bonus turn " + Colors.RESET
+                    System.out.println(UIElements.GREEN + UIElements.BOLD + "You healing" + UIElements.RESET + " : Your "
+                            + UIElements.YELLOW + "Bonus turn " + UIElements.RESET
                             + attacker.type + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
-                            + Colors.Hearts(damage) + " Your " + defender.type + "["
+                            + UIElements.Hearts(damage) + " Your " + defender.type + "["
                             + String.format("%.1f", defender.battleHealth)
                             + "] " + defender.name + "\n");
                 } else {
-                    System.out.println(Colors.GREEN + Colors.BOLD + "You attacking" + Colors.RESET + " : Your "
-                            + Colors.YELLOW + "Bonus Attack " + Colors.RESET + attacker.type + "["
+                    System.out.println(UIElements.GREEN + UIElements.BOLD + "You attacking" + UIElements.RESET + " : Your "
+                            + UIElements.YELLOW + "Bonus Attack " + UIElements.RESET + attacker.type + "["
                             + String.format("%.1f", preHealth)
                             + "] " + attacker.name
-                            + Colors.RedArrows(damage) + opponent.userName + "'s " + defender.type + "["
+                            + UIElements.RedArrows(damage) + opponent.userName + "'s " + defender.type + "["
                             + String.format("%.1f", defender.battleHealth)
                             + "] "
-                            + defender.name + Colors.RED + (isAlive(defender) ? "\n" : " Died.\n") + Colors.RESET);
+                            + defender.name + UIElements.RED + (isAlive(defender) ? "\n" : " Died.\n") + UIElements.RESET);
                 }
                 if (attacker.healPerAttack > 0)
-                    System.out.println(Colors.hearsSet + "Attacker healed "
+                    System.out.println(UIElements.hearsSet + "Attacker healed "
                             + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
                             + "\n");
-                wait(1000);
+                UIElements.wait(1000);
             }
 
             // Break loop if battle is over
@@ -204,24 +209,24 @@ public abstract class Battle {
             preHealth = attacker.battleHealth;
             damage = attack(attacker, defender);
             if (attacker instanceof Healer) {
-                System.out.println(Colors.RED + Colors.BOLD + "Opponent healing" + Colors.RESET + " : "
+                System.out.println(UIElements.RED + UIElements.BOLD + "Opponent healing" + UIElements.RESET + " : "
                         + opponent.userName + " " + attacker.type + "[" + String.format("%.1f", preHealth)
                         + "] "
-                        + attacker.name + Colors.Hearts(damage) + opponent.userName + " : " + defender.type
+                        + attacker.name + UIElements.Hearts(damage) + opponent.userName + " : " + defender.type
                         + "[" + String.format("%.1f", defender.battleHealth) + "] " + defender.name + "\n");
             } else {
-                System.out.println(Colors.RED + Colors.BOLD + "Opponent attacking" + Colors.RESET + " : "
+                System.out.println(UIElements.RED + UIElements.BOLD + "Opponent attacking" + UIElements.RESET + " : "
                         + opponent.userName + "'s " + attacker.type + "[" + String.format("%.1f", preHealth)
                         + "] "
-                        + attacker.name + Colors.RedArrows(damage) + "Your " + defender.type + "["
+                        + attacker.name + UIElements.RedArrows(damage) + "Your " + defender.type + "["
                         + String.format("%.1f", defender.battleHealth) + "] "
-                        + defender.name + Colors.RED + (isAlive(defender) ? "\n" : " Died.\n") + Colors.RESET);
+                        + defender.name + UIElements.RED + (isAlive(defender) ? "\n" : " Died.\n") + UIElements.RESET);
             }
             if (attacker.healPerAttack > 0)
-                System.out.println(Colors.hearsSet + "Attacker healed "
+                System.out.println(UIElements.hearsSet + "Attacker healed "
                         + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
                         + "\n");
-            wait(1000);
+            UIElements.wait(1000);
             if (attacker.bonusTurns > 0) {
                 if (attacker instanceof Healer)
                     defender = getLowestHealthWarrior(opponentDefence);
@@ -230,59 +235,59 @@ public abstract class Battle {
                 preHealth = attacker.battleHealth;
                 damage = bonusAttack(attacker, defender);
                 if (attacker instanceof Healer) {
-                    System.out.println(Colors.RED + Colors.BOLD + "Opponent healing" + Colors.RESET + " : "
-                            + opponent.userName + "'s" + Colors.YELLOW + "Bonus turn " + Colors.RESET + attacker.type
+                    System.out.println(UIElements.RED + UIElements.BOLD + "Opponent healing" + UIElements.RESET + " : "
+                            + opponent.userName + "'s" + UIElements.YELLOW + "Bonus turn " + UIElements.RESET + attacker.type
                             + "["
                             + String.format("%.1f", preHealth)
                             + "] "
-                            + attacker.name + Colors.Hearts(damage) + opponent.userName + " : " + defender.type
+                            + attacker.name + UIElements.Hearts(damage) + opponent.userName + " : " + defender.type
                             + "[" + String.format("%.1f", defender.battleHealth) + "] " + defender.name + "\n");
                 } else {
-                    System.out.println(Colors.RED + Colors.BOLD + "Opponent attacking" + Colors.RESET + " : "
-                            + opponent.userName + "'s " + Colors.YELLOW + "Bonus turn " + Colors.RESET + attacker.type
+                    System.out.println(UIElements.RED + UIElements.BOLD + "Opponent attacking" + UIElements.RESET + " : "
+                            + opponent.userName + "'s " + UIElements.YELLOW + "Bonus turn " + UIElements.RESET + attacker.type
                             + "[" + String.format("%.1f", preHealth) + "] " + attacker.name
-                            + Colors.RedArrows(damage) + "Your " + defender.type + "["
+                            + UIElements.RedArrows(damage) + "Your " + defender.type + "["
                             + String.format("%.1f", defender.battleHealth)
-                            + "] " + defender.name + Colors.RED + (isAlive(defender) ? "\n" : " Died.\n")
-                            + Colors.RESET);
+                            + "] " + defender.name + UIElements.RED + (isAlive(defender) ? "\n" : " Died.\n")
+                            + UIElements.RESET);
                 }
                 if (attacker.healPerAttack > 0)
-                    System.out.println(Colors.hearsSet + "Attacker healed "
+                    System.out.println(UIElements.hearsSet + "Attacker healed "
                             + attacker.type + "[" + String.format("%.1f", attacker.battleHealth) + "] " + attacker.name
                             + "\n");
-                wait(1000);
+                UIElements.wait(1000);
             }
         }
         // Checking if all warriors of either team are dead
-        wait(1000);
+        UIElements.wait(1000);
         if (!isBattleStillGoing(userDefence, opponentDefence)) {
             // If User won
             if (isUser1Won(userDefence, opponentDefence)) {
-                System.out.println(Colors.GREEN + "Congratulations " + Colors.RESET + currentUser.name
+                System.out.println(UIElements.GREEN + "Congratulations " + UIElements.RESET + currentUser.name
                         + "! You won the battle!\n");
                 currentUser.increaseXp(1);
                 int exchangeMoney = opponent.getMoney() / 10;
-                currentUser.increaseMoney(exchangeMoney);
-                opponent.decreaseMoney(exchangeMoney);
-                System.out.println("You won " + Colors.YELLOW + exchangeMoney + Colors.RESET + " coins." + "You have "
-                        + Colors.YELLOW + currentUser.getMoney() + Colors.RESET +
+                currentUser.incrementMoney(exchangeMoney);
+                opponent.decrementMoney(exchangeMoney);
+                System.out.println("You won " + UIElements.YELLOW + exchangeMoney + UIElements.RESET + " coins." + "You have "
+                        + UIElements.YELLOW + currentUser.getMoney() + UIElements.RESET +
                         " coins now.");
-                System.out.println("You won " + Colors.YELLOW + " 1 " + Colors.RESET + " XP. You have " + Colors.YELLOW
-                        + currentUser.xp + Colors.RESET + " XP now.");
+                System.out.println("You won " + UIElements.YELLOW + " 1 " + UIElements.RESET + " XP. You have " + UIElements.YELLOW
+                        + currentUser.xp + UIElements.RESET + " XP now.");
                 // If oponent won
             } else {
-                System.out.println(Colors.RED + " " + opponent.userName + " Won!\n" + Colors.RESET);
+                System.out.println(UIElements.RED + " " + opponent.userName + " Won!\n" + UIElements.RESET);
                 int exchangeMoney = currentUser.getMoney() / 10;
-                opponent.increaseMoney(exchangeMoney);
-                currentUser.decreaseMoney(exchangeMoney);
-                System.out.println("You lost " + Colors.YELLOW + exchangeMoney + Colors.RESET + " coins." + "You have "
-                        + Colors.YELLOW + currentUser.getMoney() + Colors.RESET +
+                opponent.incrementMoney(exchangeMoney);
+                currentUser.decrementMoney(exchangeMoney);
+                System.out.println("You lost " + UIElements.YELLOW + exchangeMoney + UIElements.RESET + " coins." + "You have "
+                        + UIElements.YELLOW + currentUser.getMoney() + UIElements.RESET +
                         " coins now.");
-                System.out.println("You lost " + Colors.YELLOW + " 1 " + Colors.RESET + " XP. You have " + Colors.YELLOW
-                        + currentUser.xp + Colors.RESET + " XP now.");
+                System.out.println("You lost " + UIElements.YELLOW + " 1 " + UIElements.RESET + " XP. You have " + UIElements.YELLOW
+                        + currentUser.xp + UIElements.RESET + " XP now.");
             }
         } else {
-            System.out.println(Colors.CYAN + "Draw!" + Colors.RESET);
+            System.out.println(UIElements.CYAN + "Draw!" + UIElements.RESET);
         }
         currentUser.squad.resetBattle();
         opponent.squad.resetBattle();
@@ -290,7 +295,7 @@ public abstract class Battle {
         user2AttackPointer = 0;
         user1DefencePointer = 0;
         user2DefencePointer = 0;
-        System.out.println(Colors.MAGENTA + "\n\nBattle Ended!" + Colors.RESET);
+        System.out.println(UIElements.MAGENTA + "\n\nBattle Ended!" + UIElements.RESET);
         System.out.println("Press Enter to continue...");
         scanner.nextLine();
     }
@@ -435,53 +440,5 @@ public abstract class Battle {
             damage += battleDamage + battleDamage * attWarrior.bonusAttackBuff;
         }
         return damage;
-    }
-
-    // Wait method
-    public static void wait(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
-}
-
-// Colors class
-class Colors {
-    // Text colors
-    public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String MAGENTA = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
-    public static final String PINK = "\u001B[95m";
-    public static final String BOLD = "\u001B[1m";
-
-    // Background colors
-    public static final String BLACK_BACKGROUND = "\u001B[40m";
-    public static final String RED_BACKGROUND = "\u001B[41m";
-    public static final String GREEN_BACKGROUND = "\u001B[42m";
-    public static final String YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String BLUE_BACKGROUND = "\u001B[44m";
-    public static final String MAGENTA_BACKGROUND = "\u001B[45m";
-    public static final String CYAN_BACKGROUND = "\u001B[46m";
-    public static final String WHITE_BACKGROUND = "\u001B[47m";
-    public static final String PINK_BACKGROUND = "\u001B[105m";
-
-    // StringSet
-    public static final String rightArrowSet = RED + " >> >> >> >> >> >> >> " + RESET;
-    public static final String hearsSet = PINK + " <3  >>  <3  >>  <3  >>  <3 " + RESET;
-
-    public static String RedArrows(float damage) {
-        return RED + " >> >> >> " + "[-" + String.format("%.1f", damage) + "]" + " >> >> >> " + RESET;
-    }
-
-    public static String Hearts(float heal) {
-        return PINK + " <3 >> <3 >> " + "[+" + String.format("%.1f", heal) + "]" + " >> <3 >> <3 " + RESET;
     }
 }
