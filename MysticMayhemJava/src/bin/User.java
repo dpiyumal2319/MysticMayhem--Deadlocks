@@ -361,7 +361,7 @@ public class User extends SuperUserControls {
         Map<String, WarriorInfo> warriorMap = InventoryItem.getWarriorMap(type);
         if (warriorMap != null) {
             for (String key : warriorMap.keySet()) {
-                System.out.println(key + ":"+ warriorMap.get(key).price)+ " coins");
+                System.out.println(key + ":"+ warriorMap.get(key).price+ " coins");
                 System.out.print("\tHomeLand: " + warriorMap.get(key).homeLand);
                 System.out.print("\tAttack: " + warriorMap.get(key).attack);
                 System.out.print("\tDefense: " + warriorMap.get(key).defense);

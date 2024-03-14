@@ -94,22 +94,27 @@ public abstract class Battle {
 
         // Printing your squad
         System.out.println(Colors.GREEN + "Your Squad" + Colors.RESET + " : ");
+        wait(1000);
         for (int i = 0; i < 5; i++) {
             userAttack[i].printBattleInfo();
         }
 
+        wait(3000);
         // Printing oponent's squad
-        System.out.println(Colors.RED +" "+opponent.userName +"'s Squad" + Colors.RESET + " : ");
+        System.out.println(Colors.RED + " " + opponent.userName + "'s Squad" + Colors.RESET + " : ");
+        wait(1000);
         for (int i = 0; i < 5; i++) {
             oponentAttack[i].printBattleInfo();
         }
 
+        wait(3000);
         System.out.println(
                 "Display Structure: Attacker's_Owner Type[Health before attack] Name ~~ ~~ ~~ ~~ ~~ Reciever's_Owner Type[Health After Attack] Name\n");
 
-        //Starting battle
+        wait(500);
+        // Starting battle
         System.out.print(Colors.YELLOW + "Battle starting in: ");
-        for (int i = 3; i > 0; i--) {
+        for (int i = 5; i > 0; i--) {
             System.out.print(i + " ");
             wait(1000);
         }
