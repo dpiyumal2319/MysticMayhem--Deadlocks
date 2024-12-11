@@ -45,6 +45,7 @@ public class InventoryItem implements Serializable{
     data.mythicalCreatures.put("basilisk", new WarriorInfo("Basilisk", 10, 15, 11, 12, 165, "Marshlanders"));
     data.mythicalCreatures.put("hydra", new WarriorInfo("Hydra", 15, 12, 16, 11, 205, "Marshlanders"));
     data.mythicalCreatures.put("phoenix", new WarriorInfo("Phoenix", 17, 17, 13, 19, 275, "Sunchildren"));
+    data.mythicalCreatures.put("pegasus", new WarriorInfo("Pegasus", 20, 14, 18, 20, 340, "Mystics"));
     
     data.armors.put("chainmail", new EquipmentInfo("Chainmail", 70, 0, 1, 0, -1));
     data.armors.put("regalia", new EquipmentInfo("Regalia", 105, 0, 1, 0, 0));

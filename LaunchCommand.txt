@@ -1,0 +1,1 @@
+e:; cd 'e:\MysticMayhem\MysticMayhem--Deadlocks'; & 'C:\Program Files\Eclipse Adoptium\jdk-21.0.2.13-hotspot\bin\java.exe' '--enable-preview' '-XX:+ShowCodeDetailsInExceptionMessages' '-cp' 'C:\Users\wpiyu\AppData\Roaming\Code\User\workspaceStorage\18f6036906e1fa767998fb61dd3db644\redhat.java\jdt_ws\MysticMayhem--Deadlocks_85bf6fef\bin' 'App' 
